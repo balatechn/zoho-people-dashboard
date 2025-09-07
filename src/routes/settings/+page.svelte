@@ -3,7 +3,7 @@
   import { writable } from 'svelte/store';
   import Header from '$lib/components/Header.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
-  import { Settings, TestTube, Wifi, AlertCircle, CheckCircle, Loader } from 'lucide-svelte';
+  import { Settings, TestTube, Wifi, AlertCircle, CheckCircle, Loader, Upload, Users } from 'lucide-svelte';
   import '../../app.css';
 
   // Stores for API configuration 
@@ -28,6 +28,8 @@
   let testing = false;
   let testData = {};
   let mounted = false;
+  let uploading = false;
+  let uploadResults = { success: false, message: '', recordsProcessed: 0 };
 
   onMount(() => {
     mounted = true;
@@ -284,6 +286,86 @@
     // Also save immediately
     saveConfig();
   }
+
+  async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.csv') && !file.name.endsWith('.xlsx')) {
+      uploadResults = {
+        success: false,
+        message: 'Please upload a CSV or Excel file (.csv, .xlsx)',
+        recordsProcessed: 0
+      };
+      return;
+    }
+
+    uploading = true;
+    uploadResults = { success: false, message: 'Processing...', recordsProcessed: 0 };
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/employees/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+      uploadResults = result;
+
+      if (result.success) {
+        setTimeout(() => {
+          window.location.href = '/employees';
+        }, 2000);
+      }
+    } catch (error) {
+      uploadResults = {
+        success: false,
+        message: 'Upload failed: ' + (error.message || 'Unknown error'),
+        recordsProcessed: 0
+      };
+    } finally {
+      uploading = false;
+    }
+  }
+
+  function downloadTemplate() {
+    const headers = [
+      'Employee Number', 'First Name', 'Middle Name', 'Last Name', 'Gender',
+      'Date of Joining', 'Gratuity Calculation Date', 'Designation', 'Work Email',
+      'Department', 'Worklocation Name', 'Worklocation AddressLine1',
+      'Worklocation AddressLine2', 'Worklocation City', 'Worklocation StateCode',
+      'Worklocation Country', 'Worklocation PostalCode', 'Enable Portal',
+      'Employee Status', 'Personal Email', 'Father Name', 'Mobile Number',
+      'Date of Birth', 'Personal AddressLine1', 'Personal AddressLine2',
+      'Personal City', 'Personal StateCode', 'Personal PostalCode',
+      'Personal Country', 'PAN Number', 'Differently Abled Type'
+    ];
+
+    const sampleData = [
+      'NCPL001', 'John', '', 'Doe', 'Male', '01-01-2025', '', 'Software Engineer',
+      'john.doe@company.com', 'IT', 'Head Office', '123 Main Street', '',
+      'Bengaluru', 'KA', 'India', '560001', 'Enabled', 'Active',
+      'john.personal@email.com', 'Robert Doe', '9876543210', '15-06-1990',
+      '456 Home Street', '', 'Bengaluru', 'KA', '560002', 'India',
+      'ABCDE1234F', 'none'
+    ];
+
+    const csvContent = [
+      headers.join(','),
+      sampleData.map(field => `"${field}"`).join(',')
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'employee_upload_template.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
 </script>
 
 <svelte:head>
@@ -334,6 +416,15 @@
 				>
 					<TestTube class="w-4 h-4 inline mr-2" />
 					Testing & Status
+				</button>
+				<button
+					class="px-6 py-3 rounded-lg font-medium transition-all duration-200 {activeTab === 'data' 
+						? 'bg-gradient-to-r from-gold-400 to-gold-600 text-white shadow-lg' 
+						: 'card hover:bg-gold-50'}"
+					on:click={() => activeTab = 'data'}
+				>
+					<Upload class="w-4 h-4 inline mr-2" />
+					Data Management
 				</button>
 			</div>
 
@@ -605,6 +696,141 @@
               <pre class="text-sm text-gray-700 overflow-x-auto">
 {JSON.stringify(testData.endpoints || {}, null, 2)}
               </pre>
+            </div>
+          </div>
+        </div>
+        {/if}
+
+        <!-- Data Management Tab -->
+        {#if activeTab === 'data'}
+        <div class="space-y-6">
+          <!-- Employee Data Upload -->
+          <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Employee Data Upload</h2>
+            
+            <div class="space-y-6">
+              <!-- Upload Instructions -->
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <h3 class="font-semibold text-blue-900 mb-3">📋 Upload Instructions</h3>
+                <ul class="space-y-2 text-blue-800 text-sm">
+                  <li>• Upload a CSV or Excel file (.csv, .xlsx) with employee data</li>
+                  <li>• Use the template below to ensure correct format</li>
+                  <li>• All existing employee data will be replaced</li>
+                  <li>• Maximum file size: 10MB</li>
+                  <li>• Supported date formats: DD-MM-YYYY, DD/MM/YYYY</li>
+                </ul>
+              </div>
+
+              <!-- Download Template -->
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border">
+                <div>
+                  <h4 class="font-medium text-gray-900">Excel Template</h4>
+                  <p class="text-sm text-gray-600">Download the template file with correct column headers</p>
+                </div>
+                <button
+                  on:click={downloadTemplate}
+                  class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-lg font-medium hover:from-green-600 hover:to-emerald-600 transition-all duration-200 shadow-lg flex items-center gap-2"
+                >
+                  <Upload class="w-4 h-4 rotate-180" />
+                  Download Template
+                </button>
+              </div>
+
+              <!-- File Upload -->
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gold-400 transition-colors">
+                <input
+                  type="file"
+                  id="fileUpload"
+                  accept=".csv,.xlsx"
+                  on:change={handleFileUpload}
+                  class="hidden"
+                  disabled={uploading}
+                />
+                <label
+                  for="fileUpload"
+                  class="cursor-pointer flex flex-col items-center space-y-4"
+                >
+                  <div class="w-16 h-16 bg-gold-100 rounded-full flex items-center justify-center">
+                    <Upload class="w-8 h-8 text-gold-600" />
+                  </div>
+                  <div>
+                    <p class="text-lg font-medium text-gray-900">
+                      {uploading ? 'Uploading...' : 'Click to upload employee data'}
+                    </p>
+                    <p class="text-sm text-gray-500">CSV or Excel files only (max 10MB)</p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Upload Results -->
+              {#if uploadResults.message}
+                <div class="p-4 rounded-lg border {uploadResults.success ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}">
+                  <div class="flex items-center gap-3">
+                    {#if uploadResults.success}
+                      <CheckCircle class="w-5 h-5 text-green-500" />
+                      <div>
+                        <p class="font-medium text-green-800">Upload Successful!</p>
+                        <p class="text-sm text-green-700">
+                          {uploadResults.recordsProcessed} employee records processed. 
+                          Redirecting to employee page...
+                        </p>
+                      </div>
+                    {:else}
+                      <AlertCircle class="w-5 h-5 text-red-500" />
+                      <div>
+                        <p class="font-medium text-red-800">Upload Failed</p>
+                        <p class="text-sm text-red-700">{uploadResults.message}</p>
+                      </div>
+                    {/if}
+                  </div>
+                </div>
+              {/if}
+
+              <!-- Expected File Format -->
+              <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="font-semibold text-gray-900 mb-3">📄 Expected File Format</h3>
+                <div class="text-sm text-gray-700 space-y-2">
+                  <p><strong>Required Columns:</strong></p>
+                  <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+                    <div>• Employee Number</div>
+                    <div>• First Name</div>
+                    <div>• Last Name</div>
+                    <div>• Work Email</div>
+                    <div>• Department</div>
+                    <div>• Designation</div>
+                    <div>• Date of Joining</div>
+                    <div>• Employee Status</div>
+                    <div>• Gender</div>
+                  </div>
+                  <p class="mt-3"><strong>Optional Columns:</strong> Middle Name, Personal Email, Mobile Number, Date of Birth, etc.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Export -->
+          <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Data Export</h2>
+            
+            <div class="space-y-4">
+              <p class="text-gray-600">Export current employee data for backup or analysis.</p>
+              
+              <div class="flex gap-4">
+                <a
+                  href="/employees"
+                  class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-600 hover:to-indigo-600 transition-all duration-200 shadow-lg flex items-center gap-2"
+                >
+                  <Users class="w-4 h-4" />
+                  View Employees
+                </a>
+                <button
+                  onclick="window.location.href='/employees'; setTimeout(() => document.querySelector('[title=Export]').click(), 1000)"
+                  class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-lg font-medium hover:from-green-600 hover:to-emerald-600 transition-all duration-200 shadow-lg flex items-center gap-2"
+                >
+                  <Upload class="w-4 h-4 rotate-180" />
+                  Export Data
+                </button>
+              </div>
             </div>
           </div>
         </div>

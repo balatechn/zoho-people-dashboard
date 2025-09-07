@@ -8,6 +8,7 @@
 
 	const navigationItems = [
 		{ icon: Users, label: "Dashboard", href: "/", key: "dashboard" },
+		{ icon: Users, label: "Employees", href: "/employees", key: "employees" },
 		{ icon: CalendarCheck, label: "Attendance", href: "/attendance", key: "attendance" },
 		{ icon: Clock, label: "Timesheets", href: "/timesheets", key: "timesheets" },
 		{ icon: ShieldCheck, label: "Approvals", href: "/approvals", key: "approvals" },
