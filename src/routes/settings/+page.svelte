@@ -10,7 +10,7 @@
   const apiConfig = writable({
     clientId: '1000.FCMJ4WPDJRQ29B5N5C4GVVXOM7O5EW',
     clientSecret: 'b26ee4e0b733c916730af00f6e37a5bd1201024f79',
-    redirectUri: 'http://localhost:5173/auth/callback',
+    redirectUri: 'https://zohopeople.netlify.app/auth/callback',
     accessToken: '',
     refreshToken: '',
     domain: 'people.zoho.in'  // Changed to India domain since you're being redirected to accounts.zoho.in
@@ -360,7 +360,7 @@
                   bind:value={config.redirectUri}
                   on:input={(e) => updateConfig('redirectUri', e.target.value)}
                   class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-amber-500 focus:border-transparent"
-                  placeholder="http://localhost:5173/auth/callback"
+                  placeholder="https://zohopeople.netlify.app/auth/callback"
                 />
               </div>
               
