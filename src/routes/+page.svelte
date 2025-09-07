@@ -72,18 +72,17 @@
 				/>
 			</div>
 
-			<!-- Charts Row -->
+			<!-- Today's Attendance Table (Moved Up) -->
 			<div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
-				<!-- Check-ins vs Check-outs Chart -->
 				<div class="xl:col-span-2">
-					<ChartCard
-						title="Check-ins vs Check-outs"
-						icon={Clock}
-						chartType="area"
-						data={data.charts.trendData}
+					<TableCard
+						title="Today's Attendance"
+						icon={CalendarCheck}
+						data={data.tables.todayAttendance}
+						type="attendance"
 					/>
 				</div>
-
+				
 				<!-- Attendance Split Chart -->
 				<ChartCard
 					title="Attendance Split (Today)"
@@ -93,17 +92,15 @@
 				/>
 			</div>
 
-			<!-- Tables Row -->
-			<div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
-				<!-- Today's Attendance Table -->
-				<div class="xl:col-span-2">
-					<TableCard
-						title="Today's Attendance"
-						icon={CalendarCheck}
-						data={data.tables.todayAttendance}
-						type="attendance"
-					/>
-				</div>
+			<!-- Charts Row -->
+			<div class="grid grid-cols-1 gap-6 xl:grid-cols-2">
+				<!-- Check-ins vs Check-outs Chart -->
+				<ChartCard
+					title="Check-ins vs Check-outs"
+					icon={Clock}
+					chartType="area"
+					data={data.charts.trendData}
+				/>
 
 				<!-- Pending Approvals -->
 				<TableCard
