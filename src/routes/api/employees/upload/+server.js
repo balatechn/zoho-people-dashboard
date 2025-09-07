@@ -85,42 +85,68 @@ export async function POST({ request }) {
             try {
                 const values = lines[i].split(',').map(v => v.replace(/"/g, '').trim());
                 
-                if (values.length !== headers.length) {
+                if (values.length < headers.length - 5) { // Allow some flexibility in column count
                     errors.push(`Row ${i + 1}: Column count mismatch`);
                     continue;
                 }
 
+                /** @type {Record<string, string>} */
                 const employee = {};
                 headers.forEach((header, index) => {
-                    employee[header] = values[index];
+                    if (values[index] !== undefined) {
+                        employee[header] = values[index];
+                    }
                 });
 
-                // Basic validation
-                if (!employee['Employee Number'] || !employee['First Name'] || !employee['Work Email']) {
-                    errors.push(`Row ${i + 1}: Missing required fields`);
+                // Basic validation - check for key required fields
+                const empNumber = employee['Employee Number'] || '';
+                const firstName = employee['First Name'] || '';
+                const workEmail = employee['Work Email'] || '';
+                const department = employee['Department'] || '';
+                
+                if (!empNumber || !firstName || !workEmail) {
+                    errors.push(`Row ${i + 1}: Missing required fields (Employee Number, First Name, or Work Email)`);
                     continue;
                 }
 
+                // Map to consistent format
                 employees.push({
-                    employeeNumber: employee['Employee Number'],
-                    firstName: employee['First Name'],
+                    employeeNumber: empNumber,
+                    firstName: firstName,
                     middleName: employee['Middle Name'] || '',
-                    lastName: employee['Last Name'],
-                    gender: employee['Gender'],
-                    dateOfJoining: employee['Date of Joining'],
-                    designation: employee['Designation'],
-                    workEmail: employee['Work Email'],
-                    department: employee['Department'],
+                    lastName: employee['Last Name'] || '',
+                    gender: employee['Gender'] || '',
+                    dateOfJoining: employee['Date of Joining'] || '',
+                    designation: employee['Designation'] || '',
+                    workEmail: workEmail,
+                    department: department,
                     workLocation: employee['Worklocation Name'] || 'Head Office',
-                    employeeStatus: employee['Employee Status'],
+                    employeeStatus: employee['Employee Status'] || 'Active',
                     personalEmail: employee['Personal Email'] || '',
                     mobileNumber: employee['Mobile Number'] || '',
-                    dateOfBirth: employee['Date of Birth'] || ''
+                    dateOfBirth: employee['Date of Birth'] || '',
+                    fatherName: employee['Father Name'] || '',
+                    panNumber: employee['PAN Number'] || '',
+                    // Additional fields from your format
+                    workLocationAddress1: employee['Worklocation AddressLine1'] || '',
+                    workLocationAddress2: employee['Worklocation AddressLine2'] || '',
+                    workLocationCity: employee['Worklocation City'] || '',
+                    workLocationState: employee['Worklocation StateCode'] || '',
+                    workLocationCountry: employee['Worklocation Country'] || '',
+                    workLocationPostalCode: employee['Worklocation PostalCode'] || '',
+                    enablePortal: employee['Enable Portal'] || '',
+                    personalAddress1: employee['Personal AddressLine1'] || '',
+                    personalAddress2: employee['Personal AddressLine2'] || '',
+                    personalCity: employee['Personal City'] || '',
+                    personalState: employee['Personal StateCode'] || '',
+                    personalPostalCode: employee['Personal PostalCode'] || '',
+                    personalCountry: employee['Personal Country'] || '',
+                    differentlyAbledType: employee['Differently Abled Type'] || ''
                 });
 
                 validRows++;
             } catch (error) {
-                errors.push(`Row ${i + 1}: ${error.message}`);
+                errors.push(`Row ${i + 1}: ${error instanceof Error ? error.message : 'Unknown error'}`);
             }
         }
 
