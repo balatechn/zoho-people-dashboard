@@ -270,6 +270,20 @@
       [field]: value
     }));
   }
+
+  function resetToProductionDefaults() {
+    apiConfig.set({
+      clientId: '1000.FCMJ4WPDJRQ29B5N5C4GVVXOM7O5EW',
+      clientSecret: 'b26ee4e0b733c916730af00f6e37a5bd1201024f79',
+      redirectUri: 'https://zohopeople.netlify.app/auth/callback',
+      accessToken: '',
+      refreshToken: '',
+      domain: 'people.zoho.in'
+    });
+    
+    // Also save immediately
+    saveConfig();
+  }
 </script>
 
 <svelte:head>
@@ -447,6 +461,12 @@
                 class="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-lg"
               >
                 Save Configuration
+              </button>
+              <button
+                on:click={resetToProductionDefaults}
+                class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-3 rounded-lg font-medium hover:from-purple-600 hover:to-indigo-600 transition-all duration-200 shadow-lg"
+              >
+                🔄 Reset to Production
               </button>
               <button
                 on:click={testConnection}
