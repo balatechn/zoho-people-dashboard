@@ -37,6 +37,7 @@
   let showFilters = false;
   let uploadProgress = 0;
   let fileInput;
+  let sortBy = 'department'; // 'department', 'name', 'time'
 
   // Comprehensive attendance data from September 1-6, 2025
   const fullAttendanceData = [
@@ -210,32 +211,63 @@
     applyFilters();
   }
 
-  // Group data by department for better organization
+  // Group data by date for better organization
   $: groupedData = (() => {
     const groups = {};
     filteredData.forEach(record => {
-      if (!groups[record.department]) {
-        groups[record.department] = [];
+      if (!groups[record.date]) {
+        groups[record.date] = [];
       }
-      groups[record.department].push(record);
+      groups[record.date].push(record);
     });
+    
+    // Sort records within each date group
+    Object.keys(groups).forEach(date => {
+      groups[date].sort((a, b) => {
+        switch (sortBy) {
+          case 'department':
+            if (a.department !== b.department) {
+              return a.department.localeCompare(b.department);
+            }
+            return a.employeeName.localeCompare(b.employeeName);
+          case 'name':
+            return a.employeeName.localeCompare(b.employeeName);
+          case 'time':
+            // Sort by total hours (descending)
+            return b.totalHoursDecimal - a.totalHoursDecimal;
+          default:
+            return 0;
+        }
+      });
+    });
+    
     return groups;
   })();
 
-  $: departmentStats = (() => {
+  // Sort dates in chronological order
+  $: sortedDates = Object.keys(groupedData).sort((a, b) => {
+    // Convert date format "01-Sep-2025" to comparable format
+    const dateA = new Date(a.replace(/(\d{2})-(\w{3})-(\d{4})/, '$2 $1, $3'));
+    const dateB = new Date(b.replace(/(\d{2})-(\w{3})-(\d{4})/, '$2 $1, $3'));
+    return dateA - dateB;
+  });
+
+  $: dateStats = (() => {
     const stats = {};
-    Object.keys(groupedData).forEach(dept => {
-      const deptData = groupedData[dept];
-      const present = deptData.filter(r => r.status === 'Present').length;
-      const absent = deptData.filter(r => r.status === 'Absent').length;
-      const avgHours = deptData.length > 0 
-        ? (deptData.reduce((sum, r) => sum + r.totalHoursDecimal, 0) / deptData.length).toFixed(1)
+    Object.keys(groupedData).forEach(date => {
+      const dateData = groupedData[date];
+      const present = dateData.filter(r => r.status === 'Present').length;
+      const absent = dateData.filter(r => r.status === 'Absent').length;
+      const partial = dateData.filter(r => r.status === 'Partial').length;
+      const avgHours = dateData.length > 0 
+        ? (dateData.reduce((sum, r) => sum + r.totalHoursDecimal, 0) / dateData.length).toFixed(1)
         : 0;
       
-      stats[dept] = {
-        total: deptData.length,
+      stats[date] = {
+        total: dateData.length,
         present,
         absent,
+        partial,
         avgHours
       };
     });
@@ -611,38 +643,52 @@
         </div>
       {/if}
 
-      <!-- Data Table with Department Grouping -->
+      <!-- Data Table with Date Grouping -->
       <div class="card overflow-hidden">
         <div class="card-header flex justify-between items-center">
           <h2 class="text-xl font-semibold text-zinc-900">Attendance Records ({dateRange.fromDate} to {dateRange.toDate})</h2>
-          <div class="text-sm text-zinc-600">
-            Showing {filteredData.length} of {attendanceData.length} records
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <label class="text-sm text-zinc-600">Sort by:</label>
+              <select bind:value={sortBy} class="text-sm border border-zinc-300 rounded px-2 py-1">
+                <option value="department">Department</option>
+                <option value="name">Name</option>
+                <option value="time">Hours</option>
+              </select>
+            </div>
+            <div class="text-sm text-zinc-600">
+              Showing {filteredData.length} of {attendanceData.length} records
+            </div>
           </div>
         </div>
         
         <div class="card-content p-0">
-          {#each Object.keys(groupedData) as department}
-            <!-- Department Header -->
+          {#each sortedDates as date}
+            <!-- Date Header -->
             <div class="bg-gold-50/50 px-6 py-3 border-b border-gold-200/50">
               <div class="flex items-center justify-between">
-                <h3 class="text-lg font-semibold text-zinc-900">{department}</h3>
+                <h3 class="text-lg font-semibold text-zinc-900">{date}</h3>
                 <div class="text-sm text-zinc-600">
-                  Total: <span class="font-medium">{departmentStats[department].total}</span>
-                  Present: <span class="font-medium text-emerald-600">{departmentStats[department].present}</span>
-                  {#if departmentStats[department].absent > 0}
-                    Absent: <span class="font-medium text-red-600">{departmentStats[department].absent}</span>
+                  Total: <span class="font-medium">{dateStats[date].total}</span>
+                  Present: <span class="font-medium text-emerald-600">{dateStats[date].present}</span>
+                  {#if dateStats[date].absent > 0}
+                    Absent: <span class="font-medium text-red-600">{dateStats[date].absent}</span>
                   {/if}
-                  Avg Hours: <span class="font-medium">{departmentStats[department].avgHours}</span>
+                  {#if dateStats[date].partial > 0}
+                    Partial: <span class="font-medium text-orange-600">{dateStats[date].partial}</span>
+                  {/if}
+                  Avg Hours: <span class="font-medium">{dateStats[date].avgHours}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Department Table -->
+            <!-- Date Table -->
             <div class="overflow-x-auto">
               <table class="min-w-full">
                 <thead class="bg-zinc-50">
                   <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Employee</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Department</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">First In</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Last Out</th>
@@ -654,7 +700,7 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-zinc-200">
-                  {#each groupedData[department] as record}
+                  {#each groupedData[date] as record}
                     <tr class="hover:bg-gold-50/30 transition-colors">
                       <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
@@ -668,7 +714,10 @@
                         </div>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {record.status === 'Present' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
+                        <span class="text-sm text-zinc-600">{record.department}</span>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {record.status === 'Present' ? 'bg-emerald-100 text-emerald-800' : record.status === 'Partial' ? 'bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}">
                           {record.status}
                         </span>
                       </td>
