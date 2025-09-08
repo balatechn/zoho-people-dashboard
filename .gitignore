@@ -6,3 +6,6 @@ node_modules
 .env.production
 /.vercel
 /dist
+
+# Local Netlify folder
+.netlify
