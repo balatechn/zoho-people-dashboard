@@ -38,6 +38,8 @@
   let uploadProgress = 0;
   let fileInput;
   let sortBy = 'department'; // 'department', 'name', 'time'
+  let selectedEmployee = null;
+  let showEmployeeDetails = false;
 
   // Comprehensive attendance data from September 1-6, 2025
   const fullAttendanceData = [
@@ -388,6 +390,49 @@
       status: ''
     };
   }
+
+  // Employee selection and details
+  function selectEmployee(employee) {
+    selectedEmployee = employee;
+    showEmployeeDetails = true;
+  }
+
+  function closeEmployeeDetails() {
+    selectedEmployee = null;
+    showEmployeeDetails = false;
+  }
+
+  // Get employee statistics
+  function getEmployeeStats(employeeId) {
+    const employeeRecords = attendanceData.filter(record => record.employeeId === employeeId);
+    const totalDays = employeeRecords.length;
+    const presentDays = employeeRecords.filter(r => r.status === 'Present').length;
+    const totalHours = employeeRecords.reduce((sum, r) => sum + r.totalHoursDecimal, 0);
+    const avgHours = totalDays > 0 ? (totalHours / totalDays).toFixed(1) : '0.0';
+    const attendanceRate = totalDays > 0 ? ((presentDays / totalDays) * 100).toFixed(1) : '0.0';
+
+    return {
+      totalDays,
+      presentDays,
+      totalHours: totalHours.toFixed(1),
+      avgHours,
+      attendanceRate
+    };
+  }
+
+  // Get unique employees list
+  $: uniqueEmployees = (() => {
+    const employees = new Map();
+    attendanceData.forEach(record => {
+      if (!employees.has(record.employeeId)) {
+        employees.set(record.employeeId, {
+          ...record,
+          stats: getEmployeeStats(record.employeeId)
+        });
+      }
+    });
+    return Array.from(employees.values()).sort((a, b) => a.employeeName.localeCompare(b.employeeName));
+  })();
 </script>
 
 <svelte:head>
@@ -643,6 +688,71 @@
         </div>
       {/if}
 
+      <!-- Employee Selection Grid -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="text-xl font-semibold text-zinc-900 flex items-center gap-2">
+            <Users class="h-5 w-5 text-gold-600" />
+            Employee Directory
+          </h2>
+          <p class="text-sm text-zinc-600 mt-1">Select an employee to view detailed attendance information</p>
+        </div>
+        <div class="card-content">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {#each uniqueEmployees as employee}
+              <div 
+                class="group relative bg-white border border-zinc-200 rounded-lg p-4 hover:shadow-lg hover:border-gold-300 transition-all cursor-pointer"
+                on:click={() => selectEmployee(employee)}
+                on:keydown={(e) => e.key === 'Enter' && selectEmployee(employee)}
+                role="button"
+                tabindex="0"
+              >
+                <!-- Employee Avatar -->
+                <div class="flex items-start gap-3 mb-3">
+                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-white font-semibold text-lg">
+                    {employee.employeeName.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h3 class="font-semibold text-zinc-900 text-sm truncate">{employee.employeeName}</h3>
+                    <p class="text-xs text-zinc-500 truncate">{employee.designation}</p>
+                    <p class="text-xs text-gold-600 font-medium">{employee.department}</p>
+                  </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs text-zinc-500">Attendance</span>
+                    <span class="text-xs font-medium text-emerald-600">{employee.stats.attendanceRate}%</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs text-zinc-500">Avg Hours</span>
+                    <span class="text-xs font-medium text-zinc-900">{employee.stats.avgHours}h</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs text-zinc-500">Present Days</span>
+                    <span class="text-xs font-medium text-zinc-900">{employee.stats.presentDays}/{employee.stats.totalDays}</span>
+                  </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-3">
+                  <div class="w-full bg-zinc-200 rounded-full h-1.5">
+                    <div 
+                      class="bg-gradient-to-r from-gold-500 to-gold-600 h-1.5 rounded-full transition-all"
+                      style="width: {employee.stats.attendanceRate}%"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Hover Effect -->
+                <div class="absolute inset-0 bg-gold-50/0 group-hover:bg-gold-50/20 rounded-lg transition-colors"></div>
+              </div>
+            {/each}
+          </div>
+        </div>
+      </div>
+
       <!-- Data Table with Date Grouping -->
       <div class="card overflow-hidden">
         <div class="card-header flex justify-between items-center">
@@ -772,6 +882,175 @@
     </main>
   </div>
 </div>
+
+<!-- Employee Details Modal -->
+{#if showEmployeeDetails && selectedEmployee}
+  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+      <!-- Modal Header -->
+      <div class="bg-gradient-to-r from-gold-500 to-gold-600 px-6 py-4 text-white">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-xl">
+              {selectedEmployee.employeeName.split(' ').map(n => n[0]).join('').slice(0, 2)}
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold">{selectedEmployee.employeeName}</h2>
+              <p class="text-gold-100">{selectedEmployee.designation}</p>
+              <p class="text-gold-200 text-sm">{selectedEmployee.department} • {selectedEmployee.employeeId}</p>
+            </div>
+          </div>
+          <button 
+            on:click={closeEmployeeDetails}
+            class="text-white hover:text-gold-200 transition-colors"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-emerald-600">Attendance Rate</p>
+                <p class="text-2xl font-bold text-emerald-700">{selectedEmployee.stats.attendanceRate}%</p>
+              </div>
+              <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                <CalendarCheck class="w-4 h-4 text-emerald-600" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-blue-600">Present Days</p>
+                <p class="text-2xl font-bold text-blue-700">{selectedEmployee.stats.presentDays}</p>
+              </div>
+              <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <Users class="w-4 h-4 text-blue-600" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-orange-600">Total Hours</p>
+                <p class="text-2xl font-bold text-orange-700">{selectedEmployee.stats.totalHours}h</p>
+              </div>
+              <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                <Clock class="w-4 h-4 text-orange-600" />
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm font-medium text-purple-600">Avg Hours/Day</p>
+                <p class="text-2xl font-bold text-purple-700">{selectedEmployee.stats.avgHours}h</p>
+              </div>
+              <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                <TrendingUp class="w-4 h-4 text-purple-600" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Employee Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-gray-50 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-3">Employee Information</h3>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-600">Employee ID:</span>
+                <span class="text-sm font-medium">{selectedEmployee.employeeId}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-600">Email:</span>
+                <span class="text-sm font-medium truncate">{selectedEmployee.emailId}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-600">Location:</span>
+                <span class="text-sm font-medium">{selectedEmployee.location}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-600">Role:</span>
+                <span class="text-sm font-medium">{selectedEmployee.role}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gray-50 rounded-lg p-4">
+            <h3 class="font-semibold text-gray-900 mb-3">Work Schedule</h3>
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-600">Shift:</span>
+                <span class="text-sm font-medium">{selectedEmployee.shiftName.replace(/\[|\]/g, '')}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-600">Department:</span>
+                <span class="text-sm font-medium">{selectedEmployee.department}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-sm text-gray-600">Designation:</span>
+                <span class="text-sm font-medium">{selectedEmployee.designation}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Attendance -->
+        <div class="bg-white border border-gray-200 rounded-lg">
+          <div class="px-4 py-3 border-b border-gray-200">
+            <h3 class="font-semibold text-gray-900">Recent Attendance</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">First In</th>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Last Out</th>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Total Hours</th>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Net Hours</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                {#each attendanceData.filter(record => record.employeeId === selectedEmployee.employeeId) as record}
+                  <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-2 text-sm font-medium text-gray-900">{record.date}</td>
+                    <td class="px-4 py-2">
+                      <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {record.status === 'Present' ? 'bg-emerald-100 text-emerald-800' : record.status === 'Partial' ? 'bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}">
+                        {record.status}
+                      </span>
+                    </td>
+                    <td class="px-4 py-2 text-sm text-gray-900">{record.firstIn}</td>
+                    <td class="px-4 py-2 text-sm text-gray-900">{record.lastOut}</td>
+                    <td class="px-4 py-2 text-sm font-medium text-gray-900">{record.totalHours}</td>
+                    <td class="px-4 py-2">
+                      <span class="text-sm font-medium {record.netHours.startsWith('+') ? 'text-emerald-600' : record.netHours.startsWith('-') ? 'text-red-600' : 'text-gray-500'}">
+                        {record.netHours}
+                      </span>
+                    </td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{/if}
 
 <style>
   .animate-spin {
