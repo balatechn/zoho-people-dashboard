@@ -2,7 +2,9 @@
   import { onMount } from 'svelte';
   import Header from '$lib/components/Header.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
-  import { Users, Search, Filter, Download, Upload } from 'lucide-svelte';
+  import { Users, Search, Filter, Download, Upload, AlertCircle, Check, X, AlertTriangle } from 'lucide-svelte';
+  import { validateEmployeeData, getDepartmentStats, getEmployeeById } from '$lib/utils/employeeValidator.js';
+  import { sampleAttendanceData } from '$lib/sampleData.js';
   import '../../app.css';
 
   // Employee data - this will eventually come from Zoho API or uploaded file
@@ -572,6 +574,13 @@
   let searchTerm = '';
   let selectedDepartment = 'All';
   let filteredEmployees = employees;
+  
+  // Validation functionality
+  let validationReport = null;
+  let validationStats = {};
+  let showValidationResults = false;
+  let selectedInconsistency = null;
+  let validationInProgress = false;
 
   // Get unique departments
   $: departments = ['All', ...new Set(employees.map(emp => emp.department))];
@@ -604,6 +613,31 @@
       inactive: deptEmployees.length - activeCount
     };
   });
+  
+  // Run validation when component mounts
+  onMount(() => {
+    runDataValidation();
+  });
+  
+  // Function to run validation
+  async function runDataValidation() {
+    validationInProgress = true;
+    // Add a small delay to show loading state
+    await new Promise(resolve => setTimeout(resolve, 500));
+    validationReport = validateEmployeeData(sampleAttendanceData);
+    validationStats = getDepartmentStats();
+    validationInProgress = false;
+  }
+  
+  // Function to view inconsistency details
+  function viewInconsistencyDetails(inconsistency) {
+    selectedInconsistency = inconsistency;
+  }
+  
+  // Function to close inconsistency details modal
+  function closeInconsistencyDetails() {
+    selectedInconsistency = null;
+  }
 
   function exportToExcel() {
     // Create CSV content
@@ -674,6 +708,13 @@
 							<p class="text-zinc-600">Employee directory and management</p>
 						</div>
 						<div class="flex gap-3">
+							<button
+								on:click={() => showValidationResults = !showValidationResults}
+								class="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-4 py-2 rounded-lg font-medium hover:from-amber-600 hover:to-amber-700 transition-all duration-200 shadow-lg flex items-center gap-2"
+							>
+								<AlertTriangle class="w-4 h-4" />
+								{showValidationResults ? 'Hide Validation' : 'Data Validation'}
+							</button>
 							<button
 								on:click={exportToExcel}
 								class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-lg font-medium hover:from-green-600 hover:to-emerald-600 transition-all duration-200 shadow-lg flex items-center gap-2"
@@ -832,6 +873,321 @@
 					</p>
 				</div>
 			</div>
+
+			<!-- Data Validation Section -->
+			{#if showValidationResults}
+				<div class="space-y-6 mt-8">
+					<div class="border-b border-zinc-200 pb-4">
+						<h2 class="text-2xl font-bold text-zinc-900 flex items-center gap-2">
+							<AlertTriangle class="w-6 h-6 text-amber-500" />
+							Data Validation Results
+						</h2>
+						<p class="text-zinc-600 mt-1">Cross-reference between employee database and attendance records</p>
+					</div>
+
+					{#if validationInProgress}
+						<div class="flex justify-center items-center py-12">
+							<div class="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600"></div>
+						</div>
+					{:else if validationReport}
+						<!-- Summary Cards -->
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+							<div class="bg-white rounded-lg shadow p-5 border-l-4 border-blue-500">
+								<div class="flex items-center">
+									<div class="flex-shrink-0">
+										<div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+											<Users class="w-5 h-5 text-blue-600" />
+										</div>
+									</div>
+									<div class="ml-4">
+										<p class="text-sm font-medium text-zinc-500">Total Records</p>
+										<p class="text-2xl font-semibold text-zinc-900">{validationReport.totalAttendanceRecords}</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="bg-white rounded-lg shadow p-5 border-l-4 border-green-500">
+								<div class="flex items-center">
+									<div class="flex-shrink-0">
+										<div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+											<Check class="w-5 h-5 text-green-600" />
+										</div>
+									</div>
+									<div class="ml-4">
+										<p class="text-sm font-medium text-zinc-500">Valid Records</p>
+										<p class="text-2xl font-semibold text-green-600">{validationReport.summary.validCount}</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="bg-white rounded-lg shadow p-5 border-l-4 border-red-500">
+								<div class="flex items-center">
+									<div class="flex-shrink-0">
+										<div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+											<AlertCircle class="w-5 h-5 text-red-600" />
+										</div>
+									</div>
+									<div class="ml-4">
+										<p class="text-sm font-medium text-zinc-500">Inconsistencies</p>
+										<p class="text-2xl font-semibold text-red-600">{validationReport.inconsistencies.length}</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="bg-white rounded-lg shadow p-5 border-l-4 border-amber-500">
+								<div class="flex items-center">
+									<div class="flex-shrink-0">
+										<div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
+											<AlertTriangle class="w-5 h-5 text-amber-600" />
+										</div>
+									</div>
+									<div class="ml-4">
+										<p class="text-sm font-medium text-zinc-500">Missing Records</p>
+										<p class="text-2xl font-semibold text-amber-600">{validationReport.missingEmployees.length}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Inconsistencies Table -->
+						{#if validationReport.inconsistencies.length > 0}
+							<div class="bg-white rounded-lg shadow overflow-hidden border border-zinc-200 mb-6">
+								<div class="px-6 py-4 border-b border-zinc-200 bg-zinc-50">
+									<h3 class="text-lg font-medium text-zinc-900">Data Inconsistencies</h3>
+									<p class="text-sm text-zinc-500">Issues found between employee database and attendance records</p>
+								</div>
+								<div class="overflow-x-auto">
+									<table class="min-w-full divide-y divide-zinc-200">
+										<thead class="bg-zinc-50">
+											<tr>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Type</th>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Employee ID</th>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Issue</th>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Action</th>
+											</tr>
+										</thead>
+										<tbody class="bg-white divide-y divide-zinc-200">
+											{#each validationReport.inconsistencies as inconsistency}
+												<tr class="hover:bg-zinc-50">
+													<td class="px-6 py-4 whitespace-nowrap">
+														<span class="inline-flex px-2.5 py-1 text-xs font-semibold rounded-full
+															{inconsistency.type === 'EMPLOYEE_NOT_FOUND' ? 'bg-red-100 text-red-800' :
+															inconsistency.type === 'NAME_MISMATCH' ? 'bg-amber-100 text-amber-800' :
+															inconsistency.type === 'DEPARTMENT_MISMATCH' ? 'bg-orange-100 text-orange-800' :
+															'bg-blue-100 text-blue-800'}">
+															{inconsistency.type.replace(/_/g, ' ')}
+														</span>
+													</td>
+													<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-zinc-900">
+														{inconsistency.employeeId}
+													</td>
+													<td class="px-6 py-4 text-sm text-zinc-500 max-w-md truncate">
+														{inconsistency.message}
+													</td>
+													<td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+														<button 
+															class="text-blue-600 hover:text-blue-900"
+															on:click={() => viewInconsistencyDetails(inconsistency)}>
+															View Details
+														</button>
+													</td>
+												</tr>
+											{/each}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						{/if}
+
+						<!-- Missing Employees Table -->
+						{#if validationReport.missingEmployees.length > 0}
+							<div class="bg-white rounded-lg shadow overflow-hidden border border-zinc-200">
+								<div class="px-6 py-4 border-b border-zinc-200 bg-zinc-50">
+									<h3 class="text-lg font-medium text-zinc-900">Missing Attendance Records</h3>
+									<p class="text-sm text-zinc-500">Employees in database with no attendance records</p>
+								</div>
+								<div class="overflow-x-auto">
+									<table class="min-w-full divide-y divide-zinc-200">
+										<thead class="bg-zinc-50">
+											<tr>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Employee ID</th>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Name</th>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Department</th>
+												<th class="px-6 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">Status</th>
+											</tr>
+										</thead>
+										<tbody class="bg-white divide-y divide-zinc-200">
+											{#each validationReport.missingEmployees as employee}
+												<tr class="hover:bg-zinc-50">
+													<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-zinc-900">
+														{employee.employeeId}
+													</td>
+													<td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-900">
+														{employee.employeeName}
+													</td>
+													<td class="px-6 py-4 whitespace-nowrap text-sm text-zinc-500">
+														{employee.department}
+													</td>
+													<td class="px-6 py-4 whitespace-nowrap">
+														<span class="inline-flex px-2.5 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">
+															No Attendance
+														</span>
+													</td>
+												</tr>
+											{/each}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						{/if}
+					{/if}
+				</div>
+			{/if}
+			
+			<!-- Inconsistency Details Modal -->
+			{#if selectedInconsistency}
+				<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+					<div class="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[80vh] overflow-y-auto">
+						<div class="px-6 py-4 border-b border-zinc-200 flex justify-between items-center bg-zinc-50 sticky top-0 z-10">
+							<div>
+								<h3 class="text-lg font-medium text-zinc-900">Inconsistency Details</h3>
+								<p class="text-sm text-zinc-500">Data validation issue information</p>
+							</div>
+							<button 
+								on:click={closeInconsistencyDetails}
+								class="text-zinc-400 hover:text-zinc-500 focus:outline-none">
+								<X class="w-5 h-5" />
+							</button>
+						</div>
+						
+						<div class="px-6 py-4">
+							<div class="mb-6">
+								<span class="inline-flex px-3 py-1.5 text-sm font-semibold rounded-full
+									{selectedInconsistency.type === 'EMPLOYEE_NOT_FOUND' ? 'bg-red-100 text-red-800' :
+									selectedInconsistency.type === 'NAME_MISMATCH' ? 'bg-amber-100 text-amber-800' :
+									selectedInconsistency.type === 'DEPARTMENT_MISMATCH' ? 'bg-orange-100 text-orange-800' :
+									'bg-blue-100 text-blue-800'}">
+									{selectedInconsistency.type.replace(/_/g, ' ')}
+								</span>
+							</div>
+							
+							<p class="text-zinc-800 mb-6">{selectedInconsistency.message}</p>
+							
+							<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+								<!-- Attendance Record -->
+								<div class="bg-zinc-50 rounded-lg p-4">
+									<h4 class="font-medium text-zinc-900 mb-2 flex items-center gap-1">
+										<AlertCircle class="w-4 h-4 text-amber-600" />
+										Attendance Record
+									</h4>
+									
+									{#if selectedInconsistency.attendanceRecord}
+										<div class="space-y-2">
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Employee ID:</div>
+												<div class="font-medium">{selectedInconsistency.attendanceRecord.employeeId}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Name:</div>
+												<div class="font-medium">{selectedInconsistency.attendanceRecord.employeeName}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Department:</div>
+												<div class="font-medium">{selectedInconsistency.attendanceRecord.department}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Date:</div>
+												<div class="font-medium">{selectedInconsistency.attendanceRecord.date}</div>
+											</div>
+											{#if selectedInconsistency.attendanceRecord.status}
+												<div class="grid grid-cols-2 gap-2 text-sm">
+													<div class="text-zinc-500">Status:</div>
+													<div class="font-medium">{selectedInconsistency.attendanceRecord.status}</div>
+												</div>
+											{/if}
+											{#if selectedInconsistency.attendanceRecord.timeIn}
+												<div class="grid grid-cols-2 gap-2 text-sm">
+													<div class="text-zinc-500">Time In:</div>
+													<div class="font-medium">{selectedInconsistency.attendanceRecord.timeIn}</div>
+												</div>
+											{/if}
+											{#if selectedInconsistency.attendanceRecord.timeOut}
+												<div class="grid grid-cols-2 gap-2 text-sm">
+													<div class="text-zinc-500">Time Out:</div>
+													<div class="font-medium">{selectedInconsistency.attendanceRecord.timeOut}</div>
+												</div>
+											{/if}
+										</div>
+									{:else}
+										<p class="text-sm text-zinc-600">No attendance record available</p>
+									{/if}
+								</div>
+								
+								<!-- Employee Record -->
+								<div class="bg-zinc-50 rounded-lg p-4">
+									<h4 class="font-medium text-zinc-900 mb-2 flex items-center gap-1">
+										<Users class="w-4 h-4 text-blue-600" />
+										Employee Record
+									</h4>
+									
+									{#if selectedInconsistency.employeeRecord}
+										<div class="space-y-2">
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Employee ID:</div>
+												<div class="font-medium">{selectedInconsistency.employeeRecord.employeeId || selectedInconsistency.employeeRecord.employeeNumber}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Name:</div>
+												<div class="font-medium">{selectedInconsistency.employeeRecord.employeeName || `${selectedInconsistency.employeeRecord.firstName} ${selectedInconsistency.employeeRecord.lastName}`}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Department:</div>
+												<div class="font-medium">{selectedInconsistency.employeeRecord.department}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Designation:</div>
+												<div class="font-medium">{selectedInconsistency.employeeRecord.designation || 'N/A'}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Status:</div>
+												<div class="font-medium">{selectedInconsistency.employeeRecord.employeeStatus || 'N/A'}</div>
+											</div>
+											<div class="grid grid-cols-2 gap-2 text-sm">
+												<div class="text-zinc-500">Email:</div>
+												<div class="font-medium">{selectedInconsistency.employeeRecord.workEmail || selectedInconsistency.employeeRecord.email || 'N/A'}</div>
+											</div>
+										</div>
+									{:else}
+										<p class="text-sm text-zinc-600">No employee record found in database</p>
+									{/if}
+								</div>
+							</div>
+							
+							<!-- Recommended Action -->
+							<div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+								<h4 class="font-medium text-blue-800 mb-2">Recommended Action</h4>
+								{#if selectedInconsistency.type === 'EMPLOYEE_NOT_FOUND'}
+									<p class="text-sm text-blue-700">This employee exists in attendance records but not in the employee database. Consider adding this employee to the database or checking if the employee ID is incorrect in the attendance record.</p>
+								{:else if selectedInconsistency.type === 'NAME_MISMATCH'}
+									<p class="text-sm text-blue-700">The employee name differs between the attendance record and employee database. Update either the database or correct the attendance record to ensure consistency.</p>
+								{:else if selectedInconsistency.type === 'DEPARTMENT_MISMATCH'}
+									<p class="text-sm text-blue-700">The employee's department differs between records. If the employee has transferred departments, update the database. Otherwise, correct the attendance record.</p>
+								{:else}
+									<p class="text-sm text-blue-700">Review both records and determine which one contains the accurate information, then update the other accordingly.</p>
+								{/if}
+							</div>
+						</div>
+						
+						<div class="px-6 py-4 border-t border-zinc-200 bg-zinc-50 flex justify-end">
+							<button 
+								on:click={closeInconsistencyDetails}
+								class="bg-white py-2 px-4 border border-zinc-300 rounded-md shadow-sm text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:outline-none">
+								Close
+							</button>
+						</div>
+					</div>
+				</div>
+			{/if}
 		</main>
 	</div>
 </div>

@@ -488,6 +488,13 @@
               </div>
             </div>
             <div class="flex items-center gap-3">
+              <a
+                href="/attendance/list"
+                class="btn-secondary flex items-center gap-2"
+              >
+                <Users class="h-4 w-4" />
+                Attendance List
+              </a>
               <button
                 on:click={exportToCSV}
                 class="btn-secondary flex items-center gap-2"
