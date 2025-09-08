@@ -23,8 +23,8 @@
 </script>
 
 <svelte:head>
-	<title>Zoho People - Management Dashboard</title>
-	<meta name="description" content="Zoho People Management Dashboard with elegant gold and off-white design" />
+	<title>National Consulting India - Zoho People Dashboard</title>
+	<meta name="description" content="National Consulting India Zoho People Management Dashboard with elegant gold and off-white design" />
 </svelte:head>
 
 <div class="min-h-screen bg-gradient-to-br from-offwhite-50 via-gold-50 to-offwhite-100 text-zinc-800">
@@ -121,7 +121,7 @@
 
 			<!-- Footer -->
 			<div class="pb-6 text-center text-xs text-zinc-500">
-				© {new Date().getFullYear()} National Group • Zoho People Dashboard • Gold & Off‑White theme
+				© {new Date().getFullYear()} National Consulting India • Zoho People Dashboard • Gold & Off‑White theme
 			</div>
 		</main>
 	</div>

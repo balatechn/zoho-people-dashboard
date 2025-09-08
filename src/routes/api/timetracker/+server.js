@@ -5,9 +5,9 @@ import { ZohoPeopleAPI } from '$lib/server/zohoApi.js';
 export async function GET({ url }) {
 	try {
 		const zohoApi = new ZohoPeopleAPI();
-		const fromDate = url.searchParams.get('fromDate');
-		const toDate = url.searchParams.get('toDate');
-		const employeeId = url.searchParams.get('employeeId');
+		const fromDate = url.searchParams.get('fromDate') || null;
+		const toDate = url.searchParams.get('toDate') || null;
+		const employeeId = url.searchParams.get('employeeId') || null;
 		
 		const timetracker = await zohoApi.getTimeTrackerData(fromDate, toDate, employeeId);
 		
@@ -23,7 +23,7 @@ export async function GET({ url }) {
 		return json({
 			success: false,
 			error: 'Failed to fetch timetracker data',
-			message: error.message
+			message: error instanceof Error ? error.message : 'Unknown error occurred'
 		}, { status: 500 });
 	}
 }

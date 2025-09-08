@@ -19,7 +19,7 @@
   const testResults = writable({
     status: 'idle', // idle, testing, success, error
     message: '',
-    lastTested: null,
+    lastTested: null as string | null,
     endpoints: {}
   });
 
@@ -592,8 +592,9 @@
               </div>
               
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Refresh Token</label>
+                <label for="refresh-token" class="block text-sm font-medium text-gray-700 mb-2">Refresh Token</label>
                 <textarea
+                  id="refresh-token"
                   bind:value={config.refreshToken}
                   on:input={(e) => updateConfig('refreshToken', e.target.value)}
                   rows="3"

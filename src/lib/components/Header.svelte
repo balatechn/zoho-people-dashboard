@@ -13,12 +13,12 @@
 			<div class="h-12 w-12 rounded-xl overflow-hidden bg-white shadow-lg border border-gold-200 flex items-center justify-center">
 				<img 
 					src="/national-logo.png" 
-					alt="National Group Logo" 
+					alt="National Consulting India Logo" 
 					class="h-8 w-auto object-contain"
 				/>
 			</div>
 			<div class="leading-tight">
-				<p class="text-xs uppercase tracking-wider text-zinc-500 font-medium">National Group</p>
+				<p class="text-xs uppercase tracking-wider text-zinc-500 font-medium">National Consulting India</p>
 				<h1 class="text-xl font-bold bg-gradient-to-r from-gold-600 to-gold-800 bg-clip-text text-transparent">
 					Zoho People — Management Dashboard
 				</h1>
