@@ -509,7 +509,7 @@
   <meta name="description" content="Track and analyze employee attendance patterns" />
 </svelte:head>
 
-<div class="min-h-screen bg-gradient-to-br from-offwhite-50 via-gold-50 to-offwhite-100 text-zinc-800">
+<div class="min-h-screen bg-gradient-to-br from-amber-50 via-white to-gold-50 text-zinc-800">
   <!-- Header -->
   <Header />
 
@@ -522,35 +522,37 @@
 
     <!-- Main Content -->
     <main class="lg:col-span-10 space-y-6">
-      <!-- Page Title -->
-      <div class="card">
-        <div class="card-header">
+      <!-- Page Title with Gradient -->
+      <div class="card overflow-hidden shadow-lg border-0">
+        <div class="bg-gradient-to-r from-amber-500 via-gold-500 to-amber-600 card-header py-5">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <Clock class="h-6 w-6 text-gold-600" />
+              <div class="h-12 w-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shadow-inner">
+                <Clock class="h-6 w-6" />
+              </div>
               <div>
-                <h1 class="text-2xl font-bold text-zinc-900">Attendance</h1>
-                <p class="text-sm text-zinc-600">Employee attendance tracking and management</p>
+                <h1 class="text-2xl font-bold text-white">Attendance</h1>
+                <p class="text-amber-100">Employee attendance tracking and management</p>
               </div>
             </div>
             <div class="flex items-center gap-3">
               <a
                 href="/attendance/list"
-                class="btn-secondary flex items-center gap-2"
+                class="bg-white/20 hover:bg-white/30 text-white rounded-lg px-4 py-2 flex items-center gap-2 transition-all shadow-sm backdrop-blur-sm"
               >
                 <Users class="h-4 w-4" />
                 Attendance List
               </a>
               <button
                 on:click={exportToCSV}
-                class="btn-secondary flex items-center gap-2"
+                class="bg-white/20 hover:bg-white/30 text-white rounded-lg px-4 py-2 flex items-center gap-2 transition-all shadow-sm backdrop-blur-sm"
               >
                 <Download class="h-4 w-4" />
                 Export
               </button>
               <a
                 href="/settings"
-                class="btn-secondary flex items-center gap-2"
+                class="bg-white/20 hover:bg-white/30 text-white rounded-lg px-4 py-2 flex items-center gap-2 transition-all shadow-sm backdrop-blur-sm"
               >
                 <Upload class="h-4 w-4" />
                 Upload Data
@@ -560,8 +562,8 @@
         </div>
       </div>
 
-      <!-- Controls Section -->
-      <div class="card">
+      <!-- Controls Section with Glass Morphism -->
+      <div class="card backdrop-blur-sm bg-white/60 border border-white/20 shadow-lg">
         <div class="card-content">
           <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <!-- Date Range -->
@@ -570,7 +572,7 @@
               <input
                 type="date"
                 bind:value={dateRange.fromDate}
-                class="input w-full"
+                class="w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
               />
             </div>
             <div>
@@ -578,7 +580,7 @@
               <input
                 type="date"
                 bind:value={dateRange.toDate}
-                class="input w-full"
+                class="w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
               />
             </div>
 
@@ -587,7 +589,7 @@
               <button
                 on:click={fetchAttendanceData}
                 disabled={loading}
-                class="btn-primary flex items-center gap-2 justify-center disabled:opacity-50"
+                class="flex items-center gap-2 justify-center py-2.5 px-4 rounded-lg bg-gradient-to-r from-amber-500 to-gold-600 text-white shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {#if loading}
                   <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
@@ -599,7 +601,7 @@
               </button>
               <button
                 on:click={() => showFilters = !showFilters}
-                class="btn-secondary flex items-center gap-2 justify-center"
+                class="flex items-center gap-2 justify-center py-2.5 px-4 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md hover:shadow-lg transition-all"
               >
                 <Filter class="h-4 w-4" />
                 Filters
@@ -614,12 +616,12 @@
                 accept=".csv,.xlsx"
                 on:change={handleFileUpload}
                 bind:this={fileInput}
-                class="input w-full"
+                class="w-full px-4 py-2 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm"
               />
               {#if uploadProgress > 0}
-                <div class="mt-2 bg-gold-200 rounded-full h-2">
+                <div class="mt-2 bg-white/50 rounded-full h-2.5 overflow-hidden">
                   <div 
-                    class="bg-gold-500 h-2 rounded-full transition-all duration-300"
+                    class="h-2.5 rounded-full bg-gradient-to-r from-amber-500 to-gold-500 transition-all duration-300"
                     style="width: {uploadProgress}%"
                   ></div>
                 </div>
@@ -629,68 +631,114 @@
 
           <!-- Advanced Filters -->
           {#if showFilters}
-            <div class="mt-6 p-4 bg-gold-50/50 rounded-lg border border-gold-200/50">
+            <div class="mt-6 p-6 bg-gradient-to-br from-white/90 to-gray-50/90 backdrop-blur-md rounded-xl border border-white shadow-lg">
               <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-zinc-900">Advanced Filters</h3>
+                <h3 class="text-lg font-semibold text-zinc-900 flex items-center gap-2">
+                  <div class="h-6 w-6 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+                    <Filter class="h-3.5 w-3.5 text-white" />
+                  </div>
+                  Advanced Filters
+                </h3>
                 <button
                   on:click={clearFilters}
-                  class="text-red-600 hover:text-red-800 text-sm font-medium"
+                  class="px-3 py-1 rounded-lg bg-red-50 border border-red-100 text-red-600 hover:text-white hover:bg-red-600 transition-all text-sm font-medium flex items-center gap-1.5"
                 >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
                   Clear All
                 </button>
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <input
-                  type="text"
-                  placeholder="Employee ID"
-                  bind:value={filters.employeeId}
-                  class="input"
-                />
-                <input
-                  type="text"
-                  placeholder="Employee Name"
-                  bind:value={filters.employeeName}
-                  class="input"
-                />
-                <input
-                  type="text"
-                  placeholder="Department"
-                  bind:value={filters.department}
-                  class="input"
-                />
-                <input
-                  type="text"
-                  placeholder="Designation"
-                  bind:value={filters.designation}
-                  class="input"
-                />
-                <input
-                  type="text"
-                  placeholder="Location"
-                  bind:value={filters.location}
-                  class="input"
-                />
-                <input
-                  type="text"
-                  placeholder="Shift"
-                  bind:value={filters.shift}
-                  class="input"
-                />
-                <input
-                  type="number"
-                  placeholder="Min Hours"
-                  bind:value={filters.minTotalHours}
-                  class="input"
-                />
-                <input
-                  type="text"
-                  placeholder="Max Hours"
-                  bind:value={filters.maxTotalHours}
-                  class="input"
-                />
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">ID</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Employee ID"
+                    bind:value={filters.employeeId}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">👤</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Employee Name"
+                    bind:value={filters.employeeName}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">🏢</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Department"
+                    bind:value={filters.department}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">💼</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Designation"
+                    bind:value={filters.designation}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">📍</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Location"
+                    bind:value={filters.location}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">⏱️</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Shift"
+                    bind:value={filters.shift}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">➖</span>
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Min Hours"
+                    bind:value={filters.minTotalHours}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-400">➕</span>
+                  </div>
+                  <input
+                    type="number"
+                    placeholder="Max Hours"
+                    bind:value={filters.maxTotalHours}
+                    class="pl-10 w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
+                  />
+                </div>
                 <select
                   bind:value={filters.status}
-                  class="input"
+                  class="w-full px-4 py-2.5 bg-white/70 backdrop-blur-sm border border-gray-200/70 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all"
                 >
                   <option value="">All Status</option>
                   <option value="Present">Present</option>
@@ -703,52 +751,64 @@
         </div>
       </div>
 
-      <!-- Statistics Cards -->
+      <!-- Statistics Cards with Gradients -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="card">
-          <div class="card-content">
+        <div class="card overflow-hidden shadow-md border-0 rounded-xl">
+          <div class="bg-gradient-to-r from-amber-500 to-gold-600 h-2"></div>
+          <div class="card-content relative">
             <div class="flex items-center justify-between">
               <div>
                 <p class="text-sm font-medium text-zinc-600">Total Employees</p>
-                <p class="text-3xl font-bold text-zinc-900">{statistics.totalEmployees}</p>
+                <p class="text-3xl font-bold bg-gradient-to-r from-gold-600 to-amber-600 text-transparent bg-clip-text">{statistics.totalEmployees}</p>
               </div>
-              <Users class="h-8 w-8 text-gold-500" />
+              <div class="h-12 w-12 rounded-full flex items-center justify-center bg-gradient-to-br from-gold-100 to-amber-100 text-gold-600">
+                <Users class="h-6 w-6" />
+              </div>
             </div>
           </div>
         </div>
         
-        <div class="card">
-          <div class="card-content">
+        <div class="card overflow-hidden shadow-md border-0 rounded-xl">
+          <div class="bg-gradient-to-r from-emerald-500 to-teal-600 h-2"></div>
+          <div class="card-content relative">
             <div class="flex items-center justify-between">
               <div>
                 <p class="text-sm font-medium text-zinc-600">Total Records</p>
-                <p class="text-3xl font-bold text-zinc-900">{statistics.totalRecords}</p>
+                <p class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 text-transparent bg-clip-text">{statistics.totalRecords}</p>
               </div>
-              <FileText class="h-8 w-8 text-emerald-500" />
+              <div class="h-12 w-12 rounded-full flex items-center justify-center bg-gradient-to-br from-emerald-100 to-teal-100 text-emerald-600">
+                <FileText class="h-6 w-6" />
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-content">
+        <div class="card overflow-hidden shadow-md border-0 rounded-xl">
+          <div class="bg-gradient-to-r from-blue-500 to-sky-600 h-2"></div>
+          <div class="card-content relative">
             <div class="flex items-center justify-between">
               <div>
                 <p class="text-sm font-medium text-zinc-600">Average Hours</p>
-                <p class="text-3xl font-bold text-zinc-900">{statistics.avgHours}</p>
+                <p class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-sky-600 text-transparent bg-clip-text">{statistics.avgHours}</p>
               </div>
-              <Clock class="h-8 w-8 text-blue-500" />
+              <div class="h-12 w-12 rounded-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-sky-100 text-blue-600">
+                <Clock class="h-6 w-6" />
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-content">
+        <div class="card overflow-hidden shadow-md border-0 rounded-xl">
+          <div class="bg-gradient-to-r from-red-500 to-rose-600 h-2"></div>
+          <div class="card-content relative">
             <div class="flex items-center justify-between">
               <div>
                 <p class="text-sm font-medium text-zinc-600">Late Entries</p>
-                <p class="text-3xl font-bold text-red-600">{statistics.lateEntries}</p>
+                <p class="text-3xl font-bold bg-gradient-to-r from-red-600 to-rose-600 text-transparent bg-clip-text">{statistics.lateEntries}</p>
               </div>
-              <AlertCircle class="h-8 w-8 text-red-500" />
+              <div class="h-12 w-12 rounded-full flex items-center justify-center bg-gradient-to-br from-red-100 to-rose-100 text-red-600">
+                <AlertCircle class="h-6 w-6" />
+              </div>
             </div>
           </div>
         </div>
@@ -764,16 +824,18 @@
         </div>
       {/if}
 
-      <!-- Employee Selection Grid - Inspired by Crextio UI -->
-      <div class="card bg-gradient-to-br from-white via-gray-50 to-gray-100">
-        <div class="card-header border-b border-gold-100">
+      <!-- Employee Selection Grid with Modern Gradient Design -->
+      <div class="card overflow-hidden border-0 shadow-lg">
+        <div class="card-header border-b border-gold-100 bg-gradient-to-r from-sky-500 to-indigo-500">
           <div class="flex justify-between items-center">
             <div>
-              <h2 class="text-xl font-semibold text-zinc-900 flex items-center gap-2">
-                <Users class="h-5 w-5 text-gold-600" />
+              <h2 class="text-xl font-semibold text-white flex items-center gap-2">
+                <div class="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <Users class="h-5 w-5 text-white" />
+                </div>
                 Employee Selection
               </h2>
-              <p class="text-sm text-zinc-600 mt-1">Select an employee to view detailed attendance information</p>
+              <p class="text-sky-100 mt-1">Select an employee to view detailed attendance information</p>
             </div>
             <div class="flex gap-2">
               <div class="relative">
@@ -842,19 +904,21 @@
             </div>
           </div>
           
-          <!-- Department Filter Bar -->
+            <!-- Department Filter Bar with Glass Effect -->
           <div class="flex items-center space-x-2 mb-6 overflow-x-auto pb-2">
             {#each uniqueDepartments as department}
               <button 
-                class="px-4 py-2 rounded-full text-sm font-medium transition-colors {selectedDepartment === department ? 'bg-gold-500 text-white' : 'bg-white border border-gold-200 text-gold-700 hover:bg-gold-50'}"
+                class="px-4 py-2 rounded-full text-sm font-medium transition-all {
+                  selectedDepartment === department 
+                    ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30' 
+                    : 'bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 hover:border-indigo-200'
+                }"
                 on:click={() => { selectedDepartment = department; currentPage = 1; }}
               >
                 {department}
               </button>
             {/each}
-          </div>
-          
-          <!-- Employee Cards - Modern Crextio Style -->
+          </div>          <!-- Employee Cards - Modern Crextio Style -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {#each paginatedEmployees as employee}
               <div 
@@ -969,20 +1033,20 @@
         </div>
       </div>
 
-      <!-- Data Table with Date Grouping -->
-      <div class="card overflow-hidden">
-        <div class="card-header flex justify-between items-center">
-          <h2 class="text-xl font-semibold text-zinc-900">Attendance Records ({dateRange.fromDate} to {dateRange.toDate})</h2>
+      <!-- Data Table with Date Grouping and Glass Morphism -->
+      <div class="card overflow-hidden backdrop-blur-sm bg-white/80 shadow-xl border-0">
+        <div class="card-header bg-gradient-to-r from-purple-500 to-violet-600 flex justify-between items-center">
+          <h2 class="text-xl font-semibold text-white">Attendance Records ({dateRange.fromDate} to {dateRange.toDate})</h2>
           <div class="flex items-center gap-4">
             <div class="flex items-center gap-2">
-              <label class="text-sm text-zinc-600">Sort by:</label>
-              <select bind:value={sortBy} class="text-sm border border-zinc-300 rounded px-2 py-1">
+              <label class="text-sm text-violet-100">Sort by:</label>
+              <select bind:value={sortBy} class="text-sm border border-violet-300/30 rounded-lg px-3 py-1.5 bg-white/20 backdrop-blur-sm text-white">
                 <option value="department">Department</option>
                 <option value="name">Name</option>
                 <option value="time">Hours</option>
               </select>
             </div>
-            <div class="text-sm text-zinc-600">
+            <div class="text-sm text-violet-100 bg-white/10 px-3 py-1 rounded-full">
               Showing {filteredData.length} of {attendanceData.length} records
             </div>
           </div>
