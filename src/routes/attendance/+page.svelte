@@ -443,7 +443,13 @@
     };
   }
 
-  // Get unique employees list
+  // Employee search and filtering
+  let employeeSearchTerm = '';
+  let selectedDepartment = 'All Departments';
+  let currentPage = 1;
+  let employeesPerPage = 8;
+
+  // Get unique employees list with search and filtering
   $: uniqueEmployees = (() => {
     const employees = new Map();
     attendanceData.forEach(record => {
@@ -454,7 +460,46 @@
         });
       }
     });
-    return Array.from(employees.values()).sort((a, b) => a.employeeName.localeCompare(b.employeeName));
+    
+    let filtered = Array.from(employees.values());
+    
+    // Apply search term if present
+    if (employeeSearchTerm) {
+      filtered = filtered.filter(emp => 
+        emp.employeeName.toLowerCase().includes(employeeSearchTerm.toLowerCase()) ||
+        emp.employeeId.toLowerCase().includes(employeeSearchTerm.toLowerCase())
+      );
+    }
+    
+    // Apply department filter if not "All Departments"
+    if (selectedDepartment !== 'All Departments') {
+      filtered = filtered.filter(emp => emp.department === selectedDepartment);
+    }
+    
+    return filtered.sort((a, b) => a.employeeName.localeCompare(b.employeeName));
+  })();
+  
+  // Pagination calculations
+  $: totalPages = Math.ceil(uniqueEmployees.length / employeesPerPage);
+  $: paginatedEmployees = uniqueEmployees.slice(
+    (currentPage - 1) * employeesPerPage, 
+    currentPage * employeesPerPage
+  );
+  
+  // Handle page navigation
+  function goToPage(page) {
+    if (page >= 1 && page <= totalPages) {
+      currentPage = page;
+    }
+  }
+  
+  // Department list for filtering
+  $: uniqueDepartments = (() => {
+    const departments = new Set();
+    attendanceData.forEach(record => {
+      departments.add(record.department);
+    });
+    return ['All Departments', ...Array.from(departments).sort()];
   })();
 </script>
 
@@ -725,11 +770,20 @@
             <div>
               <h2 class="text-xl font-semibold text-zinc-900 flex items-center gap-2">
                 <Users class="h-5 w-5 text-gold-600" />
-                Welcome to HR Dashboard
+                Employee Selection
               </h2>
               <p class="text-sm text-zinc-600 mt-1">Select an employee to view detailed attendance information</p>
             </div>
             <div class="flex gap-2">
+              <div class="relative">
+                <input
+                  type="text"
+                  bind:value={employeeSearchTerm}
+                  placeholder="Search employees..."
+                  class="pl-10 pr-4 py-2 border border-gold-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+                />
+                <Search class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gold-500 w-4 h-4" />
+              </div>
               <div class="flex items-center rounded-full bg-white px-3 py-1 border border-gray-200 shadow-sm">
                 <span class="text-xs font-medium text-zinc-800 mr-2">
                   <span class="text-gold-600">{uniqueEmployees.length}</span> Employees
@@ -787,9 +841,21 @@
             </div>
           </div>
           
+          <!-- Department Filter Bar -->
+          <div class="flex items-center space-x-2 mb-6 overflow-x-auto pb-2">
+            {#each uniqueDepartments as department}
+              <button 
+                class="px-4 py-2 rounded-full text-sm font-medium transition-colors {selectedDepartment === department ? 'bg-gold-500 text-white' : 'bg-white border border-gold-200 text-gold-700 hover:bg-gold-50'}"
+                on:click={() => { selectedDepartment = department; currentPage = 1; }}
+              >
+                {department}
+              </button>
+            {/each}
+          </div>
+          
           <!-- Employee Cards - Modern Crextio Style -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {#each uniqueEmployees as employee}
+            {#each paginatedEmployees as employee}
               <div 
                 class="group relative bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:border-amber-300 transition-all duration-300 cursor-pointer border border-gray-100"
                 on:click={() => selectEmployee({...employee, stats: getEmployeeStats(employee.employeeId)})}
@@ -837,10 +903,67 @@
                   </div>
                 </div>
 
+                <!-- Select Button -->
+                <button 
+                  class="w-full mt-4 px-4 py-2 bg-gold-50 hover:bg-gold-100 text-gold-700 rounded-lg text-sm font-medium border border-gold-200 transition-colors"
+                  on:click={() => selectEmployee({...employee, stats: getEmployeeStats(employee.employeeId)})}
+                >
+                  Select Employee
+                </button>
+
                 <!-- Hover Indicator -->
                 <div class="absolute -right-1 top-1/2 -translate-y-1/2 bg-gold-500 w-1 h-0 group-hover:h-12 transition-all rounded-l-full"></div>
               </div>
             {/each}
+            
+            {#if paginatedEmployees.length === 0}
+              <div class="col-span-full p-8 text-center">
+                <Users class="h-12 w-12 text-gold-300 mx-auto mb-3" />
+                <p class="text-lg text-zinc-600">No employees found</p>
+                <p class="text-sm text-zinc-500 mt-1">Try adjusting your search or filters</p>
+              </div>
+            {/if}
+          </div>
+          
+          <!-- Pagination -->
+          {#if totalPages > 1}
+            <div class="flex justify-center mt-6">
+              <div class="inline-flex items-center rounded-md shadow-sm">
+                <button 
+                  on:click={() => goToPage(currentPage - 1)}
+                  disabled={currentPage === 1} 
+                  class="px-3 py-1 rounded-l-md border border-gold-200 text-gold-600 bg-white hover:bg-gold-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Previous
+                </button>
+                
+                {#each Array(totalPages).fill().map((_, i) => i + 1) as page}
+                  {#if page === 1 || page === totalPages || (page >= currentPage - 1 && page <= currentPage + 1)}
+                    <button 
+                      on:click={() => goToPage(page)}
+                      class="px-3 py-1 border-t border-b border-gold-200 {currentPage === page ? 'text-white bg-gold-500' : 'text-gold-600 bg-white hover:bg-gold-50'}"
+                    >
+                      {page}
+                    </button>
+                  {:else if page === currentPage - 2 || page === currentPage + 2}
+                    <span class="px-2 py-1 border-t border-b border-gold-200 bg-white text-gold-600">...</span>
+                  {/if}
+                {/each}
+                
+                <button 
+                  on:click={() => goToPage(currentPage + 1)}
+                  disabled={currentPage === totalPages} 
+                  class="px-3 py-1 rounded-r-md border border-gold-200 text-gold-600 bg-white hover:bg-gold-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          {/if}
+          
+          <!-- Results Summary -->
+          <div class="mt-4 text-center text-sm text-zinc-500">
+            Showing {paginatedEmployees.length} of {uniqueEmployees.length} employees
           </div>
         </div>
       </div>
