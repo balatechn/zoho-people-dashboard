@@ -1,7 +1,7 @@
 <script>
 	import { 
 		Users, CalendarCheck, Clock, ShieldCheck, Briefcase, Building2,
-		ChevronDown, MapPin, Settings
+		ChevronDown, MapPin, Settings, CheckSquare
 	} from 'lucide-svelte';
 
 	export let currentPath = '/';
@@ -10,6 +10,7 @@
 		{ icon: Users, label: "Dashboard", href: "/", key: "dashboard" },
 		{ icon: Users, label: "Employees", href: "/employees", key: "employees" },
 		{ icon: CalendarCheck, label: "Attendance", href: "/attendance", key: "attendance" },
+		{ icon: CheckSquare, label: "Validation", href: "/validation", key: "validation" },
 		{ icon: Clock, label: "Timesheets", href: "/timesheets", key: "timesheets" },
 		{ icon: ShieldCheck, label: "Approvals", href: "/approvals", key: "approvals" },
 		{ icon: Briefcase, label: "HR Files", href: "/hr-files", key: "hr-files" },

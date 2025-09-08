@@ -1,16 +1,7 @@
-// Sample data based on National Consulting India employee structure
+// Sample data based on National Consulting India employee structure - MASTER DATABASE
 
 export const sampleEmployees = [
-  {
-    id: "NCPL019",
-    name: "Balasubramanian Pillai",
-    department: "IT",
-    location: "Head Office",
-    position: "Manager IT",
-    email: "bala@nationalconsultingindia.com",
-    joiningDate: "2025-03-03",
-    status: "Active"
-  },
+  // Management Team
   {
     id: "NCPL001",
     name: "Mohammed Farooq",
@@ -22,33 +13,273 @@ export const sampleEmployees = [
     status: "Active"
   },
   {
-    id: "NCPL017",
-    name: "Prasanna Hegde",
+    id: "NCPL021",
+    name: "Salman Khan",
+    department: "Management",
+    location: "Head Office",
+    position: "Team Lead",
+    email: "salman.k@nationalconsultingindia.com",
+    joiningDate: "2024-03-15",
+    status: "Active"
+  },
+  {
+    id: "NCPL025",
+    name: "Mohammed Faisal",
+    department: "Management",
+    location: "Head Office",
+    position: "Manager",
+    email: "faisal@nationalconsultingindia.com",
+    joiningDate: "2024-06-10",
+    status: "Active"
+  },
+  
+  // HR Department
+  {
+    id: "NCPL002",
+    name: "Shruthi Nandeesh",
+    department: "HR",
+    location: "Head Office",
+    position: "Asst Manager HR",
+    email: "shruthi.d@nationalconsultingindia.com",
+    joiningDate: "2024-01-22",
+    status: "Active"
+  },
+  
+  // Software Development Team
+  {
+    id: "NCPL024",
+    name: "Yahya Ayash Luqman",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Development Manager",
+    email: "yahya@nationalconsultingindia.com",
+    joiningDate: "2024-02-15",
+    status: "Active"
+  },
+  {
+    id: "NCPL029",
+    name: "Deepanshi Mamgain",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "deepanshi.m@nationalconsultingindia.com",
+    joiningDate: "2024-04-07",
+    status: "Active"
+  },
+  {
+    id: "NCPL028",
+    name: "Adityaa Nagarajan",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Full Stack Developer",
+    email: "aadityaa@nationalconsultingindia.com",
+    joiningDate: "2024-05-20",
+    status: "Active"
+  },
+  {
+    id: "NCPL018",
+    name: "Siddharth Venkat",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "siddharth.v@nationalconsultingindia.com",
+    joiningDate: "2024-07-12",
+    status: "Active"
+  },
+  {
+    id: "NCPL033",
+    name: "Neehar Jallu",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "neehar.j@nationalconsultingindia.com",
+    joiningDate: "2024-08-01",
+    status: "Active"
+  },
+  {
+    id: "NCPL014",
+    name: "Kiran Kumar Uggina",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "kiran.k@nationalconsultingindia.com",
+    joiningDate: "2024-06-15",
+    status: "Active"
+  },
+  {
+    id: "NCPL027",
+    name: "Akshay Hondi",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "akshay.h@nationalconsultingindia.com",
+    joiningDate: "2024-09-01",
+    status: "Active"
+  },
+  {
+    id: "NCPL039",
+    name: "Madhan M",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "madhan.m@nationalconsultingindia.com",
+    joiningDate: "2024-05-10",
+    status: "Active"
+  },
+  {
+    id: "NCPL034",
+    name: "Rakshith R",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "rakshith.r@nationalconsultingindia.com",
+    joiningDate: "2024-07-25",
+    status: "Active"
+  },
+  
+  // IT Department
+  {
+    id: "NCPL019",
+    name: "Balasubramanian Pillai",
+    department: "IT",
+    location: "Head Office",
+    position: "Manager IT",
+    email: "bala@nationalconsultingindia.com",
+    joiningDate: "2025-03-03",
+    status: "Active"
+  },
+  
+  // Accounts/Finance
+  {
+    id: "NCPL007",
+    name: "Karthik M K",
     department: "Accounts",
     location: "Head Office",
-    position: "Accounts Executive",
+    position: "CFO",
+    email: "karthik.mk@nationalconsultingindia.com",
+    joiningDate: "2024-01-15",
+    status: "Active"
+  },
+  {
+    id: "NCPL017",
+    name: "Prasanna Hegde",
+    department: "Sales",
+    location: "Head Office",
+    position: "Sales Executive",
     email: "prasanna.h@nationalconsultingindia.com",
     joiningDate: "2025-02-10",
     status: "Active"
   },
+  
+  // Marketing Department
   {
-    id: "NCPL024",
-    name: "Ashwin K",
-    department: "Software Development",
+    id: "NCPL038",
+    name: "Harshdeep Singh",
+    department: "Marketing",
     location: "Head Office",
-    position: "Software Developer",
-    email: "ashwin.k@nationalconsultingindia.com",
-    joiningDate: "2025-04-07",
+    position: "Head of Marketing",
+    email: "harshdeep.s@nationalconsultingindia.com",
+    joiningDate: "2024-03-20",
+    status: "Active"
+  },
+  
+  // Operations
+  {
+    id: "NCPL037",
+    name: "Ahmed Atique",
+    department: "Operations",
+    location: "Head Office",
+    position: "Operations Manager",
+    email: "atique.a@nationalconsultingindia.com",
+    joiningDate: "2024-04-12",
+    status: "Active"
+  },
+  
+  // Customer Support
+  {
+    id: "NCPL026",
+    name: "Shalini N",
+    department: "Customer Support",
+    location: "Head Office",
+    position: "Customer Support Executive",
+    email: "customerconnect@nationalconsultingindia.com",
+    joiningDate: "2024-06-01",
     status: "Active"
   },
   {
-    id: "NCPL002",
-    name: "Mamatha K",
-    department: "HR",
+    id: "NCPL016",
+    name: "Shwetha D",
+    department: "Customer Support",
     location: "Head Office",
-    position: "HR Executive",
-    email: "mamatha.k@nationalconsultingindia.com",
-    joiningDate: "2024-01-22",
+    position: "Customer Support Executive",
+    email: "isuzusupport@nationalconsultingindia.com",
+    joiningDate: "2024-05-15",
+    status: "Active"
+  },
+  {
+    id: "NCPL015",
+    name: "Manjushri G",
+    department: "Customer Support",
+    location: "Head Office",
+    position: "Customer Support Executive",
+    email: "montrasupport@nationalconsultingindia.com",
+    joiningDate: "2024-07-01",
+    status: "Active"
+  },
+  
+  // Security
+  {
+    id: "NCPL003",
+    name: "Sheik Munavar",
+    department: "Security",
+    location: "Head Office",
+    position: "Security Officer",
+    email: "munavar@nationalconsultingindia.com",
+    joiningDate: "2024-02-01",
+    status: "Active"
+  },
+  
+  // Administration
+  {
+    id: "NCPL023",
+    name: "Mamatha M",
+    department: "Administration",
+    location: "Head Office",
+    position: "Administrative Assistant",
+    email: "mamatha.m@nationalconsultingindia.com",
+    joiningDate: "2024-03-01",
+    status: "Active"
+  },
+  
+  // Additional employees from attendance data
+  {
+    id: "NCPL012",
+    name: "Sanjana Jagadeesha",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "sanjana.j@nationalconsultingindia.com",
+    joiningDate: "2024-08-15",
+    status: "Active"
+  },
+  {
+    id: "NCPL032",
+    name: "Sanjay Asthana",
+    department: "Operations",
+    location: "Head Office",
+    position: "Operations Executive",
+    email: "sanjay.a@nationalconsultingindia.com",
+    joiningDate: "2024-06-20",
+    status: "Active"
+  },
+  {
+    id: "NCPL009",
+    name: "Nirup Jayanth",
+    department: "Software Development",
+    location: "Head Office",
+    position: "Software Developer",
+    email: "nirup.j@nationalconsultingindia.com",
+    joiningDate: "2024-04-25",
     status: "Active"
   }
 ];
