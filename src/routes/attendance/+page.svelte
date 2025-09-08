@@ -8,6 +8,7 @@
   } from 'lucide-svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Header from '$lib/components/Header.svelte';
+  import { sampleAttendanceData } from '$lib/sampleData.js';
   
   // State management
   let attendanceData = [];
@@ -95,10 +96,10 @@
     { employeeId: 'NCPL037', employeeName: 'Ahmed Atique', emailId: 'atique.a@nationalconsultingindia.com', department: 'Operations', designation: 'Operations Manager', location: 'Head Office', role: 'Manager', date: '06-Sep-2025', firstIn: '10:37 AM', lastOut: '07:46 PM', totalHours: '09:09', totalHoursDecimal: 9.15, earlyEntry: '-', lateEntry: '-01:37', earlyExit: '-', lateExit: '+01:46', netHours: '+00:09', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' }
   ];
 
-  // Initialize with comprehensive data
+  // Initialize with sample data
   onMount(() => {
-    attendanceData = fullAttendanceData;
-    filteredData = fullAttendanceData;
+    attendanceData = sampleAttendanceData || fullAttendanceData;
+    filteredData = sampleAttendanceData || fullAttendanceData;
   });
 
   // Fetch attendance data from API
