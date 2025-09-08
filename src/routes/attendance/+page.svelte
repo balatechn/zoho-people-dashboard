@@ -2,7 +2,9 @@
   import { onMount } from 'svelte';
   import { 
     Users, Clock, CalendarCheck, Filter, Download, Search, 
-    Upload, Settings, AlertCircle, FileText, TrendingUp
+    Upload, Settings, AlertCircle, FileText, TrendingUp,
+    Briefcase, UserCheck, MapPin, Building2, CheckCircle, 
+    XCircle, ChevronDown, Bell, Activity
   } from 'lucide-svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Header from '$lib/components/Header.svelte';
@@ -402,21 +404,42 @@
     showEmployeeDetails = false;
   }
 
-  // Get employee statistics
+  // Get employee statistics with enhanced metrics for Crextio style
   function getEmployeeStats(employeeId) {
     const employeeRecords = attendanceData.filter(record => record.employeeId === employeeId);
     const totalDays = employeeRecords.length;
     const presentDays = employeeRecords.filter(r => r.status === 'Present').length;
+    const partialDays = employeeRecords.filter(r => r.status === 'Partial').length;
+    const absentDays = employeeRecords.filter(r => r.status === 'Absent').length;
+    
     const totalHours = employeeRecords.reduce((sum, r) => sum + r.totalHoursDecimal, 0);
+    const totalHoursFormatted = totalHours.toFixed(1);
+    
     const avgHours = totalDays > 0 ? (totalHours / totalDays).toFixed(1) : '0.0';
     const attendanceRate = totalDays > 0 ? ((presentDays / totalDays) * 100).toFixed(1) : '0.0';
+    
+    const lateEntries = employeeRecords.filter(r => r.lateEntry !== '-' && r.lateEntry.startsWith('-')).length;
+    const earlyExits = employeeRecords.filter(r => r.earlyExit !== '-' && r.earlyExit.startsWith('-')).length;
+    
+    const mostProductiveDay = [...employeeRecords]
+      .sort((a, b) => b.totalHoursDecimal - a.totalHoursDecimal)[0]?.date || 'N/A';
+      
+    const trend = employeeRecords.length >= 3 ? 
+      (employeeRecords[employeeRecords.length-1].totalHoursDecimal > employeeRecords[employeeRecords.length-3].totalHoursDecimal ? 'up' : 'down') : 
+      'neutral';
 
     return {
       totalDays,
       presentDays,
-      totalHours: totalHours.toFixed(1),
+      partialDays,
+      absentDays,
+      totalHours: totalHoursFormatted,
       avgHours,
-      attendanceRate
+      attendanceRate,
+      lateEntries,
+      earlyExits,
+      mostProductiveDay,
+      trend
     };
   }
 
@@ -688,65 +711,127 @@
         </div>
       {/if}
 
-      <!-- Employee Selection Grid -->
-      <div class="card">
-        <div class="card-header">
-          <h2 class="text-xl font-semibold text-zinc-900 flex items-center gap-2">
-            <Users class="h-5 w-5 text-gold-600" />
-            Employee Directory
-          </h2>
-          <p class="text-sm text-zinc-600 mt-1">Select an employee to view detailed attendance information</p>
+      <!-- Employee Selection Grid - Inspired by Crextio UI -->
+      <div class="card bg-gradient-to-br from-white via-gray-50 to-gray-100">
+        <div class="card-header border-b border-gold-100">
+          <div class="flex justify-between items-center">
+            <div>
+              <h2 class="text-xl font-semibold text-zinc-900 flex items-center gap-2">
+                <Users class="h-5 w-5 text-gold-600" />
+                Welcome to HR Dashboard
+              </h2>
+              <p class="text-sm text-zinc-600 mt-1">Select an employee to view detailed attendance information</p>
+            </div>
+            <div class="flex gap-2">
+              <div class="flex items-center rounded-full bg-white px-3 py-1 border border-gray-200 shadow-sm">
+                <span class="text-xs font-medium text-zinc-800 mr-2">
+                  <span class="text-gold-600">{uniqueEmployees.length}</span> Employees
+                </span>
+                <div class="flex -space-x-2">
+                  {#each uniqueEmployees.slice(0, 3) as employee, i}
+                    <div class="w-6 h-6 rounded-full ring-2 ring-white overflow-hidden bg-gold-100 flex items-center justify-center text-xs font-medium text-gold-800">
+                      {employee.employeeName.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                    </div>
+                  {/each}
+                  {#if uniqueEmployees.length > 3}
+                    <div class="w-6 h-6 rounded-full ring-2 ring-white bg-gold-500 flex items-center justify-center text-xs font-medium text-white">
+                      +{uniqueEmployees.length - 3}
+                    </div>
+                  {/if}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        
         <div class="card-content">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <!-- Metrics Summary - Similar to Crextio -->
+          <div class="grid grid-cols-3 gap-6 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-gold-100 to-gold-200 flex items-center justify-center">
+                <Users class="h-6 w-6 text-gold-600" />
+              </div>
+              <div>
+                <p class="text-xs text-zinc-500">Employees</p>
+                <p class="text-2xl font-bold text-zinc-900">{uniqueEmployees.length}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-200 flex items-center justify-center">
+                <Clock class="h-6 w-6 text-emerald-600" />
+              </div>
+              <div>
+                <p class="text-xs text-zinc-500">Avg Hours</p>
+                <p class="text-2xl font-bold text-zinc-900">
+                  {(attendanceData.reduce((sum, r) => sum + r.totalHoursDecimal, 0) / attendanceData.length).toFixed(1)}h
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                <CalendarCheck class="h-6 w-6 text-blue-600" />
+              </div>
+              <div>
+                <p class="text-xs text-zinc-500">Attendance Rate</p>
+                <p class="text-2xl font-bold text-zinc-900">
+                  {(attendanceData.filter(r => r.status === 'Present').length / attendanceData.length * 100).toFixed(0)}%
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Employee Cards - Modern Crextio Style -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {#each uniqueEmployees as employee}
               <div 
-                class="group relative bg-white border border-zinc-200 rounded-lg p-4 hover:shadow-lg hover:border-gold-300 transition-all cursor-pointer"
-                on:click={() => selectEmployee(employee)}
-                on:keydown={(e) => e.key === 'Enter' && selectEmployee(employee)}
+                class="group relative bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:border-amber-300 transition-all duration-300 cursor-pointer border border-gray-100"
+                on:click={() => selectEmployee({...employee, stats: getEmployeeStats(employee.employeeId)})}
+                on:keydown={(e) => e.key === 'Enter' && selectEmployee({...employee, stats: getEmployeeStats(employee.employeeId)})}
                 role="button"
                 tabindex="0"
               >
-                <!-- Employee Avatar -->
-                <div class="flex items-start gap-3 mb-3">
-                  <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-white font-semibold text-lg">
+                <!-- Employee Avatar and Info -->
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-white font-semibold text-lg">
                     {employee.employeeName.split(' ').map(n => n[0]).join('').slice(0, 2)}
                   </div>
                   <div class="flex-1 min-w-0">
-                    <h3 class="font-semibold text-zinc-900 text-sm truncate">{employee.employeeName}</h3>
-                    <p class="text-xs text-zinc-500 truncate">{employee.designation}</p>
-                    <p class="text-xs text-gold-600 font-medium">{employee.department}</p>
+                    <h3 class="font-semibold text-zinc-900 truncate">{employee.employeeName}</h3>
+                    <p class="text-sm text-zinc-500 truncate">{employee.designation}</p>
+                    <div class="mt-1 inline-flex items-center rounded-full bg-gold-50 px-2 py-0.5">
+                      <span class="text-xs text-gold-700">{employee.department}</span>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Quick Stats -->
-                <div class="space-y-2">
-                  <div class="flex justify-between items-center">
-                    <span class="text-xs text-zinc-500">Attendance</span>
-                    <span class="text-xs font-medium text-emerald-600">{employee.stats.attendanceRate}%</span>
+                <!-- Progress Section -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-xs text-zinc-500">Work Time</span>
+                    <span class="text-xs font-medium text-zinc-700">{employee.stats.avgHours}h</span>
                   </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-xs text-zinc-500">Avg Hours</span>
-                    <span class="text-xs font-medium text-zinc-900">{employee.stats.avgHours}h</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-xs text-zinc-500">Present Days</span>
-                    <span class="text-xs font-medium text-zinc-900">{employee.stats.presentDays}/{employee.stats.totalDays}</span>
-                  </div>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="mt-3">
-                  <div class="w-full bg-zinc-200 rounded-full h-1.5">
+                  <div class="w-full bg-gray-100 rounded-full h-2">
                     <div 
-                      class="bg-gradient-to-r from-gold-500 to-gold-600 h-1.5 rounded-full transition-all"
-                      style="width: {employee.stats.attendanceRate}%"
+                      class="bg-gradient-to-r from-gold-500 to-gold-400 h-2 rounded-full"
+                      style="width: {Math.min(employee.stats.avgHours / 10 * 100, 100)}%"
                     ></div>
                   </div>
                 </div>
 
-                <!-- Hover Effect -->
-                <div class="absolute inset-0 bg-gold-50/0 group-hover:bg-gold-50/20 rounded-lg transition-colors"></div>
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-3 text-center">
+                  <div class="bg-gray-50 rounded-lg p-2">
+                    <p class="text-xs text-gray-500">Attendance</p>
+                    <p class="text-sm font-semibold text-gray-900">{employee.stats.attendanceRate}%</p>
+                  </div>
+                  <div class="bg-gray-50 rounded-lg p-2">
+                    <p class="text-xs text-gray-500">Present Days</p>
+                    <p class="text-sm font-semibold text-gray-900">{employee.stats.presentDays}/{employee.stats.totalDays}</p>
+                  </div>
+                </div>
+
+                <!-- Hover Indicator -->
+                <div class="absolute -right-1 top-1/2 -translate-y-1/2 bg-gold-500 w-1 h-0 group-hover:h-12 transition-all rounded-l-full"></div>
               </div>
             {/each}
           </div>
@@ -885,26 +970,35 @@
 
 <!-- Employee Details Modal -->
 {#if showEmployeeDetails && selectedEmployee}
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
-      <!-- Modal Header -->
-      <div class="bg-gradient-to-r from-gold-500 to-gold-600 px-6 py-4 text-white">
+  <div class="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden">
+      <!-- Modal Header with Gold Gradient -->
+      <div class="bg-gradient-to-r from-amber-500 to-amber-600 px-6 py-5 text-white">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-4">
-            <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-xl">
+            <div class="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-xl shadow-inner">
               {selectedEmployee.employeeName.split(' ').map(n => n[0]).join('').slice(0, 2)}
             </div>
             <div>
               <h2 class="text-2xl font-bold">{selectedEmployee.employeeName}</h2>
-              <p class="text-gold-100">{selectedEmployee.designation}</p>
-              <p class="text-gold-200 text-sm">{selectedEmployee.department} • {selectedEmployee.employeeId}</p>
+              <p class="text-amber-100 font-medium">{selectedEmployee.designation}</p>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="flex items-center text-amber-200 text-sm">
+                  <Briefcase class="h-3.5 w-3.5 mr-1" /> {selectedEmployee.department}
+                </span>
+                <span class="text-amber-200/70">•</span>
+                <span class="flex items-center text-amber-200 text-sm">
+                  <UserCheck class="h-3.5 w-3.5 mr-1" /> {selectedEmployee.employeeId}
+                </span>
+              </div>
             </div>
           </div>
           <button 
             on:click={closeEmployeeDetails}
-            class="text-white hover:text-gold-200 transition-colors"
+            class="rounded-full bg-white/10 p-2 hover:bg-white/20 transition-colors"
+            aria-label="Close modal"
           >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
@@ -914,137 +1008,195 @@
       <!-- Modal Content -->
       <div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-sm font-medium text-emerald-600">Attendance Rate</p>
-                <p class="text-2xl font-bold text-emerald-700">{selectedEmployee.stats.attendanceRate}%</p>
-              </div>
-              <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
-                <CalendarCheck class="w-4 h-4 text-emerald-600" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="flex items-center gap-3 rounded-lg bg-emerald-50 p-4 border border-emerald-100">
+            <div class="rounded-full bg-emerald-100 p-2.5">
+              <CalendarCheck class="w-5 h-5 text-emerald-600" />
+            </div>
+            <div>
+              <p class="text-sm text-emerald-600 font-medium">Attendance Rate</p>
+              <p class="text-2xl font-bold text-emerald-700">{selectedEmployee.stats.attendanceRate}%</p>
+              <div class="w-full bg-emerald-200/50 rounded-full h-1.5 mt-1">
+                <div 
+                  class="bg-emerald-500 h-1.5 rounded-full"
+                  style="width: {selectedEmployee.stats.attendanceRate}%"
+                ></div>
               </div>
             </div>
           </div>
 
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-sm font-medium text-blue-600">Present Days</p>
-                <p class="text-2xl font-bold text-blue-700">{selectedEmployee.stats.presentDays}</p>
-              </div>
-              <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                <Users class="w-4 h-4 text-blue-600" />
-              </div>
+          <div class="flex items-center gap-3 rounded-lg bg-blue-50 p-4 border border-blue-100">
+            <div class="rounded-full bg-blue-100 p-2.5">
+              <Users class="w-5 h-5 text-blue-600" />
+            </div>
+            <div>
+              <p class="text-sm text-blue-600 font-medium">Present Days</p>
+              <p class="text-2xl font-bold text-blue-700">{selectedEmployee.stats.presentDays}</p>
+              <p class="text-xs text-blue-500 mt-1">of {selectedEmployee.stats.totalDays} working days</p>
             </div>
           </div>
 
-          <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-sm font-medium text-orange-600">Total Hours</p>
-                <p class="text-2xl font-bold text-orange-700">{selectedEmployee.stats.totalHours}h</p>
-              </div>
-              <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                <Clock class="w-4 h-4 text-orange-600" />
-              </div>
+          <div class="flex items-center gap-3 rounded-lg bg-amber-50 p-4 border border-amber-100">
+            <div class="rounded-full bg-amber-100 p-2.5">
+              <Clock class="w-5 h-5 text-amber-600" />
+            </div>
+            <div>
+              <p class="text-sm text-amber-600 font-medium">Total Hours</p>
+              <p class="text-2xl font-bold text-amber-700">{selectedEmployee.stats.totalHours}</p>
+              <p class="text-xs text-amber-500 mt-1">hours worked this month</p>
             </div>
           </div>
 
-          <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-sm font-medium text-purple-600">Avg Hours/Day</p>
-                <p class="text-2xl font-bold text-purple-700">{selectedEmployee.stats.avgHours}h</p>
-              </div>
-              <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                <TrendingUp class="w-4 h-4 text-purple-600" />
-              </div>
+          <div class="flex items-center gap-3 rounded-lg bg-purple-50 p-4 border border-purple-100">
+            <div class="rounded-full bg-purple-100 p-2.5">
+              <TrendingUp class="w-5 h-5 text-purple-600" />
             </div>
-          </div>
-        </div>
-
-        <!-- Employee Info -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div class="bg-gray-50 rounded-lg p-4">
-            <h3 class="font-semibold text-gray-900 mb-3">Employee Information</h3>
-            <div class="space-y-2">
-              <div class="flex justify-between">
-                <span class="text-sm text-gray-600">Employee ID:</span>
-                <span class="text-sm font-medium">{selectedEmployee.employeeId}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-sm text-gray-600">Email:</span>
-                <span class="text-sm font-medium truncate">{selectedEmployee.emailId}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-sm text-gray-600">Location:</span>
-                <span class="text-sm font-medium">{selectedEmployee.location}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-sm text-gray-600">Role:</span>
-                <span class="text-sm font-medium">{selectedEmployee.role}</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-gray-50 rounded-lg p-4">
-            <h3 class="font-semibold text-gray-900 mb-3">Work Schedule</h3>
-            <div class="space-y-2">
-              <div class="flex justify-between">
-                <span class="text-sm text-gray-600">Shift:</span>
-                <span class="text-sm font-medium">{selectedEmployee.shiftName.replace(/\[|\]/g, '')}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-sm text-gray-600">Department:</span>
-                <span class="text-sm font-medium">{selectedEmployee.department}</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-sm text-gray-600">Designation:</span>
-                <span class="text-sm font-medium">{selectedEmployee.designation}</span>
-              </div>
+            <div>
+              <p class="text-sm text-purple-600 font-medium">Avg Hours/Day</p>
+              <p class="text-2xl font-bold text-purple-700">{selectedEmployee.stats.avgHours}h</p>
+              <p class="text-xs text-purple-500 mt-1">when present</p>
             </div>
           </div>
         </div>
 
-        <!-- Recent Attendance -->
-        <div class="bg-white border border-gray-200 rounded-lg">
-          <div class="px-4 py-3 border-b border-gray-200">
-            <h3 class="font-semibold text-gray-900">Recent Attendance</h3>
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Left Column - Info and Tasks -->
+          <div>
+            <!-- Employee Information Card -->
+            <div class="rounded-lg border bg-gray-50 p-4 mb-4">
+              <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <Users class="w-4 h-4" />
+                Employee Information
+              </h3>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center py-1 border-b border-gray-100">
+                  <span class="text-sm text-gray-600">Employee ID:</span>
+                  <span class="text-sm font-medium">{selectedEmployee.employeeId}</span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-gray-100">
+                  <span class="text-sm text-gray-600">Email:</span>
+                  <span class="text-sm font-medium truncate max-w-[170px]">{selectedEmployee.emailId}</span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-gray-100">
+                  <span class="text-sm text-gray-600">Location:</span>
+                  <span class="text-sm font-medium">{selectedEmployee.location}</span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-gray-100">
+                  <span class="text-sm text-gray-600">Department:</span>
+                  <span class="text-sm font-medium">{selectedEmployee.department}</span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-gray-100">
+                  <span class="text-sm text-gray-600">Role:</span>
+                  <span class="text-sm font-medium">{selectedEmployee.role}</span>
+                </div>
+                <div class="flex justify-between items-center py-1">
+                  <span class="text-sm text-gray-600">Shift:</span>
+                  <span class="text-sm font-medium">{selectedEmployee.shiftName.replace(/\[|\]/g, '')}</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Tasks Card -->
+            <div class="rounded-lg border bg-gray-50 p-4">
+              <h3 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <Briefcase class="w-4 h-4" />
+                Tasks & Projects
+              </h3>
+              
+              <div class="space-y-3">
+                <div class="rounded border p-3 bg-white">
+                  <div class="flex justify-between">
+                    <span class="font-medium text-sm">Dashboard Updates</span>
+                    <span class="text-xs px-1.5 py-0.5 bg-red-100 text-red-800 rounded">High</span>
+                  </div>
+                  <div class="mt-2 text-xs text-gray-500">Due in 1 day</div>
+                  <div class="mt-2 h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-red-500 rounded-full" style="width: 85%"></div>
+                  </div>
+                </div>
+                
+                <div class="rounded border p-3 bg-white">
+                  <div class="flex justify-between">
+                    <span class="font-medium text-sm">API Integration</span>
+                    <span class="text-xs px-1.5 py-0.5 bg-amber-100 text-amber-800 rounded">Medium</span>
+                  </div>
+                  <div class="mt-2 text-xs text-gray-500">Due in 3 days</div>
+                  <div class="mt-2 h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-amber-500 rounded-full" style="width: 60%"></div>
+                  </div>
+                </div>
+                
+                <div class="rounded border p-3 bg-white">
+                  <div class="flex justify-between">
+                    <span class="font-medium text-sm">Documentation</span>
+                    <span class="text-xs px-1.5 py-0.5 bg-emerald-100 text-emerald-800 rounded">Low</span>
+                  </div>
+                  <div class="mt-2 text-xs text-gray-500">Due in 5 days</div>
+                  <div class="mt-2 h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-500 rounded-full" style="width: 25%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="overflow-x-auto">
-            <table class="min-w-full">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">First In</th>
-                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Last Out</th>
-                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Total Hours</th>
-                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Net Hours</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                {#each attendanceData.filter(record => record.employeeId === selectedEmployee.employeeId) as record}
-                  <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-2 text-sm font-medium text-gray-900">{record.date}</td>
-                    <td class="px-4 py-2">
-                      <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {record.status === 'Present' ? 'bg-emerald-100 text-emerald-800' : record.status === 'Partial' ? 'bg-orange-100 text-orange-800' : 'bg-red-100 text-red-800'}">
-                        {record.status}
-                      </span>
-                    </td>
-                    <td class="px-4 py-2 text-sm text-gray-900">{record.firstIn}</td>
-                    <td class="px-4 py-2 text-sm text-gray-900">{record.lastOut}</td>
-                    <td class="px-4 py-2 text-sm font-medium text-gray-900">{record.totalHours}</td>
-                    <td class="px-4 py-2">
-                      <span class="text-sm font-medium {record.netHours.startsWith('+') ? 'text-emerald-600' : record.netHours.startsWith('-') ? 'text-red-600' : 'text-gray-500'}">
-                        {record.netHours}
-                      </span>
-                    </td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
+          
+          <!-- Right Column - Attendance Table -->
+          <div class="md:col-span-2">
+            <div class="rounded-lg border bg-white">
+              <div class="px-4 py-3 border-b bg-gray-50 flex items-center justify-between">
+                <h3 class="font-semibold text-gray-900 flex items-center gap-2">
+                  <CalendarCheck class="w-4 h-4" />
+                  Recent Attendance
+                </h3>
+                <button class="text-xs text-amber-600 hover:text-amber-700 font-medium">
+                  View Full History
+                </button>
+              </div>
+              
+              <div class="overflow-x-auto">
+                <table class="min-w-full">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th class="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                      <th class="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                      <th class="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First In</th>
+                      <th class="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Out</th>
+                      <th class="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Hours</th>
+                      <th class="px-4 py-2.5 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Net</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-200">
+                    {#each attendanceData.filter(record => record.employeeId === selectedEmployee.employeeId).slice(0, 8) as record}
+                      <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 text-sm font-medium text-gray-900">{record.date}</td>
+                        <td class="px-4 py-3">
+                          <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full {
+                            record.status === 'Present' ? 'bg-emerald-100 text-emerald-800' : 
+                            record.status === 'Partial' ? 'bg-amber-100 text-amber-800' : 
+                            'bg-red-100 text-red-800'
+                          }">
+                            {record.status}
+                          </span>
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-900">{record.firstIn}</td>
+                        <td class="px-4 py-3 text-sm text-gray-900">{record.lastOut}</td>
+                        <td class="px-4 py-3 text-sm font-medium text-gray-900">{record.totalHours}</td>
+                        <td class="px-4 py-3">
+                          <span class="text-sm font-medium {
+                            record.netHours.startsWith('+') ? 'text-emerald-600' : 
+                            record.netHours.startsWith('-') ? 'text-red-600' : 
+                            'text-gray-500'
+                          }">
+                            {record.netHours}
+                          </span>
+                        </td>
+                      </tr>
+                    {/each}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
