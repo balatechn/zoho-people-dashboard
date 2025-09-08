@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { writable } from 'svelte/store';
   import Header from '$lib/components/Header.svelte';
