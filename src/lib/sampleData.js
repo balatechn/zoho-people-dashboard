@@ -55,44 +55,60 @@ export const sampleEmployees = [
 
 export const sampleAttendance = [
   {
-    employeeId: "NCPL019",
-    date: "2025-09-07",
-    checkIn: "09:18",
-    checkOut: "18:30",
+    employeeId: "NCPL021",
+    date: "2025-09-08",
+    checkIn: "11:47",
+    checkOut: "22:34",
     status: "Present",
-    workingHours: "8h 42m"
+    workingHours: "10h 47m"
   },
   {
     employeeId: "NCPL001",
-    date: "2025-09-07",
-    checkIn: "09:05",
-    checkOut: "17:45",
-    status: "WFH",
-    workingHours: "8h 40m"
-  },
-  {
-    employeeId: "NCPL017",
-    date: "2025-09-07",
-    checkIn: "09:24",
-    checkOut: "18:15",
+    date: "2025-09-08",
+    checkIn: "10:16",
+    checkOut: "21:01",
     status: "Present",
-    workingHours: "8h 51m"
+    workingHours: "10h 45m"
   },
   {
     employeeId: "NCPL024",
-    date: "2025-09-07",
-    checkIn: null,
-    checkOut: null,
-    status: "Leave",
-    workingHours: "0h"
+    date: "2025-09-08",
+    checkIn: "10:37",
+    checkOut: "19:30",
+    status: "Present",
+    workingHours: "8h 53m"
   },
   {
     employeeId: "NCPL002",
-    date: "2025-09-07",
-    checkIn: "08:59",
-    checkOut: "18:00",
+    date: "2025-09-08",
+    checkIn: "10:22",
+    checkOut: "19:05",
     status: "Present",
-    workingHours: "9h 1m"
+    workingHours: "8h 43m"
+  },
+  {
+    employeeId: "NCPL028",
+    date: "2025-09-08",
+    checkIn: "09:56",
+    checkOut: "19:14",
+    status: "Present",
+    workingHours: "9h 18m"
+  },
+  {
+    employeeId: "NCPL038",
+    date: "2025-09-08",
+    checkIn: "09:43",
+    checkOut: "18:43",
+    status: "Present",
+    workingHours: "9h 00m"
+  },
+  {
+    employeeId: "NCPL019",
+    date: "2025-09-08",
+    checkIn: "08:51",
+    checkOut: "20:34",
+    status: "Present",
+    workingHours: "11h 43m"
   }
 ];
 
@@ -162,9 +178,9 @@ export const sampleTimeTracker = [
 export const sampleDashboardData = {
   kpis: {
     totalEmployees: 35,
-    presentToday: 28,
-    pendingApprovals: 5,
-    avgCheckin: "09:15"
+    presentToday: 32,
+    pendingApprovals: 3,
+    avgCheckin: "10:15"
   },
   charts: {
     trendData: [
@@ -195,11 +211,14 @@ export const sampleDashboardData = {
   },
   tables: {
     todayAttendance: [
-      { name: "Balasubramanian Pillai", dept: "IT", location: "Head Office", status: "Present", time: "09:18" },
-      { name: "Mohammed Farooq", dept: "Management", location: "Head Office", status: "WFH", time: "09:05" },
-      { name: "Prasanna Hegde", dept: "Accounts", location: "Head Office", status: "Present", time: "09:24" },
-      { name: "Ashwin K", dept: "Software Development", location: "Head Office", status: "Leave", time: "-" },
-      { name: "Mamatha K", dept: "HR", location: "Head Office", status: "Present", time: "08:59" },
+      { name: "Salman Khan", dept: "Management", location: "Head Office", status: "Present", time: "11:47 - 22:34", hours: "10h 47m" },
+      { name: "Mohammed Farooq", dept: "Management", location: "Head Office", status: "Present", time: "10:16 - 21:01", hours: "10h 45m" },
+      { name: "Yahya Ayash Luqman", dept: "Software Development", location: "Head Office", status: "Present", time: "10:37 - 19:30", hours: "8h 53m" },
+      { name: "Shruthi Nandeesh", dept: "HR", location: "Head Office", status: "Present", time: "10:22 - 19:05", hours: "8h 43m" },
+      { name: "Adityaa Nagarajan", dept: "Software Development", location: "Head Office", status: "Present", time: "09:56 - 19:14", hours: "9h 18m" },
+      { name: "Harshdeep Singh", dept: "Marketing", location: "Head Office", status: "Present", time: "09:43 - 18:43", hours: "9h 00m" },
+      { name: "Balasubramanian Pillai", dept: "IT", location: "Head Office", status: "Present", time: "08:51 - 20:34", hours: "11h 43m" },
+      { name: "Deepanshi Mamgain", dept: "Software Development", location: "Head Office", status: "Present", time: "11:10 - 19:32", hours: "8h 22m" },
     ],
     pendingApprovals: [
       { id: "RG-1042", type: "Regularization", by: "Prasanna H", for: "Sep 06 • 09:20", age: "1d" },

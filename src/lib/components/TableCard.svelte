@@ -42,9 +42,9 @@
 						<tr class="border-b border-gold-200 bg-gold-50/50 text-left text-xs uppercase text-zinc-600 font-medium">
 							<th class="px-4 py-3">Employee</th>
 							<th class="px-4 py-3">Department</th>
-							<th class="px-4 py-3">Location</th>
 							<th class="px-4 py-3">Status</th>
-							<th class="px-4 py-3">Check-in</th>
+							<th class="px-4 py-3">Check-in/out</th>
+							<th class="px-4 py-3">Hours</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,13 +52,13 @@
 							<tr class="border-b border-gold-100 last:border-none hover:bg-gold-25 transition-colors">
 								<td class="px-4 py-3 font-medium text-zinc-800">{row.name}</td>
 								<td class="px-4 py-3 text-zinc-600">{row.dept}</td>
-								<td class="px-4 py-3 text-zinc-600">{row.location}</td>
 								<td class="px-4 py-3">
 									<span class="rounded-full px-3 py-1 text-xs font-medium {getStatusColor(row.status)}">
 										{row.status}
 									</span>
 								</td>
-								<td class="px-4 py-3 text-zinc-600 font-mono">{row.time}</td>
+								<td class="px-4 py-3 text-zinc-600 font-mono text-xs">{row.time}</td>
+								<td class="px-4 py-3 text-zinc-600 font-medium text-xs">{row.hours || '-'}</td>
 							</tr>
 						{/each}
 					</tbody>

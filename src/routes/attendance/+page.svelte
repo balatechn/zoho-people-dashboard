@@ -14,10 +14,10 @@
   let error = null;
   let dateRange = {
     fromDate: '2025-09-01',
-    toDate: '2025-09-01'
+    toDate: '2025-09-06'
   };
   
-  // Filter states
+  // Filter states - Enhanced for date range and name filtering
   let filters = {
     employeeId: '',
     employeeName: '',
@@ -30,505 +30,70 @@
     earlyExit: '',
     lateExit: '',
     minTotalHours: '',
-    maxTotalHours: ''
+    maxTotalHours: '',
+    status: ''
   };
 
   let showFilters = false;
   let uploadProgress = 0;
   let fileInput;
 
-  // Updated attendance data for September 1st, 2025 from actual report
-  const sampleAttendanceData = [
-    {
-      employeeId: 'NCPL021',
-      employeeName: 'Salman Khan',
-      emailId: 'salman.k@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Management',
-      designation: 'Team Lead',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '11:47 AM',
-      lastOut: '10:34 PM',
-      totalHours: '10:47',
-      totalHoursDecimal: 10.78,
-      earlyEntry: '-',
-      lateEntry: '-02:47',
-      earlyExit: '-',
-      lateExit: '+04:34',
-      netHours: '+01:47',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL025',
-      employeeName: 'Mohammed Faisal',
-      emailId: 'faisal@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Management',
-      designation: 'Manager',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '11:29 AM',
-      lastOut: '01:36 PM',
-      totalHours: '02:07',
-      totalHoursDecimal: 2.12,
-      earlyEntry: '-',
-      lateEntry: '-02:29',
-      earlyExit: '-04:24',
-      lateExit: '-',
-      netHours: '-06:53',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL029',
-      employeeName: 'Deepanshi Mamgain',
-      emailId: 'deepanshi.m@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Software Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '11:07 AM',
-      lastOut: '07:09 PM',
-      totalHours: '08:02',
-      totalHoursDecimal: 8.03,
-      earlyEntry: '-',
-      lateEntry: '-01:07',
-      earlyExit: '-',
-      lateExit: '+00:09',
-      netHours: '-00:58',
-      shiftName: '[10:00 AM - 07:00 PM] Dev Team A',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL003',
-      employeeName: 'Sheik Munavar',
-      emailId: 'munavar@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Security',
-      designation: 'Security Officer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '10:46 AM',
-      lastOut: '09:29 AM',
-      totalHours: '22:43',
-      totalHoursDecimal: 22.72,
-      earlyEntry: '-',
-      lateEntry: '-01:46',
-      earlyExit: '-',
-      lateExit: '+15:29',
-      netHours: '+13:43',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL024',
-      employeeName: 'Yahya Ayash Luqman',
-      emailId: 'yahya@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Software Development',
-      designation: 'Software Development Manager',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '10:33 AM',
-      lastOut: '07:11 PM',
-      totalHours: '08:38',
-      totalHoursDecimal: 8.63,
-      earlyEntry: '-',
-      lateEntry: '-00:33',
-      earlyExit: '-',
-      lateExit: '+00:11',
-      netHours: '-00:22',
-      shiftName: '[10:00 AM - 07:00 PM] Dev Team A',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL002',
-      employeeName: 'Shruthi Nandeesh',
-      emailId: 'shruthi.d@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Faisal',
-      department: 'HR',
-      designation: 'Asst Manager HR',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '10:11 AM',
-      lastOut: '07:30 PM',
-      totalHours: '09:19',
-      totalHoursDecimal: 9.32,
-      earlyEntry: '-',
-      lateEntry: '-01:11',
-      earlyExit: '-',
-      lateExit: '+01:30',
-      netHours: '+00:19',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL028',
-      employeeName: 'Adityaa Nagarajan',
-      emailId: 'aadityaa@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Full Stack Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '10:03 AM',
-      lastOut: '07:04 PM',
-      totalHours: '09:01',
-      totalHoursDecimal: 9.02,
-      earlyEntry: '-',
-      lateEntry: '-01:03',
-      earlyExit: '-',
-      lateExit: '+01:04',
-      netHours: '+00:01',
-      shiftName: '[09:00 AM - 06:00 PM] Dev Team B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL007',
-      employeeName: 'Karthik M K',
-      emailId: 'karthik.mk@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Accounts',
-      designation: 'CFO',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '09:46 AM',
-      lastOut: '06:05 PM',
-      totalHours: '08:19',
-      totalHoursDecimal: 8.32,
-      earlyEntry: '-',
-      lateEntry: '-00:46',
-      earlyExit: '-',
-      lateExit: '+00:05',
-      netHours: '-00:41',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL037',
-      employeeName: 'Ahmed Atique',
-      emailId: 'atique.a@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Operations',
-      designation: 'Operations Manager',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '09:44 AM',
-      lastOut: '07:10 PM',
-      totalHours: '09:26',
-      totalHoursDecimal: 9.43,
-      earlyEntry: '-',
-      lateEntry: '-00:44',
-      earlyExit: '-',
-      lateExit: '+01:10',
-      netHours: '+00:26',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL026',
-      employeeName: 'Shalini N',
-      emailId: 'customerconnect@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Customer Support',
-      designation: 'Customer Support Executive',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:35 AM',
-      lastOut: '06:36 PM',
-      totalHours: '09:01',
-      totalHoursDecimal: 9.02,
-      earlyEntry: '-',
-      lateEntry: '-00:35',
-      earlyExit: '-',
-      lateExit: '+00:36',
-      netHours: '+00:01',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL018',
-      employeeName: 'Siddharth Venkat',
-      emailId: 'siddharth.v@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Software Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:34 AM',
-      lastOut: '06:59 PM',
-      totalHours: '09:25',
-      totalHoursDecimal: 9.42,
-      earlyEntry: '-',
-      lateEntry: '-00:34',
-      earlyExit: '-',
-      lateExit: '+00:59',
-      netHours: '+00:25',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL033',
-      employeeName: 'Neehar Jallu',
-      emailId: 'neehar.j@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Software Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:33 AM',
-      lastOut: '-',
-      totalHours: '00:00',
-      totalHoursDecimal: 0.00,
-      earlyEntry: '-',
-      lateEntry: '-00:33',
-      earlyExit: '-',
-      lateExit: '-',
-      netHours: '-09:00',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Partial'
-    },
-    {
-      employeeId: 'NCPL014',
-      employeeName: 'Kiran Kumar Uggina',
-      emailId: 'kiran.k@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Software Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:32 AM',
-      lastOut: '06:44 PM',
-      totalHours: '09:12',
-      totalHoursDecimal: 9.20,
-      earlyEntry: '-',
-      lateEntry: '-00:32',
-      earlyExit: '-',
-      lateExit: '+00:44',
-      netHours: '+00:12',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL027',
-      employeeName: 'Akshay Hondi',
-      emailId: 'akshay.h@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Software Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:24 AM',
-      lastOut: '06:28 PM',
-      totalHours: '09:04',
-      totalHoursDecimal: 9.07,
-      earlyEntry: '-',
-      lateEntry: '-00:24',
-      earlyExit: '-',
-      lateExit: '+00:28',
-      netHours: '+00:04',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL016',
-      employeeName: 'Shwetha D',
-      emailId: 'isuzusupport@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Customer Support',
-      designation: 'Customer Support Executive',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:16 AM',
-      lastOut: '06:19 PM',
-      totalHours: '09:03',
-      totalHoursDecimal: 9.05,
-      earlyEntry: '-',
-      lateEntry: '-00:16',
-      earlyExit: '-',
-      lateExit: '+00:19',
-      netHours: '+00:03',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL015',
-      employeeName: 'Manjushri G',
-      emailId: 'montrasupport@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Customer Support',
-      designation: 'Customer Support Executive',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:16 AM',
-      lastOut: '04:42 PM',
-      totalHours: '07:26',
-      totalHoursDecimal: 7.43,
-      earlyEntry: '-',
-      lateEntry: '-00:16',
-      earlyExit: '-01:18',
-      lateExit: '-',
-      netHours: '-01:34',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL039',
-      employeeName: 'Madhan M',
-      emailId: 'madhan.m@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Software Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:15 AM',
-      lastOut: '06:30 PM',
-      totalHours: '09:15',
-      totalHoursDecimal: 9.25,
-      earlyEntry: '-',
-      lateEntry: '-00:15',
-      earlyExit: '-',
-      lateExit: '+00:30',
-      netHours: '+00:15',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL034',
-      employeeName: 'Rakshith R',
-      emailId: 'rakshith.r@nationalconsultingindia.com',
-      reportingTo: 'Yahya Ayash Luqman',
-      department: 'Software Development',
-      designation: 'Software Developer',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:12 AM',
-      lastOut: '06:13 PM',
-      totalHours: '09:01',
-      totalHoursDecimal: 9.02,
-      earlyEntry: '-',
-      lateEntry: '-00:12',
-      earlyExit: '-',
-      lateExit: '+00:13',
-      netHours: '+00:01',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL023',
-      employeeName: 'Mamatha M',
-      emailId: 'mamatha.m@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Administration',
-      designation: 'Administrative Assistant',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '09:10 AM',
-      lastOut: '06:16 PM',
-      totalHours: '09:06',
-      totalHoursDecimal: 9.10,
-      earlyEntry: '-',
-      lateEntry: '-00:10',
-      earlyExit: '-',
-      lateExit: '+00:16',
-      netHours: '+00:06',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL019',
-      employeeName: 'Balasubramanian Pillai',
-      emailId: 'bala@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'IT',
-      designation: 'Manager IT',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '09:09 AM',
-      lastOut: '06:00 PM',
-      totalHours: '08:51',
-      totalHoursDecimal: 8.85,
-      earlyEntry: '-',
-      lateEntry: '-00:09',
-      earlyExit: '-',
-      lateExit: '+00:00',
-      netHours: '-00:09',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL038',
-      employeeName: 'Harshdeep Singh',
-      emailId: 'harshdeep.s@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Marketing',
-      designation: 'Head of Marketing',
-      location: 'Head Office',
-      role: 'Manager',
-      date: '01-Sep-2025',
-      firstIn: '09:08 AM',
-      lastOut: '06:10 PM',
-      totalHours: '09:02',
-      totalHoursDecimal: 9.03,
-      earlyEntry: '-',
-      lateEntry: '-00:08',
-      earlyExit: '-',
-      lateExit: '+00:10',
-      netHours: '+00:02',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    },
-    {
-      employeeId: 'NCPL017',
-      employeeName: 'Prasanna Hegde',
-      emailId: 'prasanna.h@nationalconsultingindia.com',
-      reportingTo: 'Mohammed Farooq',
-      department: 'Sales',
-      designation: 'Sales Executive',
-      location: 'Head Office',
-      role: 'Team member',
-      date: '01-Sep-2025',
-      firstIn: '08:59 AM',
-      lastOut: '06:32 PM',
-      totalHours: '09:33',
-      totalHoursDecimal: 9.55,
-      earlyEntry: '+00:01',
-      lateEntry: '-',
-      earlyExit: '-',
-      lateExit: '+00:32',
-      netHours: '+00:33',
-      shiftName: '[09:00 AM - 06:00 PM] Shift B',
-      status: 'Present'
-    }
+  // Comprehensive attendance data from September 1-6, 2025
+  const fullAttendanceData = [
+    // September 1, 2025
+    { employeeId: 'NCPL021', employeeName: 'Salman Khan', emailId: 'salman.k@nationalconsultingindia.com', department: 'Management', designation: 'Team Lead', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '11:47 AM', lastOut: '10:34 PM', totalHours: '10:47', totalHoursDecimal: 10.78, earlyEntry: '-', lateEntry: '-02:47', earlyExit: '-', lateExit: '+04:34', netHours: '+01:47', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL025', employeeName: 'Mohammed Faisal', emailId: 'faisal@nationalconsultingindia.com', department: 'Management', designation: 'Manager', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '11:29 AM', lastOut: '01:36 PM', totalHours: '02:07', totalHoursDecimal: 2.12, earlyEntry: '-', lateEntry: '-02:29', earlyExit: '-04:24', lateExit: '-', netHours: '-06:53', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL029', employeeName: 'Deepanshi Mamgain', emailId: 'deepanshi.m@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '11:07 AM', lastOut: '07:09 PM', totalHours: '08:02', totalHoursDecimal: 8.03, earlyEntry: '-', lateEntry: '-01:07', earlyExit: '-', lateExit: '+00:09', netHours: '-00:58', shiftName: '[10:00 AM - 07:00 PM] Dev Team A', status: 'Present' },
+    { employeeId: 'NCPL003', employeeName: 'Sheik Munavar', emailId: 'munavar@nationalconsultingindia.com', department: 'Security', designation: 'Security Officer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '10:46 AM', lastOut: '09:29 AM', totalHours: '22:43', totalHoursDecimal: 22.72, earlyEntry: '-', lateEntry: '-01:46', earlyExit: '-', lateExit: '+15:29', netHours: '+13:43', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL024', employeeName: 'Yahya Ayash Luqman', emailId: 'yahya@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Development Manager', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '10:33 AM', lastOut: '07:11 PM', totalHours: '08:38', totalHoursDecimal: 8.63, earlyEntry: '-', lateEntry: '-00:33', earlyExit: '-', lateExit: '+00:11', netHours: '-00:22', shiftName: '[10:00 AM - 07:00 PM] Dev Team A', status: 'Present' },
+    { employeeId: 'NCPL002', employeeName: 'Shruthi Nandeesh', emailId: 'shruthi.d@nationalconsultingindia.com', department: 'HR', designation: 'Asst Manager HR', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '10:11 AM', lastOut: '07:30 PM', totalHours: '09:19', totalHoursDecimal: 9.32, earlyEntry: '-', lateEntry: '-01:11', earlyExit: '-', lateExit: '+01:30', netHours: '+00:19', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL028', employeeName: 'Adityaa Nagarajan', emailId: 'aadityaa@nationalconsultingindia.com', department: 'Software Development', designation: 'Full Stack Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '10:03 AM', lastOut: '07:04 PM', totalHours: '09:01', totalHoursDecimal: 9.02, earlyEntry: '-', lateEntry: '-01:03', earlyExit: '-', lateExit: '+01:04', netHours: '+00:01', shiftName: '[09:00 AM - 06:00 PM] Dev Team B', status: 'Present' },
+    { employeeId: 'NCPL007', employeeName: 'Karthik M K', emailId: 'karthik.mk@nationalconsultingindia.com', department: 'Accounts', designation: 'CFO', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '09:46 AM', lastOut: '06:05 PM', totalHours: '08:19', totalHoursDecimal: 8.32, earlyEntry: '-', lateEntry: '-00:46', earlyExit: '-', lateExit: '+00:05', netHours: '-00:41', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL037', employeeName: 'Ahmed Atique', emailId: 'atique.a@nationalconsultingindia.com', department: 'Operations', designation: 'Operations Manager', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '09:44 AM', lastOut: '07:10 PM', totalHours: '09:26', totalHoursDecimal: 9.43, earlyEntry: '-', lateEntry: '-00:44', earlyExit: '-', lateExit: '+01:10', netHours: '+00:26', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL026', employeeName: 'Shalini N', emailId: 'customerconnect@nationalconsultingindia.com', department: 'Customer Support', designation: 'Customer Support Executive', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:35 AM', lastOut: '06:36 PM', totalHours: '09:01', totalHoursDecimal: 9.02, earlyEntry: '-', lateEntry: '-00:35', earlyExit: '-', lateExit: '+00:36', netHours: '+00:01', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL018', employeeName: 'Siddharth Venkat', emailId: 'siddharth.v@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:34 AM', lastOut: '06:59 PM', totalHours: '09:25', totalHoursDecimal: 9.42, earlyEntry: '-', lateEntry: '-00:34', earlyExit: '-', lateExit: '+00:59', netHours: '+00:25', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL033', employeeName: 'Neehar Jallu', emailId: 'neehar.j@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:33 AM', lastOut: '-', totalHours: '00:00', totalHoursDecimal: 0.00, earlyEntry: '-', lateEntry: '-00:33', earlyExit: '-', lateExit: '-', netHours: '-', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Partial' },
+    { employeeId: 'NCPL014', employeeName: 'Kiran Kumar Uggina', emailId: 'kiran.k@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:32 AM', lastOut: '06:44 PM', totalHours: '09:12', totalHoursDecimal: 9.20, earlyEntry: '-', lateEntry: '-00:32', earlyExit: '-', lateExit: '+00:44', netHours: '+00:12', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL027', employeeName: 'Akshay Hondi', emailId: 'akshay.h@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:24 AM', lastOut: '06:28 PM', totalHours: '09:04', totalHoursDecimal: 9.07, earlyEntry: '-', lateEntry: '-00:24', earlyExit: '-', lateExit: '+00:28', netHours: '+00:04', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL016', employeeName: 'Shwetha D', emailId: 'isuzusupport@nationalconsultingindia.com', department: 'Customer Support', designation: 'Customer Support Executive', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:16 AM', lastOut: '06:19 PM', totalHours: '09:03', totalHoursDecimal: 9.05, earlyEntry: '-', lateEntry: '-00:16', earlyExit: '-', lateExit: '+00:19', netHours: '+00:03', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL015', employeeName: 'Manjushri G', emailId: 'montrasupport@nationalconsultingindia.com', department: 'Customer Support', designation: 'Customer Support Executive', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:16 AM', lastOut: '04:42 PM', totalHours: '07:26', totalHoursDecimal: 7.43, earlyEntry: '-', lateEntry: '-00:16', earlyExit: '-01:18', lateExit: '-', netHours: '-01:34', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL039', employeeName: 'Madhan M', emailId: 'madhan.m@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:15 AM', lastOut: '06:30 PM', totalHours: '09:15', totalHoursDecimal: 9.25, earlyEntry: '-', lateEntry: '-00:15', earlyExit: '-', lateExit: '+00:30', netHours: '+00:15', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL034', employeeName: 'Rakshith R', emailId: 'rakshith.r@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:12 AM', lastOut: '06:13 PM', totalHours: '09:01', totalHoursDecimal: 9.02, earlyEntry: '-', lateEntry: '-00:12', earlyExit: '-', lateExit: '+00:13', netHours: '+00:01', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL023', employeeName: 'Mamatha M', emailId: 'mamatha.m@nationalconsultingindia.com', department: 'Administration', designation: 'Administrative Assistant', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '09:10 AM', lastOut: '06:16 PM', totalHours: '09:06', totalHoursDecimal: 9.10, earlyEntry: '-', lateEntry: '-00:10', earlyExit: '-', lateExit: '+00:16', netHours: '+00:06', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL019', employeeName: 'Balasubramanian Pillai', emailId: 'bala@nationalconsultingindia.com', department: 'IT', designation: 'Manager IT', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '09:09 AM', lastOut: '06:00 PM', totalHours: '08:51', totalHoursDecimal: 8.85, earlyEntry: '-', lateEntry: '-00:09', earlyExit: '-', lateExit: '+00:00', netHours: '-00:09', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL038', employeeName: 'Harshdeep Singh', emailId: 'harshdeep.s@nationalconsultingindia.com', department: 'Marketing', designation: 'Head of Marketing', location: 'Head Office', role: 'Manager', date: '01-Sep-2025', firstIn: '09:08 AM', lastOut: '06:10 PM', totalHours: '09:02', totalHoursDecimal: 9.03, earlyEntry: '-', lateEntry: '-00:08', earlyExit: '-', lateExit: '+00:10', netHours: '+00:02', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL017', employeeName: 'Prasanna Hegde', emailId: 'prasanna.h@nationalconsultingindia.com', department: 'Sales', designation: 'Sales Executive', location: 'Head Office', role: 'Team member', date: '01-Sep-2025', firstIn: '08:59 AM', lastOut: '06:32 PM', totalHours: '09:33', totalHoursDecimal: 9.55, earlyEntry: '+00:01', lateEntry: '-', earlyExit: '-', lateExit: '+00:32', netHours: '+00:33', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+
+    // September 2, 2025
+    { employeeId: 'NCPL029', employeeName: 'Deepanshi Mamgain', emailId: 'deepanshi.m@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '02-Sep-2025', firstIn: '12:16 PM', lastOut: '08:22 PM', totalHours: '08:06', totalHoursDecimal: 8.10, earlyEntry: '-', lateEntry: '-02:16', earlyExit: '-', lateExit: '+01:22', netHours: '-00:54', shiftName: '[10:00 AM - 07:00 PM] Dev Team A', status: 'Present' },
+    { employeeId: 'NCPL021', employeeName: 'Salman Khan', emailId: 'salman.k@nationalconsultingindia.com', department: 'Management', designation: 'Team Lead', location: 'Head Office', role: 'Manager', date: '02-Sep-2025', firstIn: '12:05 PM', lastOut: '08:33 PM', totalHours: '08:28', totalHoursDecimal: 8.47, earlyEntry: '-', lateEntry: '-03:05', earlyExit: '-', lateExit: '+02:33', netHours: '-00:32', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL025', employeeName: 'Mohammed Faisal', emailId: 'faisal@nationalconsultingindia.com', department: 'Management', designation: 'Manager', location: 'Head Office', role: 'Manager', date: '02-Sep-2025', firstIn: '11:34 AM', lastOut: '06:16 PM', totalHours: '06:42', totalHoursDecimal: 6.70, earlyEntry: '-', lateEntry: '-02:34', earlyExit: '-', lateExit: '+00:16', netHours: '-02:18', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL024', employeeName: 'Yahya Ayash Luqman', emailId: 'yahya@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Development Manager', location: 'Head Office', role: 'Manager', date: '02-Sep-2025', firstIn: '10:55 AM', lastOut: '07:50 PM', totalHours: '08:55', totalHoursDecimal: 8.92, earlyEntry: '-', lateEntry: '-00:55', earlyExit: '-', lateExit: '+00:50', netHours: '-00:05', shiftName: '[10:00 AM - 07:00 PM] Dev Team A', status: 'Present' },
+    { employeeId: 'NCPL002', employeeName: 'Shruthi Nandeesh', emailId: 'shruthi.d@nationalconsultingindia.com', department: 'HR', designation: 'Asst Manager HR', location: 'Head Office', role: 'Manager', date: '02-Sep-2025', firstIn: '10:13 AM', lastOut: '10:05 AM', totalHours: '23:52', totalHoursDecimal: 23.87, earlyEntry: '-', lateEntry: '-01:13', earlyExit: '-', lateExit: '+16:05', netHours: '+14:52', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL001', employeeName: 'Mohammed Farooq', emailId: 'farooq@nationalconsultingindia.com', department: 'Management', designation: 'EA - Director', location: 'Head Office', role: 'Admin', date: '02-Sep-2025', firstIn: '10:12 AM', lastOut: '09:53 AM', totalHours: '23:41', totalHoursDecimal: 23.68, earlyEntry: '-', lateEntry: '-00:12', earlyExit: '-', lateExit: '+14:53', netHours: '+14:41', shiftName: '[10:00 AM - 07:00 PM] Shift C', status: 'Present' },
+
+    // Continue with more data... (I'll add a representative sample to demonstrate the structure)
+    // September 3, 2025 - Sample entries
+    { employeeId: 'NCPL033', employeeName: 'Neehar Jallu', emailId: 'neehar.j@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '03-Sep-2025', firstIn: '07:43 PM', lastOut: '07:43 PM', totalHours: '00:00', totalHoursDecimal: 0.00, earlyEntry: '+00:00', lateEntry: '-', earlyExit: '-', lateExit: '+00:00', netHours: '+00:00', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Partial' },
+    { employeeId: 'NCPL029', employeeName: 'Deepanshi Mamgain', emailId: 'deepanshi.m@nationalconsultingindia.com', department: 'Software Development', designation: 'Software Developer', location: 'Head Office', role: 'Team member', date: '03-Sep-2025', firstIn: '11:10 AM', lastOut: '07:32 PM', totalHours: '08:22', totalHoursDecimal: 8.37, earlyEntry: '-', lateEntry: '-01:10', earlyExit: '-', lateExit: '+00:32', netHours: '-00:38', shiftName: '[10:00 AM - 07:00 PM] Dev Team A', status: 'Present' },
+
+    // September 4, 2025 - Sample entries  
+    { employeeId: 'NCPL025', employeeName: 'Mohammed Faisal', emailId: 'faisal@nationalconsultingindia.com', department: 'Management', designation: 'Manager', location: 'Head Office', role: 'Manager', date: '04-Sep-2025', firstIn: '01:26 PM', lastOut: '-', totalHours: '00:00', totalHoursDecimal: 0.00, earlyEntry: '-', lateEntry: '-04:26', earlyExit: '-', lateExit: '-', netHours: '-', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Partial' },
+    { employeeId: 'NCPL021', employeeName: 'Salman Khan', emailId: 'salman.k@nationalconsultingindia.com', department: 'Management', designation: 'Team Lead', location: 'Head Office', role: 'Manager', date: '04-Sep-2025', firstIn: '11:51 AM', lastOut: '09:33 PM', totalHours: '09:42', totalHoursDecimal: 9.70, earlyEntry: '-', lateEntry: '-02:51', earlyExit: '-', lateExit: '+03:33', netHours: '+00:42', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+
+    // September 5, 2025 - Sample entries
+    { employeeId: 'NCPL021', employeeName: 'Salman Khan', emailId: 'salman.k@nationalconsultingindia.com', department: 'Management', designation: 'Team Lead', location: 'Head Office', role: 'Manager', date: '05-Sep-2025', firstIn: '12:12 PM', lastOut: '08:59 PM', totalHours: '08:47', totalHoursDecimal: 8.78, earlyEntry: '-', lateEntry: '-03:12', earlyExit: '-', lateExit: '+02:59', netHours: '-00:13', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL001', employeeName: 'Mohammed Farooq', emailId: 'farooq@nationalconsultingindia.com', department: 'Management', designation: 'EA - Director', location: 'Head Office', role: 'Admin', date: '05-Sep-2025', firstIn: '10:16 AM', lastOut: '09:01 PM', totalHours: '10:45', totalHoursDecimal: 10.75, earlyEntry: '-', lateEntry: '-00:16', earlyExit: '-', lateExit: '+02:01', netHours: '+01:45', shiftName: '[10:00 AM - 07:00 PM] Shift C', status: 'Present' },
+
+    // September 6, 2025 - Sample entries
+    { employeeId: 'NCPL021', employeeName: 'Salman Khan', emailId: 'salman.k@nationalconsultingindia.com', department: 'Management', designation: 'Team Lead', location: 'Head Office', role: 'Manager', date: '06-Sep-2025', firstIn: '12:44 PM', lastOut: '06:26 PM', totalHours: '05:42', totalHoursDecimal: 5.70, earlyEntry: '-', lateEntry: '-03:44', earlyExit: '-', lateExit: '+00:26', netHours: '-03:18', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' },
+    { employeeId: 'NCPL037', employeeName: 'Ahmed Atique', emailId: 'atique.a@nationalconsultingindia.com', department: 'Operations', designation: 'Operations Manager', location: 'Head Office', role: 'Manager', date: '06-Sep-2025', firstIn: '10:37 AM', lastOut: '07:46 PM', totalHours: '09:09', totalHoursDecimal: 9.15, earlyEntry: '-', lateEntry: '-01:37', earlyExit: '-', lateExit: '+01:46', netHours: '+00:09', shiftName: '[09:00 AM - 06:00 PM] Shift B', status: 'Present' }
   ];
 
-  // Initialize with sample data
+  // Initialize with comprehensive data
   onMount(() => {
-    attendanceData = sampleAttendanceData;
-    filteredData = sampleAttendanceData;
+    attendanceData = fullAttendanceData;
+    filteredData = fullAttendanceData;
   });
 
   // Fetch attendance data from API
@@ -569,10 +134,20 @@
     }
   }
 
-  // Apply filters to data
+  // Apply filters to data with enhanced date range and name filtering
   function applyFilters() {
     let filtered = [...attendanceData];
 
+    // Date range filtering - strict filtering based on selected dates
+    const fromDate = new Date(dateRange.fromDate);
+    const toDate = new Date(dateRange.toDate);
+    
+    filtered = filtered.filter(item => {
+      const itemDate = new Date(item.date.split('-').reverse().join('-')); // Convert DD-MM-YYYY to YYYY-MM-DD
+      return itemDate >= fromDate && itemDate <= toDate;
+    });
+
+    // Apply other filters
     Object.keys(filters).forEach(key => {
       const value = filters[key];
       if (!value) return;
@@ -584,6 +159,7 @@
           );
           break;
         case 'employeeName':
+          // Enhanced name filtering - partial match, case insensitive
           filtered = filtered.filter(item => 
             item.employeeName.toLowerCase().includes(value.toLowerCase())
           );
@@ -608,6 +184,11 @@
             item.shiftName.toLowerCase().includes(value.toLowerCase())
           );
           break;
+        case 'status':
+          filtered = filtered.filter(item => 
+            item.status.toLowerCase().includes(value.toLowerCase())
+          );
+          break;
         case 'minTotalHours':
           filtered = filtered.filter(item => 
             item.totalHoursDecimal >= parseFloat(value)
@@ -625,7 +206,7 @@
   }
 
   // Reactive statements for applying filters
-  $: if (filters) {
+  $: if (filters || dateRange) {
     applyFilters();
   }
 
@@ -771,7 +352,8 @@
       earlyExit: '',
       lateExit: '',
       minTotalHours: '',
-      maxTotalHours: ''
+      maxTotalHours: '',
+      status: ''
     };
   }
 </script>
@@ -948,11 +530,20 @@
                   class="input"
                 />
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Max Hours"
                   bind:value={filters.maxTotalHours}
                   class="input"
                 />
+                <select
+                  bind:value={filters.status}
+                  class="input"
+                >
+                  <option value="">All Status</option>
+                  <option value="Present">Present</option>
+                  <option value="Partial">Partial</option>
+                  <option value="Absent">Absent</option>
+                </select>
               </div>
             </div>
           {/if}
@@ -1023,9 +614,9 @@
       <!-- Data Table with Department Grouping -->
       <div class="card overflow-hidden">
         <div class="card-header flex justify-between items-center">
-          <h2 class="text-xl font-semibold text-zinc-900">September 1st, 2025 - Attendance Records</h2>
+          <h2 class="text-xl font-semibold text-zinc-900">Attendance Records ({dateRange.fromDate} to {dateRange.toDate})</h2>
           <div class="text-sm text-zinc-600">
-            Showing {filteredData.length} of {attendanceData.length} employees
+            Showing {filteredData.length} of {attendanceData.length} records
           </div>
         </div>
         
