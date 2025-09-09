@@ -298,6 +298,48 @@ export default function ZohoPeopleDashboardMock() {
             </CardContent>
           </Card>
 
+          {/* Attendance Upload Component Preview */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><Upload className="h-4 w-4"/>Attendance Upload</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+                <div className="px-4 py-3 bg-gradient-to-r from-amber-500 to-gold-600 flex justify-between items-center">
+                  <h2 className="text-white font-medium flex items-center gap-2">
+                    <Upload className="h-4 w-4" />
+                    Attendance Data Upload
+                  </h2>
+                </div>
+                
+                <div className="p-6">
+                  <div className="border-2 border-dashed rounded-lg p-8 text-center border-gray-300 hover:border-gold-400">
+                    <div className="h-12 w-12 rounded-full bg-gold-100 flex items-center justify-center mx-auto mb-3">
+                      <Upload className="h-6 w-6 text-gold-600" />
+                    </div>
+                    
+                    <p className="mb-2 text-sm font-medium text-gray-900">Click to upload or drag and drop</p>
+                    <p className="mb-4 text-xs text-gray-500">CSV or Excel files only</p>
+                    
+                    <button className="px-4 py-2 bg-gradient-to-r from-amber-500 to-gold-600 rounded-md text-white text-sm font-medium hover:opacity-90 inline-flex items-center gap-1">
+                      <Upload className="h-4 w-4" />
+                      Select File
+                    </button>
+                  </div>
+                  
+                  <div className="mt-4">
+                    <h3 className="text-sm font-medium text-gray-900 mb-2">Supported Formats</h3>
+                    <ul className="text-xs text-gray-600 space-y-1 list-disc pl-5">
+                      <li>CSV file with header row (recommended)</li>
+                      <li>Excel file (.xlsx) with attendance data</li>
+                      <li>Required columns: Date, Employee Id, Name, Email, Check-in, Check-out, etc.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Footer */}
           <div className="pb-6 text-center text-xs text-zinc-500">
             © {new Date().getFullYear()} National Group • Sample UI for Zoho People dashboard • Gold & Off‑White theme

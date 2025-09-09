@@ -3,6 +3,7 @@
   import { writable } from 'svelte/store';
   import Header from '$lib/components/Header.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
+  import AttendanceUploader from '$lib/components/AttendanceUploader.svelte';
   import { Settings, TestTube, Wifi, AlertCircle, CheckCircle, Loader, Upload, Users } from 'lucide-svelte';
   import '../../app.css';
 
@@ -24,6 +25,7 @@
   });
 
   let activeTab = 'config';
+  let focusSection = null;
   let config = {};
   let testing = false;
   let testData = {};
@@ -36,6 +38,26 @@
     apiConfig.subscribe(value => config = value);
     testResults.subscribe(value => testData = value);
     loadSavedConfig();
+    
+    // Check URL parameters for tab selection and section focus
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    const sectionParam = urlParams.get('section');
+    
+    if (tabParam) {
+      activeTab = tabParam;
+    }
+    
+    if (sectionParam) {
+      focusSection = sectionParam;
+      // Add a small delay to ensure DOM is ready before scrolling
+      setTimeout(() => {
+        const element = document.getElementById(`section-${sectionParam}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
+    }
   });
 
   async function loadSavedConfig() {
@@ -363,6 +385,41 @@
     const a = document.createElement('a');
     a.href = url;
     a.download = 'employee_upload_template.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+  
+  function downloadAttendanceTemplate() {
+    const headers = [
+      'Date', 'Employee Id', 'Employee Name', 'Email ID', 'First In', 
+      'Last Out', 'Total Hours', 'Early Entry', 'Late Entry', 
+      'Early Exit', 'Late Exit', 'Net hours', 'Shift name'
+    ];
+
+    const sampleData = [
+      // First row - full data
+      ['08-Sep-2025', 'NCPL001', 'Mohammed Farooq', 'farooq@nationalconsultingindia.com', '09:15 AM', 
+       '06:30 PM', '09:15', '+00:15', '-', '-', '+00:30', '+00:15', '[09:00 AM - 06:00 PM] Shift B'],
+      
+      // Second row - another employee
+      ['08-Sep-2025', 'NCPL002', 'Shruthi Nandeesh', 'shruthi.d@nationalconsultingindia.com', '10:11 AM', 
+       '07:30 PM', '09:19', '-', '-01:11', '-', '+01:30', '+00:19', '[09:00 AM - 06:00 PM] Shift B'],
+       
+      // Third row - partial day (no checkout)
+      ['08-Sep-2025', 'NCPL025', 'Mohammed Faisal', 'faisal@nationalconsultingindia.com', '11:34 AM', 
+       '-', '00:00', '-', '-02:34', '-', '-', '-', '[09:00 AM - 06:00 PM] Shift B']
+    ];
+
+    const csvContent = [
+      headers.join(','),
+      ...sampleData.map(row => row.map(field => `"${field}"`).join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'attendance_upload_template.csv';
     a.click();
     window.URL.revokeObjectURL(url);
   }
@@ -806,6 +863,49 @@
                   <p class="mt-3"><strong>Optional Columns:</strong> Middle Name, Personal Email, Mobile Number, Date of Birth, etc.</p>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- Attendance Data Upload -->
+          <div id="section-attendance" class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 {focusSection === 'attendance' ? 'ring-2 ring-amber-400' : ''}"
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Attendance Data Upload</h2>
+            
+            <div class="space-y-6">
+              <!-- Upload Instructions -->
+              <div class="bg-amber-50 border border-amber-200 rounded-lg p-6">
+                <h3 class="font-semibold text-amber-900 mb-3">📋 Attendance Upload Instructions</h3>
+                <ul class="space-y-2 text-amber-800 text-sm">
+                  <li>• Upload a CSV or Excel file (.csv, .xlsx) with attendance data</li>
+                  <li>• Ensure your file has the correct format with date, employee ID, check-in/out times</li>
+                  <li>• Data will be processed and validated before importing</li>
+                  <li>• Maximum file size: 10MB</li>
+                  <li>• Date format: DD-MMM-YYYY (e.g., 08-Sep-2025)</li>
+                </ul>
+              </div>
+
+              <!-- Download Attendance Template -->
+              <div class="flex items-center justify-between p-4 bg-amber-50 rounded-lg border border-amber-200">
+                <div>
+                  <h4 class="font-medium text-amber-900">Attendance Template</h4>
+                  <p class="text-sm text-amber-700">Download the template file with correct attendance column headers</p>
+                </div>
+                <button
+                  on:click={downloadAttendanceTemplate}
+                  class="bg-gradient-to-r from-amber-500 to-gold-600 text-white px-4 py-2 rounded-lg font-medium hover:from-amber-600 hover:to-gold-700 transition-all duration-200 shadow-lg flex items-center gap-2"
+                >
+                  <Upload class="w-4 h-4 rotate-180" />
+                  Download Template
+                </button>
+              </div>
+              
+              <!-- Attendance Uploader Component -->
+              <AttendanceUploader 
+                onUploadComplete={(data) => {
+                  console.log('Uploaded attendance data:', data);
+                  // Here you would typically send the data to your backend
+                  alert(`Successfully processed ${data.length} attendance records`);
+                }} 
+              />
             </div>
           </div>
 

@@ -44,29 +44,29 @@
 			<div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
 				<KPICard
 					title="Total Employees"
-					value={data.kpis.totalEmployees}
-					subtitle="+4 this month"
+					value="35"
+					subtitle="+3 this month"
 					icon={Users}
 					gradient="from-gold-400 to-gold-600"
 				/>
 				<KPICard
 					title="Present Now"
-					value={data.kpis.presentToday}
+					value="32"
 					subtitle="↑ 3% vs last wk"
 					icon={UserCheck}
 					gradient="from-emerald-400 to-emerald-600"
 				/>
 				<KPICard
 					title="Pending Approvals"
-					value={data.kpis.pendingApprovals}
+					value="3"
 					subtitle="Reg/Leave/WFH"
 					icon={ShieldCheck}
 					gradient="from-amber-400 to-amber-600"
 				/>
 				<KPICard
 					title="Avg. Check-in"
-					value={data.kpis.avgCheckin}
-					subtitle="Bengaluru • Sep 06"
+					value="10:15"
+					subtitle="Bengaluru • Sep 09"
 					icon={Clock}
 					gradient="from-blue-400 to-blue-600"
 				/>
@@ -76,7 +76,7 @@
 			<div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
 				<div class="xl:col-span-2">
 					<TableCard
-						title="Today's Attendance"
+						title="Today's Attendance (September 9, 2025)"
 						icon={CalendarCheck}
 						data={data.tables.todayAttendance}
 						type="attendance"
@@ -85,7 +85,7 @@
 				
 				<!-- Attendance Split Chart -->
 				<ChartCard
-					title="Attendance Split (Today)"
+					title="Attendance Split (September 9, 2025)"
 					icon={Calendar}
 					chartType="pie"
 					data={data.charts.attendanceSplit}
@@ -121,7 +121,7 @@
 
 			<!-- Footer -->
 			<div class="pb-6 text-center text-xs text-zinc-500">
-				© {new Date().getFullYear()} National Consulting India • Zoho People Dashboard • Gold & Off‑White theme
+				© {new Date().getFullYear()} National Consulting India • Zoho People Dashboard
 			</div>
 		</main>
 	</div>

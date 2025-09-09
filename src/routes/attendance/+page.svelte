@@ -551,7 +551,7 @@
                 Export
               </button>
               <a
-                href="/settings"
+                href="/settings?tab=data&section=attendance"
                 class="bg-white/20 hover:bg-white/30 text-white rounded-lg px-4 py-2 flex items-center gap-2 transition-all shadow-sm backdrop-blur-sm"
               >
                 <Upload class="h-4 w-4" />
