@@ -1,6 +1,5 @@
 import { c as create_ssr_component, v as validate_component, h as add_attribute, e as escape } from "../../../chunks/ssr.js";
-import { H as Header, S as Sidebar, c as Settings } from "../../../chunks/Header.js";
-/* empty css                  */
+import { H as Header, S as Sidebar, b as Settings } from "../../../chunks/app.js";
 import { I as Icon } from "../../../chunks/Icon.js";
 import { U as Upload } from "../../../chunks/upload.js";
 const Test_tube = create_ssr_component(($$result, $$props, $$bindings, slots) => {

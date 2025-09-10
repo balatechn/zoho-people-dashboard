@@ -10,7 +10,7 @@ return {
 	assets: new Set(["favicon.png","national-logo.png"]),
 	mimeTypes: {".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.DJB7qDgM.js",app:"_app/immutable/entry/app.BB2wvHPU.js",imports:["_app/immutable/entry/start.DJB7qDgM.js","_app/immutable/chunks/BOw-gFo2.js","_app/immutable/chunks/Hwbxprs-.js","_app/immutable/chunks/BXJlbnAZ.js","_app/immutable/entry/app.BB2wvHPU.js","_app/immutable/chunks/Hwbxprs-.js","_app/immutable/chunks/yA2zqden.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.RkIdIVGl.js",app:"_app/immutable/entry/app.DrcF1jJ1.js",imports:["_app/immutable/entry/start.RkIdIVGl.js","_app/immutable/chunks/BPsa7TAR.js","_app/immutable/chunks/B-GFLjmK.js","_app/immutable/chunks/fyVP4H57.js","_app/immutable/entry/app.DrcF1jJ1.js","_app/immutable/chunks/B-GFLjmK.js","_app/immutable/chunks/0ChlnYTn.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -18,7 +18,8 @@ return {
 			__memo(() => import('./nodes/3.js')),
 			__memo(() => import('./nodes/4.js')),
 			__memo(() => import('./nodes/5.js')),
-			__memo(() => import('./nodes/6.js'))
+			__memo(() => import('./nodes/6.js')),
+			__memo(() => import('./nodes/7.js'))
 		],
 		remotes: {
 			
@@ -37,13 +38,6 @@ return {
 				params: [],
 				page: null,
 				endpoint: __memo(() => import('./entries/endpoints/api/_server.js'))
-			},
-			{
-				id: "/api/attendance",
-				pattern: /^\/api\/attendance\/?$/,
-				params: [],
-				page: null,
-				endpoint: __memo(() => import('./entries/endpoints/api/attendance/_server.js'))
 			},
 			{
 				id: "/api/auth/token",
@@ -123,31 +117,38 @@ return {
 				endpoint: __memo(() => import('./entries/endpoints/api/timetracker/_server.js'))
 			},
 			{
-				id: "/attendance",
-				pattern: /^\/attendance\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 3 },
-				endpoint: null
-			},
-			{
 				id: "/auth/callback",
 				pattern: /^\/auth\/callback\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 4 },
+				page: { layouts: [0,], errors: [1,], leaf: 3 },
 				endpoint: null
 			},
 			{
 				id: "/employees",
 				pattern: /^\/employees\/?$/,
 				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 5 },
+				page: { layouts: [0,], errors: [1,], leaf: 4 },
 				endpoint: null
 			},
 			{
 				id: "/settings",
 				pattern: /^\/settings\/?$/,
 				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 5 },
+				endpoint: null
+			},
+			{
+				id: "/upload",
+				pattern: /^\/upload\/?$/,
+				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 6 },
+				endpoint: null
+			},
+			{
+				id: "/validation",
+				pattern: /^\/validation\/?$/,
+				params: [],
+				page: { layouts: [0,], errors: [1,], leaf: 7 },
 				endpoint: null
 			}
 		],

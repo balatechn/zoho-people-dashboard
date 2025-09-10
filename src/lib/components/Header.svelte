@@ -1,9 +1,15 @@
 <script>
 	import { 
-		Filter, Download, Plus, Settings
+		Activity, Bell
 	} from 'lucide-svelte';
 
-	let searchQuery = '';
+	// Get current date
+	const today = new Date();
+	const formattedDate = today.toLocaleDateString('en-GB', {
+		day: '2-digit',
+		month: 'short',
+		year: 'numeric'
+	});
 </script>
 
 <!-- Top Bar -->
@@ -25,26 +31,30 @@
 			</div>
 		</div>
 		<div class="ml-auto flex items-center gap-3">
-			<input 
-				class="input w-64" 
-				placeholder="Search employee, request, policy…"
-				bind:value={searchQuery}
-			/>
-			<button class="btn-secondary gap-2 flex items-center">
-				<Filter class="h-4 w-4"/>
-				Filters
-			</button>
-			<button class="btn-secondary gap-2 flex items-center">
-				<Download class="h-4 w-4"/>
-				Export
-			</button>
-			<button class="btn-primary gap-2 flex items-center">
-				<Plus class="h-4 w-4"/>
-				Add Employee
-			</button>
-			<button class="p-2 text-gold-600 hover:bg-gold-100 rounded-lg transition-colors">
-				<Settings class="h-5 w-5"/>
-			</button>
+			<!-- Removed search, filter, and export buttons for cleaner interface -->
+		</div>
+	</div>
+</div>
+
+<!-- Welcome Banner -->
+<div class="border-b border-gold-200/50 bg-gradient-to-r from-amber-500 via-gold-500 to-amber-600">
+	<div class="mx-auto max-w-7xl px-6 py-5">
+		<div class="flex items-center justify-between">
+			<div class="flex items-center gap-3">
+				<div class="h-12 w-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white shadow-inner">
+					<Activity class="h-6 w-6" />
+				</div>
+				<div>
+					<h2 class="text-2xl font-bold text-white">Welcome to Zoho People</h2>
+					<p class="text-amber-100">Dashboard Overview • {formattedDate}</p>
+				</div>
+			</div>
+			<div class="flex items-center gap-3">
+				<div class="flex items-center space-x-2 px-4 py-2 bg-white/20 rounded-lg backdrop-blur-sm text-white">
+					<Bell class="h-4 w-4" />
+					<span class="text-sm font-medium">3 Pending Approvals</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

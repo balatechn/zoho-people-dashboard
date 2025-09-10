@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Lookup Logic Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+        .result { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+        .success { color: green; }
+        .error { color: red; }
+        input { padding: 8px; margin: 5px; width: 200px; }
+        button { padding: 8px 15px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Employee Lookup Logic Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: NCPL019 Lookup</h2>
+        <p>Testing the lookup for Employee Number NCPL019 (Balasubramanian Pillai)</p>
+        <div class="result">
+            <strong>Expected Results:</strong><br>
+            Department: IT<br>
+            Designation: Manager IT<br>
+            Location: Head Office<br>
+            Role: Admin<br>
+            Full Name: Balasubramanian Pillai<br>
+            Email: bala@nationalconsultingindia.com
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Interactive Employee Lookup</h2>
+        <input type="text" id="employeeInput" placeholder="Enter Employee Number (e.g., NCPL019)" value="NCPL019">
+        <button onclick="lookupEmployee()">Lookup Employee</button>
+        <div id="employeeResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Attendance Record Creation</h2>
+        <button onclick="createAttendanceRecord()">Create Attendance for NCPL019</button>
+        <div id="attendanceResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 4: Department Analysis</h2>
+        <button onclick="analyzeDepartments()">Analyze All Departments</button>
+        <div id="departmentResult" class="result"></div>
+    </div>
+
+    <script type="module">
+        // Employee lookup logic embedded for testing
+        const EMPLOYEES_MASTER_DATA = [
+            {
+                employeeNumber: 'NCPL019',
+                firstName: 'Balasubramanian',
+                lastName: 'Pillai',
+                fullName: 'Balasubramanian Pillai',
+                designation: 'Manager IT',
+                workEmail: 'bala@nationalconsultingindia.com',
+                department: 'IT',
+                workLocation: 'Head Office',
+                role: 'Admin',
+                employeeStatus: 'Active'
+            },
+            {
+                employeeNumber: 'NCPL001',
+                firstName: 'Mohammed',
+                lastName: 'Farooq',
+                fullName: 'Mohammed Farooq',
+                designation: 'EA - Director',
+                workEmail: 'farooq@nationalconsultingindia.com',
+                department: 'Management',
+                workLocation: 'Head Office',
+                role: 'Manager',
+                employeeStatus: 'Active'
+            },
+            {
+                employeeNumber: 'NCPL024',
+                firstName: 'Yahya Ayash',
+                lastName: 'Luqman',
+                fullName: 'Yahya Ayash Luqman',
+                designation: 'Software Development Manager',
+                workEmail: 'yahya@nationalconsultingindia.com',
+                department: 'Software Development',
+                workLocation: 'Head Office',
+                role: 'Manager',
+                employeeStatus: 'Active'
+            }
+        ];
+
+        function getEmployeeDetails(employeeNumber) {
+            const employee = EMPLOYEES_MASTER_DATA.find(emp => 
+                emp.employeeNumber === employeeNumber.toUpperCase()
+            );
+            
+            if (!employee) {
+                return {
+                    employeeNumber: employeeNumber,
+                    department: null,
+                    designation: null,
+                    location: null,
+                    role: null,
+                    fullName: null,
+                    workEmail: null,
+                    found: false,
+                    error: `Employee ${employeeNumber} not found in database`
+                };
+            }
+
+            return {
+                employeeNumber: employee.employeeNumber,
+                department: employee.department,
+                designation: employee.designation,
+                location: employee.workLocation,
+                role: employee.role,
+                fullName: employee.fullName,
+                workEmail: employee.workEmail,
+                found: true,
+                error: null
+            };
+        }
+
+        function captureEmployeeForAttendance(employeeNumber) {
+            const details = getEmployeeDetails(employeeNumber);
+            
+            if (!details.found) {
+                return {
+                    'Employee Id': employeeNumber,
+                    'Employee Name': 'Unknown Employee',
+                    'Email ID': '',
+                    'Department': 'N/A',
+                    'Designation': 'N/A',
+                    'Location': 'N/A',
+                    'Role': 'N/A',
+                    found: false,
+                    error: details.error
+                };
+            }
+
+            return {
+                'Employee Id': details.employeeNumber,
+                'Employee Name': details.fullName,
+                'Email ID': details.workEmail,
+                'Department': details.department,
+                'Designation': details.designation,
+                'Location': details.location,
+                'Role': details.role,
+                found: true,
+                error: null
+            };
+        }
+
+        // Make functions global for onclick handlers
+        window.lookupEmployee = function() {
+            const empNum = document.getElementById('employeeInput').value;
+            const details = getEmployeeDetails(empNum);
+            const resultDiv = document.getElementById('employeeResult');
+            
+            if (details.found) {
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        <strong>✓ Employee Found:</strong><br>
+                        Employee Number: ${details.employeeNumber}<br>
+                        Full Name: ${details.fullName}<br>
+                        Department: ${details.department}<br>
+                        Designation: ${details.designation}<br>
+                        Location: ${details.location}<br>
+                        Role: ${details.role}<br>
+                        Email: ${details.workEmail}
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <strong>✗ Employee Not Found:</strong><br>
+                        ${details.error}
+                    </div>
+                `;
+            }
+        };
+
+        window.createAttendanceRecord = function() {
+            const attendanceRecord = captureEmployeeForAttendance('NCPL019');
+            const resultDiv = document.getElementById('attendanceResult');
+            
+            if (attendanceRecord.found) {
+                resultDiv.innerHTML = `
+                    <div class="success">
+                        <strong>✓ Attendance Record Created:</strong><br>
+                        Employee ID: ${attendanceRecord['Employee Id']}<br>
+                        Employee Name: ${attendanceRecord['Employee Name']}<br>
+                        Email: ${attendanceRecord['Email ID']}<br>
+                        Department: ${attendanceRecord['Department']}<br>
+                        Designation: ${attendanceRecord['Designation']}<br>
+                        Location: ${attendanceRecord['Location']}<br>
+                        Role: ${attendanceRecord['Role']}<br>
+                        <br>
+                        <em>This data can now be used in the attendance table with additional fields like First In, Last Out, Total Hours, etc.</em>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <strong>✗ Failed to Create Attendance Record:</strong><br>
+                        ${attendanceRecord.error}
+                    </div>
+                `;
+            }
+        };
+
+        window.analyzeDepartments = function() {
+            const departments = {};
+            
+            EMPLOYEES_MASTER_DATA.forEach(emp => {
+                if (!departments[emp.department]) {
+                    departments[emp.department] = [];
+                }
+                departments[emp.department].push({
+                    id: emp.employeeNumber,
+                    name: emp.fullName,
+                    designation: emp.designation,
+                    role: emp.role
+                });
+            });
+
+            const resultDiv = document.getElementById('departmentResult');
+            let html = '<div class="success"><strong>Department Analysis:</strong><br>';
+            
+            Object.keys(departments).forEach(dept => {
+                html += `<br><strong>${dept} Department:</strong><br>`;
+                departments[dept].forEach(emp => {
+                    html += `&nbsp;&nbsp;• ${emp.id} - ${emp.name} (${emp.designation}) - Role: ${emp.role}<br>`;
+                });
+            });
+            
+            html += '</div>';
+            resultDiv.innerHTML = html;
+        };
+
+        // Auto-run test for NCPL019 on page load
+        window.addEventListener('load', function() {
+            console.log('=== Employee Lookup Logic Test ===');
+            
+            // Test NCPL019
+            const ncpl019 = getEmployeeDetails('NCPL019');
+            console.log('NCPL019 Test:', ncpl019);
+            
+            // Test attendance record creation
+            const attendance = captureEmployeeForAttendance('NCPL019');
+            console.log('Attendance Record:', attendance);
+            
+            // Test invalid employee
+            const invalid = getEmployeeDetails('NCPL999');
+            console.log('Invalid Employee Test:', invalid);
+            
+            console.log('✓ All tests completed. Use the interactive buttons above to test manually.');
+        });
+    </script>
+</body>
+</html>

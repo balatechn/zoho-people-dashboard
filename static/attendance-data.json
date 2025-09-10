@@ -1,0 +1,1732 @@
+[
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "11:47 AM",
+    "Last Out": "10:34 PM",
+    "Total Hours": "10:47",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL025",
+    "Employee Name": "Mohammed Faisal",
+    "Email ID": "faisal@nationalconsultingindia.com",
+    "First In": "11:29 AM",
+    "Last Out": "01:36 PM",
+    "Total Hours": "02:07",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL029",
+    "Employee Name": "Deepanshi Mamgain",
+    "Email ID": "deepanshi.m@nationalconsultingindia.com",
+    "First In": "11:07 AM",
+    "Last Out": "07:09 PM",
+    "Total Hours": "08:02",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL003",
+    "Employee Name": "Sheik Munavar",
+    "Email ID": "munavar@nationalconsultingindia.com",
+    "First In": "10:46 AM",
+    "Last Out": "09:29 AM",
+    "Total Hours": "22:43",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL024",
+    "Employee Name": "Yahya Ayash Luqman",
+    "Email ID": "yahya@nationalconsultingindia.com",
+    "First In": "10:33 AM",
+    "Last Out": "07:11 PM",
+    "Total Hours": "08:38",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "10:11 AM",
+    "Last Out": "07:30 PM",
+    "Total Hours": "09:19",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL028",
+    "Employee Name": "Adityaa Nagarajan",
+    "Email ID": "aadityaa@nationalconsultingindia.com",
+    "First In": "10:03 AM",
+    "Last Out": "07:04 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Dev Team B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL007",
+    "Employee Name": "Karthik M K",
+    "Email ID": "karthik.mk@nationalconsultingindia.com",
+    "First In": "09:46 AM",
+    "Last Out": "06:05 PM",
+    "Total Hours": "08:19",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL037",
+    "Employee Name": "Ahmed Atique",
+    "Email ID": "atique.a@nationalconsultingindia.com",
+    "First In": "09:44 AM",
+    "Last Out": "07:10 PM",
+    "Total Hours": "09:26",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL026",
+    "Employee Name": "Shalini N",
+    "Email ID": "customerconnect@nationalconsultingindia.com",
+    "First In": "09:35 AM",
+    "Last Out": "06:36 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL018",
+    "Employee Name": "Siddharth Venkat",
+    "Email ID": "siddharth.v@nationalconsultingindia.com",
+    "First In": "09:34 AM",
+    "Last Out": "06:59 PM",
+    "Total Hours": "09:25",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "09:33 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL014",
+    "Employee Name": "Kiran Kumar Uggina",
+    "Email ID": "kiran.k@nationalconsultingindia.com",
+    "First In": "09:32 AM",
+    "Last Out": "06:44 PM",
+    "Total Hours": "09:12",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL027",
+    "Employee Name": "Akshay Hondi",
+    "Email ID": "akshay.h@nationalconsultingindia.com",
+    "First In": "09:24 AM",
+    "Last Out": "06:28 PM",
+    "Total Hours": "09:04",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:16 AM",
+    "Last Out": "06:19 PM",
+    "Total Hours": "09:03",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL015",
+    "Employee Name": "Manjushri G",
+    "Email ID": "montrasupport@nationalconsultingindia.com",
+    "First In": "09:16 AM",
+    "Last Out": "04:42 PM",
+    "Total Hours": "07:26",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "09:15 AM",
+    "Last Out": "06:30 PM",
+    "Total Hours": "09:15",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "09:12 AM",
+    "Last Out": "06:13 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL023",
+    "Employee Name": "Mamatha M",
+    "Email ID": "mamatha.m@nationalconsultingindia.com",
+    "First In": "09:10 AM",
+    "Last Out": "06:16 PM",
+    "Total Hours": "09:06",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL019",
+    "Employee Name": "Balasubramanian Pillai",
+    "Email ID": "bala@nationalconsultingindia.com",
+    "First In": "09:09 AM",
+    "Last Out": "06:00 PM",
+    "Total Hours": "08:51",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:08 AM",
+    "Last Out": "06:10 PM",
+    "Total Hours": "09:02",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "01-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "08:59 AM",
+    "Last Out": "06:32 PM",
+    "Total Hours": "09:33",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL029",
+    "Employee Name": "Deepanshi Mamgain",
+    "Email ID": "deepanshi.m@nationalconsultingindia.com",
+    "First In": "12:16 PM",
+    "Last Out": "08:22 PM",
+    "Total Hours": "08:06",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "12:05 PM",
+    "Last Out": "08:33 PM",
+    "Total Hours": "08:28",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL025",
+    "Employee Name": "Mohammed Faisal",
+    "Email ID": "faisal@nationalconsultingindia.com",
+    "First In": "11:34 AM",
+    "Last Out": "06:16 PM",
+    "Total Hours": "06:42",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL024",
+    "Employee Name": "Yahya Ayash Luqman",
+    "Email ID": "yahya@nationalconsultingindia.com",
+    "First In": "10:55 AM",
+    "Last Out": "07:50 PM",
+    "Total Hours": "08:55",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "10:13 AM",
+    "Last Out": "10:05 AM",
+    "Total Hours": "23:52",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL001",
+    "Employee Name": "Mohammed Farooq",
+    "Email ID": "farooq@nationalconsultingindia.com",
+    "First In": "10:12 AM",
+    "Last Out": "09:53 AM",
+    "Total Hours": "23:41",
+    "Shift name": "[10:00 AM - 07:00 PM] Shift C"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL012",
+    "Employee Name": "Sanjana Jagadeesha",
+    "Email ID": "sanjana.j@nationalconsultingindia.com",
+    "First In": "10:11 AM",
+    "Last Out": "07:09 PM",
+    "Total Hours": "08:58",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL037",
+    "Employee Name": "Ahmed Atique",
+    "Email ID": "atique.a@nationalconsultingindia.com",
+    "First In": "10:05 AM",
+    "Last Out": "07:20 PM",
+    "Total Hours": "09:15",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL018",
+    "Employee Name": "Siddharth Venkat",
+    "Email ID": "siddharth.v@nationalconsultingindia.com",
+    "First In": "09:53 AM",
+    "Last Out": "06:33 PM",
+    "Total Hours": "08:40",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "09:52 AM",
+    "Last Out": "07:20 PM",
+    "Total Hours": "09:28",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL014",
+    "Employee Name": "Kiran Kumar Uggina",
+    "Email ID": "kiran.k@nationalconsultingindia.com",
+    "First In": "09:51 AM",
+    "Last Out": "07:20 PM",
+    "Total Hours": "09:29",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL028",
+    "Employee Name": "Adityaa Nagarajan",
+    "Email ID": "aadityaa@nationalconsultingindia.com",
+    "First In": "09:42 AM",
+    "Last Out": "06:31 PM",
+    "Total Hours": "08:49",
+    "Shift name": "[09:00 AM - 06:00 PM] Dev Team B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL003",
+    "Employee Name": "Sheik Munavar",
+    "Email ID": "munavar@nationalconsultingindia.com",
+    "First In": "09:29 AM",
+    "Last Out": "06:32 PM",
+    "Total Hours": "09:03",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL026",
+    "Employee Name": "Shalini N",
+    "Email ID": "customerconnect@nationalconsultingindia.com",
+    "First In": "09:19 AM",
+    "Last Out": "06:20 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL027",
+    "Employee Name": "Akshay Hondi",
+    "Email ID": "akshay.h@nationalconsultingindia.com",
+    "First In": "09:16 AM",
+    "Last Out": "06:18 PM",
+    "Total Hours": "09:02",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL023",
+    "Employee Name": "Mamatha M",
+    "Email ID": "mamatha.m@nationalconsultingindia.com",
+    "First In": "09:14 AM",
+    "Last Out": "06:15 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "09:13 AM",
+    "Last Out": "06:14 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:10 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "09:01 AM",
+    "Last Out": "06:17 PM",
+    "Total Hours": "09:16",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:00 AM",
+    "Last Out": "06:10 PM",
+    "Total Hours": "09:10",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "02-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "09:00 AM",
+    "Last Out": "06:05 PM",
+    "Total Hours": "09:05",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "07:43 PM",
+    "Last Out": "07:43 PM",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL029",
+    "Employee Name": "Deepanshi Mamgain",
+    "Email ID": "deepanshi.m@nationalconsultingindia.com",
+    "First In": "11:10 AM",
+    "Last Out": "07:32 PM",
+    "Total Hours": "08:22",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "10:59 AM",
+    "Last Out": "08:33 PM",
+    "Total Hours": "09:34",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL024",
+    "Employee Name": "Yahya Ayash Luqman",
+    "Email ID": "yahya@nationalconsultingindia.com",
+    "First In": "10:37 AM",
+    "Last Out": "07:30 PM",
+    "Total Hours": "08:53",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "10:05 AM",
+    "Last Out": "07:31 PM",
+    "Total Hours": "09:26",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL012",
+    "Employee Name": "Sanjana Jagadeesha",
+    "Email ID": "sanjana.j@nationalconsultingindia.com",
+    "First In": "10:04 AM",
+    "Last Out": "07:27 PM",
+    "Total Hours": "09:23",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL001",
+    "Employee Name": "Mohammed Farooq",
+    "Email ID": "farooq@nationalconsultingindia.com",
+    "First In": "09:54 AM",
+    "Last Out": "08:43 PM",
+    "Total Hours": "10:49",
+    "Shift name": "[10:00 AM - 07:00 PM] Shift C"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL028",
+    "Employee Name": "Adityaa Nagarajan",
+    "Email ID": "aadityaa@nationalconsultingindia.com",
+    "First In": "09:53 AM",
+    "Last Out": "06:48 PM",
+    "Total Hours": "08:55",
+    "Shift name": "[09:00 AM - 06:00 PM] Dev Team B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL007",
+    "Employee Name": "Karthik M K",
+    "Email ID": "karthik.mk@nationalconsultingindia.com",
+    "First In": "09:51 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL014",
+    "Employee Name": "Kiran Kumar Uggina",
+    "Email ID": "kiran.k@nationalconsultingindia.com",
+    "First In": "09:50 AM",
+    "Last Out": "09:49 AM",
+    "Total Hours": "23:59",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:34 AM",
+    "Last Out": "06:34 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL018",
+    "Employee Name": "Siddharth Venkat",
+    "Email ID": "siddharth.v@nationalconsultingindia.com",
+    "First In": "09:34 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL003",
+    "Employee Name": "Sheik Munavar",
+    "Email ID": "munavar@nationalconsultingindia.com",
+    "First In": "09:31 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:24 AM",
+    "Last Out": "07:57 PM",
+    "Total Hours": "10:33",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL026",
+    "Employee Name": "Shalini N",
+    "Email ID": "customerconnect@nationalconsultingindia.com",
+    "First In": "09:24 AM",
+    "Last Out": "06:25 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL037",
+    "Employee Name": "Ahmed Atique",
+    "Email ID": "atique.a@nationalconsultingindia.com",
+    "First In": "09:22 AM",
+    "Last Out": "07:32 PM",
+    "Total Hours": "10:10",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL019",
+    "Employee Name": "Balasubramanian Pillai",
+    "Email ID": "bala@nationalconsultingindia.com",
+    "First In": "09:15 AM",
+    "Last Out": "08:51 AM",
+    "Total Hours": "23:36",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL023",
+    "Employee Name": "Mamatha M",
+    "Email ID": "mamatha.m@nationalconsultingindia.com",
+    "First In": "09:13 AM",
+    "Last Out": "06:29 PM",
+    "Total Hours": "09:16",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL015",
+    "Employee Name": "Manjushri G",
+    "Email ID": "montrasupport@nationalconsultingindia.com",
+    "First In": "09:10 AM",
+    "Last Out": "06:25 PM",
+    "Total Hours": "09:15",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL027",
+    "Employee Name": "Akshay Hondi",
+    "Email ID": "akshay.h@nationalconsultingindia.com",
+    "First In": "09:08 AM",
+    "Last Out": "06:09 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "09:01 AM",
+    "Last Out": "06:09 PM",
+    "Total Hours": "09:08",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "08:59 AM",
+    "Last Out": "06:00 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "03-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "08:45 AM",
+    "Last Out": "06:00 PM",
+    "Total Hours": "09:15",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL025",
+    "Employee Name": "Mohammed Faisal",
+    "Email ID": "faisal@nationalconsultingindia.com",
+    "First In": "01:26 PM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "11:51 AM",
+    "Last Out": "09:33 PM",
+    "Total Hours": "09:42",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL029",
+    "Employee Name": "Deepanshi Mamgain",
+    "Email ID": "deepanshi.m@nationalconsultingindia.com",
+    "First In": "11:26 AM",
+    "Last Out": "07:26 PM",
+    "Total Hours": "08:00",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL007",
+    "Employee Name": "Karthik M K",
+    "Email ID": "karthik.mk@nationalconsultingindia.com",
+    "First In": "11:04 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL024",
+    "Employee Name": "Yahya Ayash Luqman",
+    "Email ID": "yahya@nationalconsultingindia.com",
+    "First In": "10:48 AM",
+    "Last Out": "07:16 PM",
+    "Total Hours": "08:28",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL037",
+    "Employee Name": "Ahmed Atique",
+    "Email ID": "atique.a@nationalconsultingindia.com",
+    "First In": "10:31 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL012",
+    "Employee Name": "Sanjana Jagadeesha",
+    "Email ID": "sanjana.j@nationalconsultingindia.com",
+    "First In": "10:28 AM",
+    "Last Out": "07:33 PM",
+    "Total Hours": "09:05",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "10:22 AM",
+    "Last Out": "07:05 PM",
+    "Total Hours": "08:43",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL028",
+    "Employee Name": "Adityaa Nagarajan",
+    "Email ID": "aadityaa@nationalconsultingindia.com",
+    "First In": "09:56 AM",
+    "Last Out": "07:14 PM",
+    "Total Hours": "09:18",
+    "Shift name": "[09:00 AM - 06:00 PM] Dev Team B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL001",
+    "Employee Name": "Mohammed Farooq",
+    "Email ID": "farooq@nationalconsultingindia.com",
+    "First In": "09:56 AM",
+    "Last Out": "07:59 PM",
+    "Total Hours": "10:03",
+    "Shift name": "[10:00 AM - 07:00 PM] Shift C"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "09:50 AM",
+    "Last Out": "08:00 PM",
+    "Total Hours": "10:10",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL018",
+    "Employee Name": "Siddharth Venkat",
+    "Email ID": "siddharth.v@nationalconsultingindia.com",
+    "First In": "09:43 AM",
+    "Last Out": "06:40 PM",
+    "Total Hours": "08:57",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:43 AM",
+    "Last Out": "06:43 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL023",
+    "Employee Name": "Mamatha M",
+    "Email ID": "mamatha.m@nationalconsultingindia.com",
+    "First In": "09:33 AM",
+    "Last Out": "06:33 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "09:28 AM",
+    "Last Out": "06:14 PM",
+    "Total Hours": "08:46",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL015",
+    "Employee Name": "Manjushri G",
+    "Email ID": "montrasupport@nationalconsultingindia.com",
+    "First In": "09:27 AM",
+    "Last Out": "06:27 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:14 AM",
+    "Last Out": "06:27 PM",
+    "Total Hours": "09:13",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL027",
+    "Employee Name": "Akshay Hondi",
+    "Email ID": "akshay.h@nationalconsultingindia.com",
+    "First In": "09:09 AM",
+    "Last Out": "06:10 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "09:05 AM",
+    "Last Out": "06:06 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "09:03 AM",
+    "Last Out": "06:04 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "04-Sep-2025",
+    "Employee Id": "NCPL019",
+    "Employee Name": "Balasubramanian Pillai",
+    "Email ID": "bala@nationalconsultingindia.com",
+    "First In": "08:51 AM",
+    "Last Out": "08:34 AM",
+    "Total Hours": "23:43",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "12:12 PM",
+    "Last Out": "08:59 PM",
+    "Total Hours": "08:47",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL001",
+    "Employee Name": "Mohammed Farooq",
+    "Email ID": "farooq@nationalconsultingindia.com",
+    "First In": "10:16 AM",
+    "Last Out": "09:01 PM",
+    "Total Hours": "10:45",
+    "Shift name": "[10:00 AM - 07:00 PM] Shift C"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL014",
+    "Employee Name": "Kiran Kumar Uggina",
+    "Email ID": "kiran.k@nationalconsultingindia.com",
+    "First In": "10:00 AM",
+    "Last Out": "08:10 PM",
+    "Total Hours": "10:10",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "10:00 AM",
+    "Last Out": "08:08 PM",
+    "Total Hours": "10:08",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL012",
+    "Employee Name": "Sanjana Jagadeesha",
+    "Email ID": "sanjana.j@nationalconsultingindia.com",
+    "First In": "09:43 AM",
+    "Last Out": "08:04 PM",
+    "Total Hours": "10:21",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL018",
+    "Employee Name": "Siddharth Venkat",
+    "Email ID": "siddharth.v@nationalconsultingindia.com",
+    "First In": "09:43 AM",
+    "Last Out": "06:48 PM",
+    "Total Hours": "09:05",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL032",
+    "Employee Name": "Sanjay Asthana",
+    "Email ID": "sanjay.a@nationalconsultingindia.com",
+    "First In": "09:34 AM",
+    "Last Out": "06:44 PM",
+    "Total Hours": "09:10",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL003",
+    "Employee Name": "Sheik Munavar",
+    "Email ID": "munavar@nationalconsultingindia.com",
+    "First In": "09:30 AM",
+    "Last Out": "06:32 PM",
+    "Total Hours": "09:02",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL009",
+    "Employee Name": "Nirup Jayanth",
+    "Email ID": "nirup.j@nationalconsultingindia.com",
+    "First In": "09:28 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:20 AM",
+    "Last Out": "06:30 PM",
+    "Total Hours": "09:10",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL028",
+    "Employee Name": "Adityaa Nagarajan",
+    "Email ID": "aadityaa@nationalconsultingindia.com",
+    "First In": "09:19 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Dev Team B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:18 AM",
+    "Last Out": "06:31 PM",
+    "Total Hours": "09:13",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL024",
+    "Employee Name": "Yahya Ayash Luqman",
+    "Email ID": "yahya@nationalconsultingindia.com",
+    "First In": "09:15 AM",
+    "Last Out": "05:47 PM",
+    "Total Hours": "08:32",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "09:13 AM",
+    "Last Out": "05:47 PM",
+    "Total Hours": "08:34",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL027",
+    "Employee Name": "Akshay Hondi",
+    "Email ID": "akshay.h@nationalconsultingindia.com",
+    "First In": "09:06 AM",
+    "Last Out": "06:29 PM",
+    "Total Hours": "09:23",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "09:00 AM",
+    "Last Out": "06:03 PM",
+    "Total Hours": "09:03",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "09:00 AM",
+    "Last Out": "08:11 PM",
+    "Total Hours": "11:11",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "08:59 AM",
+    "Last Out": "05:59 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL015",
+    "Employee Name": "Manjushri G",
+    "Email ID": "montrasupport@nationalconsultingindia.com",
+    "First In": "08:52 AM",
+    "Last Out": "05:56 PM",
+    "Total Hours": "09:04",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL023",
+    "Employee Name": "Mamatha M",
+    "Email ID": "mamatha.m@nationalconsultingindia.com",
+    "First In": "08:50 AM",
+    "Last Out": "06:09 PM",
+    "Total Hours": "09:19",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL026",
+    "Employee Name": "Shalini N",
+    "Email ID": "customerconnect@nationalconsultingindia.com",
+    "First In": "08:50 AM",
+    "Last Out": "05:50 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "05-Sep-2025",
+    "Employee Id": "NCPL019",
+    "Employee Name": "Balasubramanian Pillai",
+    "Email ID": "bala@nationalconsultingindia.com",
+    "First In": "08:34 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "12:44 PM",
+    "Last Out": "06:26 PM",
+    "Total Hours": "05:42",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL037",
+    "Employee Name": "Ahmed Atique",
+    "Email ID": "atique.a@nationalconsultingindia.com",
+    "First In": "10:37 AM",
+    "Last Out": "07:46 PM",
+    "Total Hours": "09:09",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "10:11 AM",
+    "Last Out": "07:26 PM",
+    "Total Hours": "09:15",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL007",
+    "Employee Name": "Karthik M K",
+    "Email ID": "karthik.mk@nationalconsultingindia.com",
+    "First In": "09:58 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL032",
+    "Employee Name": "Sanjay Asthana",
+    "Email ID": "sanjay.a@nationalconsultingindia.com",
+    "First In": "09:51 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL018",
+    "Employee Name": "Siddharth Venkat",
+    "Email ID": "siddharth.v@nationalconsultingindia.com",
+    "First In": "09:39 AM",
+    "Last Out": "05:40 PM",
+    "Total Hours": "08:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:29 AM",
+    "Last Out": "06:29 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:10 AM",
+    "Last Out": "06:10 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "09:07 AM",
+    "Last Out": "06:07 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL015",
+    "Employee Name": "Manjushri G",
+    "Email ID": "montrasupport@nationalconsultingindia.com",
+    "First In": "08:57 AM",
+    "Last Out": "05:58 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "08:54 AM",
+    "Last Out": "06:24 PM",
+    "Total Hours": "09:30",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "08:53 AM",
+    "Last Out": "06:10 PM",
+    "Total Hours": "09:17",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL019",
+    "Employee Name": "Balasubramanian Pillai",
+    "Email ID": "bala@nationalconsultingindia.com",
+    "First In": "08:49 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL023",
+    "Employee Name": "Mamatha M",
+    "Email ID": "mamatha.m@nationalconsultingindia.com",
+    "First In": "08:48 AM",
+    "Last Out": "05:57 PM",
+    "Total Hours": "09:09",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL026",
+    "Employee Name": "Shalini N",
+    "Email ID": "customerconnect@nationalconsultingindia.com",
+    "First In": "08:40 AM",
+    "Last Out": "05:51 PM",
+    "Total Hours": "09:11",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "06-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "08:30 AM",
+    "Last Out": "04:46 PM",
+    "Total Hours": "08:16",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL025",
+    "Employee Name": "Mohammed Faisal",
+    "Email ID": "faisal@nationalconsultingindia.com",
+    "First In": "02:06 PM",
+    "Last Out": "06:32 PM",
+    "Total Hours": "04:26",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "01:53 PM",
+    "Last Out": "05:59 PM",
+    "Total Hours": "04:06",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "11:50 AM",
+    "Last Out": "08:31 PM",
+    "Total Hours": "08:41",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL029",
+    "Employee Name": "Deepanshi Mamgain",
+    "Email ID": "deepanshi.m@nationalconsultingindia.com",
+    "First In": "11:11 AM",
+    "Last Out": "07:11 PM",
+    "Total Hours": "08:00",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL007",
+    "Employee Name": "Karthik M K",
+    "Email ID": "karthik.mk@nationalconsultingindia.com",
+    "First In": "10:52 AM",
+    "Last Out": "06:44 PM",
+    "Total Hours": "07:52",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL001",
+    "Employee Name": "Mohammed Farooq",
+    "Email ID": "farooq@nationalconsultingindia.com",
+    "First In": "10:28 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[10:00 AM - 07:00 PM] Shift C"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL024",
+    "Employee Name": "Yahya Ayash Luqman",
+    "Email ID": "yahya@nationalconsultingindia.com",
+    "First In": "10:15 AM",
+    "Last Out": "07:22 PM",
+    "Total Hours": "09:07",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL032",
+    "Employee Name": "Sanjay Asthana",
+    "Email ID": "sanjay.a@nationalconsultingindia.com",
+    "First In": "10:13 AM",
+    "Last Out": "06:53 PM",
+    "Total Hours": "08:40",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "10:05 AM",
+    "Last Out": "06:59 PM",
+    "Total Hours": "08:54",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "10:00 AM",
+    "Last Out": "07:27 PM",
+    "Total Hours": "09:27",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL014",
+    "Employee Name": "Kiran Kumar Uggina",
+    "Email ID": "kiran.k@nationalconsultingindia.com",
+    "First In": "09:59 AM",
+    "Last Out": "07:28 PM",
+    "Total Hours": "09:29",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL027",
+    "Employee Name": "Akshay Hondi",
+    "Email ID": "akshay.h@nationalconsultingindia.com",
+    "First In": "09:39 AM",
+    "Last Out": "06:35 PM",
+    "Total Hours": "08:56",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL037",
+    "Employee Name": "Ahmed Atique",
+    "Email ID": "atique.a@nationalconsultingindia.com",
+    "First In": "09:35 AM",
+    "Last Out": "06:51 PM",
+    "Total Hours": "09:16",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL009",
+    "Employee Name": "Nirup Jayanth",
+    "Email ID": "nirup.j@nationalconsultingindia.com",
+    "First In": "09:28 AM",
+    "Last Out": "06:50 PM",
+    "Total Hours": "09:22",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:27 AM",
+    "Last Out": "06:27 PM",
+    "Total Hours": "09:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:17 AM",
+    "Last Out": "06:36 PM",
+    "Total Hours": "09:19",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL026",
+    "Employee Name": "Shalini N",
+    "Email ID": "customerconnect@nationalconsultingindia.com",
+    "First In": "09:14 AM",
+    "Last Out": "06:15 PM",
+    "Total Hours": "09:01",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "09:01 AM",
+    "Last Out": "06:03 PM",
+    "Total Hours": "09:02",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "08:58 AM",
+    "Last Out": "06:48 PM",
+    "Total Hours": "09:50",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL010",
+    "Employee Name": "Abhiram C",
+    "Email ID": "abhiram.c@nationalconsultingindia.com",
+    "First In": "08:57 AM",
+    "Last Out": "06:01 PM",
+    "Total Hours": "09:04",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL015",
+    "Employee Name": "Manjushri G",
+    "Email ID": "montrasupport@nationalconsultingindia.com",
+    "First In": "08:44 AM",
+    "Last Out": "05:49 PM",
+    "Total Hours": "09:05",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "08-Sep-2025",
+    "Employee Id": "NCPL012",
+    "Employee Name": "Sanjana Jagadeesha",
+    "Email ID": "sanjana.j@nationalconsultingindia.com",
+    "First In": "08:36 AM",
+    "Last Out": "06:35 PM",
+    "Total Hours": "09:59",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL029",
+    "Employee Name": "Deepanshi Mamgain",
+    "Email ID": "deepanshi.m@nationalconsultingindia.com",
+    "First In": "11:36 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL024",
+    "Employee Name": "Yahya Ayash Luqman",
+    "Email ID": "yahya@nationalconsultingindia.com",
+    "First In": "11:15 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[10:00 AM - 07:00 PM] Dev Team A"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL021",
+    "Employee Name": "Salman Khan",
+    "Email ID": "salman.k@nationalconsultingindia.com",
+    "First In": "11:03 AM",
+    "Last Out": "02:37 PM",
+    "Total Hours": "03:34",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL012",
+    "Employee Name": "Sanjana Jagadeesha",
+    "Email ID": "sanjana.j@nationalconsultingindia.com",
+    "First In": "10:15 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL001",
+    "Employee Name": "Mohammed Farooq",
+    "Email ID": "farooq@nationalconsultingindia.com",
+    "First In": "10:13 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[10:00 AM - 07:00 PM] Shift C"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL003",
+    "Employee Name": "Sheik Munavar",
+    "Email ID": "munavar@nationalconsultingindia.com",
+    "First In": "09:57 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL002",
+    "Employee Name": "Shruthi Nandeesh",
+    "Email ID": "shruthi.d@nationalconsultingindia.com",
+    "First In": "09:54 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL018",
+    "Employee Name": "Siddharth Venkat",
+    "Email ID": "siddharth.v@nationalconsultingindia.com",
+    "First In": "09:48 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL033",
+    "Employee Name": "Neehar Jallu",
+    "Email ID": "neehar.j@nationalconsultingindia.com",
+    "First In": "09:41 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL014",
+    "Employee Name": "Kiran Kumar Uggina",
+    "Email ID": "kiran.k@nationalconsultingindia.com",
+    "First In": "09:39 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL007",
+    "Employee Name": "Karthik M K",
+    "Email ID": "karthik.mk@nationalconsultingindia.com",
+    "First In": "09:33 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL032",
+    "Employee Name": "Sanjay Asthana",
+    "Email ID": "sanjay.a@nationalconsultingindia.com",
+    "First In": "09:26 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL038",
+    "Employee Name": "Harshdeep Singh",
+    "Email ID": "harshdeep.s@nationalconsultingindia.com",
+    "First In": "09:26 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL027",
+    "Employee Name": "Akshay Hondi",
+    "Email ID": "akshay.h@nationalconsultingindia.com",
+    "First In": "09:22 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL009",
+    "Employee Name": "Nirup Jayanth",
+    "Email ID": "nirup.j@nationalconsultingindia.com",
+    "First In": "09:18 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL016",
+    "Employee Name": "Shwetha D",
+    "Email ID": "isuzusupport@nationalconsultingindia.com",
+    "First In": "09:14 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL010",
+    "Employee Name": "Abhiram C",
+    "Email ID": "abhiram.c@nationalconsultingindia.com",
+    "First In": "09:13 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL026",
+    "Employee Name": "Shalini N",
+    "Email ID": "customerconnect@nationalconsultingindia.com",
+    "First In": "09:12 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL017",
+    "Employee Name": "Prasanna Hegde",
+    "Email ID": "prasanna.h@nationalconsultingindia.com",
+    "First In": "09:11 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL028",
+    "Employee Name": "Adityaa Nagarajan",
+    "Email ID": "aadityaa@nationalconsultingindia.com",
+    "First In": "09:10 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Dev Team B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL037",
+    "Employee Name": "Ahmed Atique",
+    "Email ID": "atique.a@nationalconsultingindia.com",
+    "First In": "09:08 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL039",
+    "Employee Name": "Madhan M",
+    "Email ID": "madhan.m@nationalconsultingindia.com",
+    "First In": "09:06 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL023",
+    "Employee Name": "Mamatha M",
+    "Email ID": "mamatha.m@nationalconsultingindia.com",
+    "First In": "09:05 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL034",
+    "Employee Name": "Rakshith R",
+    "Email ID": "rakshith.r@nationalconsultingindia.com",
+    "First In": "09:05 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL015",
+    "Employee Name": "Manjushri G",
+    "Email ID": "montrasupport@nationalconsultingindia.com",
+    "First In": "08:59 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  },
+  {
+    "Date": "09-Sep-2025",
+    "Employee Id": "NCPL019",
+    "Employee Name": "Balasubramanian Pillai",
+    "Email ID": "bala@nationalconsultingindia.com",
+    "First In": "08:51 AM",
+    "Last Out": "-",
+    "Total Hours": "00:00",
+    "Shift name": "[09:00 AM - 06:00 PM] Shift B"
+  }
+]

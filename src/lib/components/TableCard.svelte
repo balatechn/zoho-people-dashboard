@@ -1,8 +1,11 @@
 <script>
+	import { formatDate } from '$lib/utils/dateFormatter';
+	
 	export let title;
 	export let icon;
 	export let data = [];
 	export let type = 'attendance'; // 'attendance' or 'approvals'
+	export let showDate = false; // Flag to show date column
 
 	function getStatusColor(status) {
 		const colors = {
@@ -10,6 +13,7 @@
 			'WFH': 'bg-blue-100 text-blue-700',
 			'Leave': 'bg-amber-100 text-amber-700',
 			'OD': 'bg-purple-100 text-purple-700',
+			'Partial': 'bg-blue-100 text-blue-700',
 			'Absent': 'bg-red-100 text-red-700'
 		};
 		return colors[status] || 'bg-gray-100 text-gray-700';
@@ -40,6 +44,9 @@
 				<table class="w-full text-sm">
 					<thead>
 						<tr class="border-b border-gold-200 bg-gold-50/50 text-left text-xs uppercase text-zinc-600 font-medium">
+							{#if showDate}
+								<th class="px-4 py-3">Date</th>
+							{/if}
 							<th class="px-4 py-3">Employee</th>
 							<th class="px-4 py-3">Department</th>
 							<th class="px-4 py-3">Status</th>
@@ -50,15 +57,30 @@
 					<tbody>
 						{#each data as row, i}
 							<tr class="border-b border-gold-100 last:border-none hover:bg-gold-25 transition-colors">
-								<td class="px-4 py-3 font-medium text-zinc-800">{row.name}</td>
-								<td class="px-4 py-3 text-zinc-600">{row.dept}</td>
+								{#if showDate}
+									<td class="px-4 py-3 text-zinc-600">{formatDate(row.date)}</td>
+								{/if}
+								<td class="px-4 py-3 font-medium text-zinc-800">{row.name || row.employeeName}</td>
+								<td class="px-4 py-3 text-zinc-600">{row.dept || row.department}</td>
 								<td class="px-4 py-3">
 									<span class="rounded-full px-3 py-1 text-xs font-medium {getStatusColor(row.status)}">
 										{row.status}
 									</span>
 								</td>
-								<td class="px-4 py-3 text-zinc-600 font-mono text-xs">{row.time}</td>
-								<td class="px-4 py-3 text-zinc-600 font-medium text-xs">{row.hours || '-'}</td>
+								<td class="px-4 py-3 text-zinc-600 font-mono text-xs">
+									{#if row.time}
+										{row.time}
+									{:else if row.firstIn && row.lastOut}
+										{row.firstIn} - {row.lastOut !== '-' ? row.lastOut : '...'}
+									{:else if row.checkIn}
+										{row.checkIn}{row.checkOut ? ' - ' + row.checkOut : ''}
+									{:else}
+										-
+									{/if}
+								</td>
+								<td class="px-4 py-3 text-zinc-600 font-medium text-xs">
+									{row.hours || row.totalHours || row.workingHours || '-'}
+								</td>
 							</tr>
 						{/each}
 					</tbody>

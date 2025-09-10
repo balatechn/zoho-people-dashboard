@@ -121,6 +121,19 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Today's Attendance Card -->
+	<div class="card">
+		<div class="card-header">
+			<h3 class="text-sm font-semibold text-gold-800">Today's Attendance</h3>
+		</div>
+		<div class="card-content">
+			<div class="bg-amber-500 rounded-lg p-3 text-white text-center">
+				<div class="text-2xl font-bold">26</div>
+				<div class="text-sm text-amber-100">Present Today</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>

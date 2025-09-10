@@ -3,7 +3,6 @@
   import { writable } from 'svelte/store';
   import Header from '$lib/components/Header.svelte';
   import Sidebar from '$lib/components/Sidebar.svelte';
-  import AttendanceUploader from '$lib/components/AttendanceUploader.svelte';
   import { Settings, TestTube, Wifi, AlertCircle, CheckCircle, Loader, Upload, Users } from 'lucide-svelte';
   import '../../app.css';
 
@@ -867,7 +866,7 @@
           </div>
 
           <!-- Attendance Data Upload -->
-          <div id="section-attendance" class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 {focusSection === 'attendance' ? 'ring-2 ring-amber-400' : ''}"
+          <div id="section-attendance" class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8 {focusSection === 'attendance' ? 'ring-2 ring-amber-400' : ''}">
             <h2 class="text-2xl font-bold text-gray-900 mb-6">Attendance Data Upload</h2>
             
             <div class="space-y-6">
@@ -898,14 +897,16 @@
                 </button>
               </div>
               
-              <!-- Attendance Uploader Component -->
-              <AttendanceUploader 
-                onUploadComplete={(data) => {
-                  console.log('Uploaded attendance data:', data);
-                  // Here you would typically send the data to your backend
-                  alert(`Successfully processed ${data.length} attendance records`);
-                }} 
-              />
+              <!-- Data Upload Notice -->
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                  <AlertCircle class="w-5 h-5 text-blue-600 mt-0.5" />
+                  <div>
+                    <h4 class="font-medium text-blue-800">Data Upload</h4>
+                    <p class="text-sm text-blue-700 mt-1">Attendance data upload functionality has been removed. Please contact your administrator for data management options.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -9,17 +9,6 @@
       "_environment.js"
     ]
   },
-  "_Header.js": {
-    "file": "chunks/Header.js",
-    "name": "Header",
-    "imports": [
-      "_ssr.js",
-      "_Icon.js"
-    ],
-    "css": [
-      "_app/immutable/assets/Header.DXUaweVI.css"
-    ]
-  },
   "_Icon.js": {
     "file": "chunks/Icon.js",
     "name": "Icon",
@@ -28,8 +17,24 @@
     ]
   },
   "_app.js": {
-    "file": "_app/immutable/assets/app.DdhCmUej.css",
-    "src": "_app.js"
+    "file": "chunks/app.js",
+    "name": "app",
+    "imports": [
+      "_ssr.js",
+      "_Icon.js"
+    ],
+    "css": [
+      "_app/immutable/assets/app.BAzb8I2s.css"
+    ]
+  },
+  "_client.js": {
+    "file": "chunks/client.js",
+    "name": "client",
+    "imports": [
+      "_exports.js",
+      "_utils.js",
+      "_ssr2.js"
+    ]
   },
   "_environment.js": {
     "file": "chunks/environment.js",
@@ -48,13 +53,9 @@
       "_environment.js"
     ]
   },
-  "_search.js": {
-    "file": "chunks/search.js",
-    "name": "search",
-    "imports": [
-      "_ssr.js",
-      "_Icon.js"
-    ]
+  "_sampleData.js": {
+    "file": "chunks/sampleData.js",
+    "name": "sampleData"
   },
   "_shared.js": {
     "file": "chunks/shared.js",
@@ -104,9 +105,7 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_exports.js",
-      "_utils.js",
-      "_ssr2.js"
+      "_client.js"
     ]
   },
   "node_modules/@sveltejs/kit/src/runtime/components/svelte-4/layout.svelte": {
@@ -132,11 +131,23 @@
       "_ssr.js"
     ]
   },
+  "src/routes/+page.js": {
+    "file": "entries/pages/_page.js",
+    "name": "entries/pages/_page",
+    "src": "src/routes/+page.js",
+    "isEntry": true,
+    "imports": [
+      "_sampleData.js"
+    ]
+  },
   "src/routes/+page.server.js": {
     "file": "entries/pages/_page.server.js",
     "name": "entries/pages/_page.server",
     "src": "src/routes/+page.server.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_sampleData.js"
+    ]
   },
   "src/routes/+page.svelte": {
     "file": "entries/pages/_page.svelte.js",
@@ -145,11 +156,11 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_Header.js",
+      "_app.js",
       "_Icon.js"
     ],
     "css": [
-      "_app/immutable/assets/app.DdhCmUej.css"
+      "_app/immutable/assets/_page.BUF4Zhd3.css"
     ]
   },
   "src/routes/api/+server.js": {
@@ -157,15 +168,6 @@
     "name": "entries/endpoints/api/_server",
     "src": "src/routes/api/+server.js",
     "isEntry": true
-  },
-  "src/routes/api/attendance/+server.js": {
-    "file": "entries/endpoints/api/attendance/_server.js",
-    "name": "entries/endpoints/api/attendance/_server",
-    "src": "src/routes/api/attendance/+server.js",
-    "isEntry": true,
-    "imports": [
-      "_zohoApi.js"
-    ]
   },
   "src/routes/api/auth/token/+server.js": {
     "file": "entries/endpoints/api/auth/token/_server.js",
@@ -254,22 +256,6 @@
       "_zohoApi.js"
     ]
   },
-  "src/routes/attendance/+page.svelte": {
-    "file": "entries/pages/attendance/_page.svelte.js",
-    "name": "entries/pages/attendance/_page.svelte",
-    "src": "src/routes/attendance/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_ssr.js",
-      "_Header.js",
-      "_upload.js",
-      "_search.js",
-      "_Icon.js"
-    ],
-    "css": [
-      "_app/immutable/assets/_page.BUF4Zhd3.css"
-    ]
-  },
   "src/routes/auth/callback/+page.server.js": {
     "file": "entries/pages/auth/callback/_page.server.js",
     "name": "entries/pages/auth/callback/_page.server",
@@ -293,12 +279,9 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_Header.js",
+      "_app.js",
       "_upload.js",
-      "_search.js"
-    ],
-    "css": [
-      "_app/immutable/assets/app.DdhCmUej.css"
+      "_Icon.js"
     ]
   },
   "src/routes/settings/+page.svelte": {
@@ -308,12 +291,28 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_Header.js",
+      "_app.js",
       "_Icon.js",
       "_upload.js"
-    ],
-    "css": [
-      "_app/immutable/assets/app.DdhCmUej.css"
+    ]
+  },
+  "src/routes/upload/+page.svelte": {
+    "file": "entries/pages/upload/_page.svelte.js",
+    "name": "entries/pages/upload/_page.svelte",
+    "src": "src/routes/upload/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_client.js"
+    ]
+  },
+  "src/routes/validation/+page.svelte": {
+    "file": "entries/pages/validation/_page.svelte.js",
+    "name": "entries/pages/validation/_page.svelte",
+    "src": "src/routes/validation/+page.svelte",
+    "isEntry": true,
+    "imports": [
+      "_ssr.js"
     ]
   }
 }
